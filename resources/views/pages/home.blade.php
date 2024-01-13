@@ -324,7 +324,7 @@
                     <a href="#">3</a>
                     <a href="#">4</a>
                     <a href="#">5</a>
-                    <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                    {{-- <a href="#"><i class="fa fa-angle-double-right"></i></a> --}}
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-8">

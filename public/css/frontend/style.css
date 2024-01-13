@@ -327,7 +327,9 @@ ol {
 -----------------------*/
 
 .header {
+    position: relative;
 	background: #070720;
+    z-index: 9999;
 }
 
 .header__logo {
@@ -910,6 +912,7 @@ ol {
 
 .product__pagination {
 	padding-top: 15px;
+    text-align: center;
 }
 
 .product__pagination a {
@@ -2035,6 +2038,7 @@ ol {
 	}
 	.header {
 		position: relative;
+        z-index: 9999;
 	}
 	.header .container {
 		position: relative;
@@ -2140,6 +2144,7 @@ ol {
 	}
 	.header {
 		position: relative;
+        z-index: 9999;
 	}
 	.header .container {
 		position: relative;

@@ -28,6 +28,10 @@ Route::get('chapter', function () {
     return view('pages.chapter');
 })->name('chapter');
 
+Route::get('profile', function () {
+    return view('user.profile');
+})->name('profile');
+
 Route::get('dang-nhap', [LoginUserController::class, 'home'])->name('login');
 Route::get('dang-ky', [RegisterUserController::class, 'home'])->name('register');
 

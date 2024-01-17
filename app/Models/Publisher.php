@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Publisher extends Model
+class Publisher extends \TCG\Voyager\Models\User
 {
     use HasFactory;
     public $timestamps = true; //Set time to false

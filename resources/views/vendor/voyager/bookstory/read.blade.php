@@ -57,15 +57,7 @@
                                 <img class="img-responsive"
                                      src="{{ filter_var($dataTypeContent->{$row->field}, FILTER_VALIDATE_URL) ? $dataTypeContent->{$row->field} : Voyager::image($dataTypeContent->{$row->field}) }}">
                             @elseif($row->type == "media_picker")
-                                @if(json_decode($dataTypeContent->{$row->field}))
-                                    @foreach(json_decode($dataTypeContent->{$row->field}) as $file)
-                                        <a class="col-md-3" href="#">
-                                            <img style="width: 300px; height:300px; margin-bottom: 3px;" src="{{ Voyager::image($file) }}" alt="{{ $file }}">
-                                            {{ $file }}
-                                        </a>
-                                        <br/>
-                                    @endforeach
-                                @endif
+                                <img style="width: 200px;" src="{{ Voyager::image($dataTypeContent->{ $row->field }) }}" alt="{{ $dataTypeContent->{$row->field} }}">
                             @elseif($row->type == 'multiple_images')
                                 @if(json_decode($dataTypeContent->{$row->field}))
                                     @foreach(json_decode($dataTypeContent->{$row->field}) as $file)

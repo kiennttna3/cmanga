@@ -31,6 +31,23 @@
         <link rel="stylesheet" href="{{ asset('css/frontend/owl.carousel.min.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ asset('css/frontend/slicknav.min.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ asset('css/frontend/style.css') }}" type="text/css">
+
+        <!-- Css custom -->
+        <style>
+            .header__menu ul li .dropdown {
+                width: 1000px;
+                left: -376px;
+            }
+            .header__menu ul li .dropdown li {
+                float: left;
+                width: 200px;
+            }
+            .header__menu ul li .dropdown li a {
+                width: fit-content;
+            }
+        </style>
+
+        @stack('css')
     </head>
     <body class="antialiased">
         <!-- Page Preloder -->
@@ -44,7 +61,7 @@
                     <div class="col-lg-2">
                         <div class="header__logo">
                             <a href="{{ route('home') }}">
-                                <img src="img/logo.png" alt="">
+                                <img src="img/logocmanga.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -52,15 +69,15 @@
                         <div class="header__nav">
                             <nav class="header__menu mobile-menu">
                                 <ul>
-                                    <li class="active"><a href="{{ route('home') }}">Homepage</a></li>
-                                    <li><a href="#">Categories <span class="arrow_carrot-down"></span></a>
+                                    <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
+                                    <li>
+                                        <a style="cursor: pointer">Thể loại <span class="arrow_carrot-down"></span></a>
                                         <ul class="dropdown">
-                                            <li><a href="#">Categories</a></li>
-                                            <li><a href="#">Anime Details</a></li>
-                                            <li><a href="#">Anime Watching</a></li>
-                                            <li><a href="#">Blog Details</a></li>
-                                            <li><a href="#">Sign Up</a></li>
-                                            <li><a href="#">Login</a></li>
+                                            @foreach ($category as $key => $value)
+                                                <li>
+                                                    <a href="#">{{ $value->title }}</a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </li>
                                     <li><a href="./blog.html">Our Blog</a></li>
@@ -102,7 +119,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="footer__logo">
-                            <a href="{{ route('home') }}"><img src="img/logo.png" alt=""></a>
+                            <a href="{{ route('home') }}"><img src="img/logocmanga.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-6">

@@ -5,6 +5,8 @@ use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\user\LoginUserController;
 use App\Http\Controllers\user\RegisterUserController;
 
+use App\Http\Controllers\index\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +18,11 @@ use App\Http\Controllers\user\RegisterUserController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('home');
+// Route::get('/', function () {
+//     return view('pages.home');
+// })->name('home');
 
-Route::get('truyen', function () {
+Route::get('/truyen', function () {
     return view('pages.bookstory');
 })->name('bookstory');
 
@@ -31,6 +33,8 @@ Route::get('chapter', function () {
 Route::get('profile', function () {
     return view('user.profile');
 })->name('profile');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('dang-nhap', [LoginUserController::class, 'home'])->name('login');
 Route::get('dang-ky', [RegisterUserController::class, 'home'])->name('register');

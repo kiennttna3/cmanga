@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $category = Category::orderBy('title')->get();
+        $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
         $bookstory = Bookstory::orderBy('title')->where('status', 'ACTIVE')->get();
 
         return view('pages.home')->with(compact('category','bookstory'));

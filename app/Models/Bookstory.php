@@ -24,6 +24,6 @@ class Bookstory extends Model
     }
 
     public function pivote_bookstory_category() {
-        return $this->belongsToMany(Category::class, 'pivote_bookstory_category', 'bookstory_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'pivote_bookstory_category', 'bookstory_id', 'category_id')->where('status', 'ACTIVE');
     }
 }

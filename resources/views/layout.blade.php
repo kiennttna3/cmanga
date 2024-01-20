@@ -34,6 +34,36 @@
 
         <!-- Css custom -->
         <style>
+            /* width */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+            ::-webkit-scrollbar-button {
+                width: 8px;
+                height: 5px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: #33333300;
+                border: thin solid #33333300;
+                border-radius: 10px;
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: #2d334f;
+                border: thin solid #33333300;
+                border-radius: 10px;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #2d334f;
+            }
+            .text_capitalize {
+                text-transform: capitalize;
+            }
             .header__menu ul li .dropdown {
                 width: 1000px;
                 left: -376px;
@@ -44,6 +74,13 @@
             }
             .header__menu ul li .dropdown li a {
                 width: fit-content;
+                color: #ffffff;
+            }
+            .header__menu ul li:hover .dropdown {
+                background-color: #151D35;
+            }
+            .header__menu ul li .dropdown li a:hover {
+                color: #6C74FC;
             }
         </style>
 
@@ -55,13 +92,13 @@
             <div class="loader"></div>
         </div>
         <!-- Header Section Begin -->
-        <header class="header">
+        <header class="header text_capitalize">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="header__logo">
                             <a href="{{ route('home') }}">
-                                <img src="img/logocmanga.png" alt="">
+                                <img style="width: 100px;" src="{{ asset('img/logocmanga.png') }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -119,7 +156,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="footer__logo">
-                            <a href="{{ route('home') }}"><img src="img/logocmanga.png" alt=""></a>
+                            <a href="{{ route('home') }}"><img style="width: 100px;" src="img/logocmanga.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -166,5 +203,7 @@
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+        @stack('js')
     </body>
 </html>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Bookstory;
 
 class bookstoryController extends Controller
 {
@@ -12,7 +14,11 @@ class bookstoryController extends Controller
      */
     public function index($slug)
     {
-        //
+        $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
+
+        $bookstory = Bookstory::where('slug', $slug)->where('status', 'ACTIVE')->first();
+
+        return view('pages.bookstory')->with(compact('category', 'bookstory'));
     }
 
     /**

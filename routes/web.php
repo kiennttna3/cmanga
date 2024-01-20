@@ -6,6 +6,7 @@ use App\Http\Controllers\user\LoginUserController;
 use App\Http\Controllers\user\RegisterUserController;
 
 use App\Http\Controllers\index\HomeController;
+use App\Http\Controllers\index\bookstoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +19,6 @@ use App\Http\Controllers\index\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('pages.home');
-// })->name('home');
-
-Route::get('/truyen', function () {
-    return view('pages.bookstory');
-})->name('bookstory');
-
 Route::get('chapter', function () {
     return view('pages.chapter');
 })->name('chapter');
@@ -35,6 +28,7 @@ Route::get('profile', function () {
 })->name('profile');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('{slug}', [bookstoryController::class, 'index'])->name('bookstory');
 
 Route::get('dang-nhap', [LoginUserController::class, 'home'])->name('login');
 Route::get('dang-ky', [RegisterUserController::class, 'home'])->name('register');

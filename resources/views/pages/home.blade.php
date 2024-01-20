@@ -78,6 +78,37 @@
         .product__page__title .product__page__filter {
             text-align: right;
         }
+        .product__sidebar .section-title h5:after {
+            background: #6C74FC;
+        }
+        img {
+            border-radius: 5px;
+        }
+        hr {
+            background-color: #222F5C;
+        }
+        .product__sidebar__view {
+            margin-bottom: 35px;
+        }
+        .comment_avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+        }
+        .product__sidebar__item__text {
+            max-width: calc(100% - 80px);
+            max-height: 30px;
+            overflow: hidden;
+        }
+        .background__fittel {
+            background-color: #151D35;
+            padding: 5px;
+            border-top: 1px solid #6C74FC;
+        }
+        .filter__comment {
+            max-height: 1000px;
+            overflow: auto;
+        }
         @media only screen and (max-width: 1199.98px) {
             .product__item__pic .ep {
                 font-size: 15px;
@@ -136,37 +167,44 @@
                             <div class="product__item col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-4 col-6">
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg" data-setbg="{{ Voyager::image($value->image) }}" style="background-image: url('{{ Voyager::image($value->image) }}');">
-                                        <div class="ep"><a href="#">Đang đọc 100</a></div>
+                                        <a href="{{ route('bookstory', [$value->slug]) }}"><img class="product__item__pic" src="" alt=""></a>
+                                        <div class="ep">
+                                            <a href="#">
+                                                Đang đọc 100
+                                            </a>
+                                        </div>
                                         <div class="background_option">
-                                            <div class="option_view"><i class="fa fa-eye"></i> 11</div>
-                                            <div class="option_follow"><i class="fa fa-bookmark"></i> 9141</div>
+                                            <div class="option_view">
+                                                <i class="fa fa-eye"></i>
+                                                11
+                                            </div>
+                                            <div class="option_follow">
+                                                <i class="fa fa-bookmark"></i>
+                                                9141
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="product__item__text">
-                                        <h5><a href="{{ route('bookstory') }}">{{ $value->title }}</a></h5>
+                                    <div class="product__item__text text_capitalize">
+                                        <h5>
+                                            <a href="{{ route('bookstory', [$value->slug]) }}">
+                                                {{ $value->title }}
+                                            </a>
+                                        </h5>
                                     </div>
                                     <div class="justify-content-between align-items-center mt-3 product__item__lastchapter">
                                         <div class="btn-group">
                                             <small class="text-muted">
                                                 <a href="#">
-                                                    {{-- <i class="fa-brands fa-readme"></i> --}}
                                                     Chapter 100
                                                 </a>
                                             </small>
                                         </div>
                                         <div class="btn-group">
                                             <small class="text-muted">
-                                                {{-- <i class="fa-regular fa-clock"></i> --}}
                                                 10 giờ trước
                                             </small>
                                         </div>
                                     </div>
-                                    {{-- <div class="product__item__text product__item__lastchapter">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                    </div> --}}
                                     <div class="clear"></div>
                                 </div>
                             </div>
@@ -183,7 +221,11 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-8">
-                @include('pages.bookstorySidebar')
+                <div class="product__sidebar">
+                    @include('pages.home.sidebarFollow')
+                    @include('pages.home.sidebarView')
+                    @include('pages.home.sidebarComment')
+                </div>
             </div>
         </div>
     </div>

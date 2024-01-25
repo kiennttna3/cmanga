@@ -66,7 +66,7 @@
             }
             .header__menu ul li .dropdown {
                 width: 1000px;
-                left: -376px;
+                left: -382px;
             }
             .header__menu ul li .dropdown li {
                 float: left;
@@ -75,12 +75,156 @@
             .header__menu ul li .dropdown li a {
                 width: fit-content;
                 color: #ffffff;
+                padding: 5px 10px;
+                max-width: 100%;
+                max-height: 30px;
+                overflow: hidden;
             }
             .header__menu ul li:hover .dropdown {
                 background-color: #151D35;
             }
             .header__menu ul li .dropdown li a:hover {
                 color: #6C74FC;
+            }
+            .header {
+                position: fixed;
+                width: -webkit-fill-available;
+                /* background-color: #101739; */
+            }
+            .header_auth {
+                text-align: right;
+            }
+            .header__right {
+                padding: 0;
+            }
+            .header__menu ul li.active a {
+                background-color: #6C74FC;
+            }
+            .header__right a.auth {
+                margin-right: 0px;
+            }
+            .header__right .header__menu ul li .dropdown {
+                width: auto;
+                left: -190px;
+                border-radius: 20px;
+                padding: 10px 9px;
+                background-color: #222F5C;
+                box-shadow: 0 0 3px #0C1121;
+            }
+            .header__right .header__menu ul li .dropdown li {
+                margin: 10px;
+                cursor: pointer;
+                line-height: 30px;
+                border-radius: 150px;
+            }
+            .header__right .header__menu ul li .dropdown li:hover {
+                background-color: #4A5693;
+            }
+            .header__right .header__menu ul li .dropdown li a:hover {
+                color: #fff;
+            }
+            .header__right .header__menu ul li .dropdown li a i{
+                margin-right: 4px;
+            }
+            .header__right .header__menu ul li a {
+                padding: 0px;
+            }
+            .header__right .header__menu ul li a.auth {
+                padding: 20px;
+            }
+            .actives {
+                background-color: #6C74FC;
+            }
+            /* css form báo lỗi */
+            #overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1; /* Ensure the overlay is on top */
+            }
+
+            #formContainer {
+                position: absolute;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #0C1121;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                max-width: 80%; /* Adjust the maximum width as needed */
+                width: 500px; /* Set a fixed width for smaller screens */
+                z-index: 2; /* Ensure the form is on top of the overlay */
+            }
+
+            #closeForm {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+                color: #6C74FC;
+                cursor: pointer;
+            }
+            #overlay .btn {
+                background-color: #6C74FC;
+                border-color: #2A3254;
+                color: #fff;
+            }
+            /* css form báo lỗi */
+            @media only screen and (max-width: 767px) {
+                .header {
+                    position: fixed;
+                    width: -webkit-fill-available;
+                }
+            }
+            @media only screen and (max-width: 767px) {
+                .header__right .header__menu {
+                    display: block;
+                }
+                .header__right {
+                    right: 100px;
+                    top: -60px;
+                }
+                .header__right .header__menu ul li .dropdown {
+                    left: -110px;
+                    top: 40px;
+                }
+                .header__right .header__menu ul li a {
+                    padding: 0px;
+                }
+                .header__right .header__menu ul li a.auth {
+                    padding: 20px;
+                }
+            }
+            @media only screen and (min-width: 768px) and (max-width: 991px) {
+                .header__right .header__menu {
+                    display: block;
+                }
+                .header__right {
+                    right: 80px;
+                    top: -60px;
+                }
+                .header__right .header__menu ul li .dropdown {
+                    top: 30px;
+                }
+                .header__right .header__menu ul li a {
+                    padding: 0px;
+                }
+                .header__right .header__menu ul li a.auth {
+                    padding: 20px;
+                }
+            }
+            @media only screen and (min-width: 992px) and (max-width: 1199px) {
+                .header__right .header__menu ul li a {
+                    padding: 0px;
+                }
+                .header__right .header__menu ul li a.auth {
+                    padding: 20px;
+                }
             }
         </style>
 
@@ -112,12 +256,12 @@
                                         <ul class="dropdown">
                                             @foreach ($category as $key => $value)
                                                 <li>
-                                                    <a href="#">{{ $value->title }}</a>
+                                                    <a href="{{ route('category', [$value->slug]) }}">{{ $value->title }}</a>
                                                 </li>
                                             @endforeach
                                         </ul>
                                     </li>
-                                    <li><a href="./blog.html">Our Blog</a></li>
+                                    <li><a href="#">Our Blog</a></li>
                                     <li><a href="#">Contacts</a></li>
                                 </ul>
                             </nav>
@@ -125,9 +269,53 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="header__right">
-                            <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                            <a href="#"><span class="icon_profile"></span></a>
+                            <nav class="header__menu header_auth">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                                    </li>
+                                    @if (Session::get('login_publisher'))
+                                        <li>
+                                            <a class="auth" style="cursor: pointer"><span class="icon_profile"></span></a>
+                                            <ul class="dropdown">
+                                                <li>
+                                                    <a href="{{ route('profile') }}">
+                                                        <i class="fa-solid fa-user-tie"></i>
+                                                        Trang cá nhân
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                        Danh sách theo dõi
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fa-solid fa-clock-rotate-left"></i>
+                                                        Lịch sử đọc truyện
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                                        Đăng xuất
+                                                    </a>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                        @csrf
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a href="{{ route('login') }}" class="auth" style="cursor: pointer"><span class="icon_profile"></span></a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </nav>
                         </div>
+                    </div>
                     </div>
                 </div>
                 <div id="mobile-menu-wrap"></div>
@@ -156,7 +344,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="footer__logo">
-                            <a href="{{ route('home') }}"><img style="width: 100px;" src="img/logocmanga.png" alt=""></a>
+                            <a href="{{ route('home') }}"><img style="width: 100px;" src="{{ asset('img/logocmanga.png') }}" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -203,6 +391,42 @@
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Hàm để hiển thị overlay và form
+                function open() {
+                    $('#overlay').fadeIn()
+                }
+
+                // Hàm để đóng overlay và form
+                function hide() {
+                    $('#overlay').fadeOut()
+                }
+
+                // Bắt sự kiện khi click vào nút mở form
+                $('#openForm').on('click', function () {
+                    open()
+                })
+
+                // Bắt sự kiện khi click vào nút đóng form
+                $('#closeForm').on('click', function () {
+                    hide()
+                })
+
+                // Bắt sự kiện khi click bên ngoài form để đóng form
+                $('#overlay').on('click', function (event) {
+                    if (event.target === this) {
+                        hide()
+                    }
+                })
+            })
+
+            function toggleActive(element) {
+                // Chuyển đổi trạng thái 'active' cho thẻ a được nhấp vào
+                element.classList.toggle('actives')
+            }
+        </script>
 
         @stack('js')
     </body>

@@ -48,6 +48,9 @@
         .product__item__text h5 a:hover {
             color: #6C74FC;
         }
+        .product__sidebar__comment .product__sidebar__comment__item__text .product__sidebar__item__text a:hover {
+            color: #6C74FC;
+        }
         .product__item__lastchapter {
             position: absolute;
             bottom: 0px;
@@ -81,6 +84,14 @@
         .product__sidebar .section-title h5:after {
             background: #6C74FC;
         }
+        .hot_tags {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            min-height: auto;
+            width: auto;
+            min-width: auto;
+        }
         img {
             border-radius: 5px;
         }
@@ -108,6 +119,30 @@
         .filter__comment {
             max-height: 1000px;
             overflow: auto;
+        }
+        .nice-select.open .list,
+        .nice-select .list {
+            width: -webkit-fill-available;
+            background-color: #374151;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+        .nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+            background-color: #6C74FC;
+        }
+        .flex_center a {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin-left: 10px;
+        }
+        .nice-select {
+            background-color: #2A3254;
+            color: #fff;
+            border: none;
+        }
+        .nice-select:hover {
+            border-color: #2A3254;
         }
         @media only screen and (max-width: 1199.98px) {
             .product__item__pic .ep {
@@ -137,13 +172,14 @@
 @endpush
 
 @section('content')
+    @include('pages.overlay')
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
                 <div class="product__page__content">
                     <div class="product__page__title">
                         <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-10 col-xs-6 col-9">
+                            <div class="col-lg-9 col-md-8 col-sm-10 col-xs-6 col-12">
                                 <div class="section-title">
                                     <h4>
                                         <i class="fa-solid fa-arrows-rotate"></i>
@@ -151,11 +187,14 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-2 col-xs-4 col-3">
+                            <div class="col-lg-3 col-md-4 col-sm-2 col-xs-4 col-12">
                                 <div class="product__page__filter">
-                                    <div class="product__pagination" style="text-align: inherit">
-                                        <a href="#" class="current_page">
+                                    <div class="product__pagination flex_center" style="text-align: inherit; display: flex;flex-direction: row-reverse;">
+                                        <a id="openForm" class="current_page btn">
                                             <i class="fa-solid fa-filter"></i>
+                                        </a>
+                                        <a class="current_page btn" onclick="toggleActive(this)">
+                                            <i class="fa-solid fa-list"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -168,6 +207,9 @@
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg" data-setbg="{{ Voyager::image($value->image) }}" style="background-image: url('{{ Voyager::image($value->image) }}');">
                                         <a href="{{ route('bookstory', [$value->slug]) }}"><img class="product__item__pic" src="" alt=""></a>
+                                        @if ($value->featured)
+                                            <img class="hot_tags" src="{{ asset('img/hot_tags.png') }}">
+                                        @endif
                                         <div class="ep">
                                             <a href="#">
                                                 Đang đọc 100
@@ -194,16 +236,18 @@
                                     <div class="justify-content-between align-items-center mt-3 product__item__lastchapter">
                                         <div class="btn-group">
                                             <small class="text-muted">
-                                                <a href="#">
-                                                    Chapter 100
+                                                <a href="{{url('truyen-tranh/'.$value->slug.'/'.$value->chapter_slug)}}">
+                                                    {{ $value->chapter_title }}
                                                 </a>
                                             </small>
                                         </div>
-                                        <div class="btn-group">
-                                            <small class="text-muted">
-                                                10 giờ trước
-                                            </small>
-                                        </div>
+                                        @if ($value->chapter_created_at)
+                                            <div class="btn-group">
+                                                <small class="text-muted">
+                                                    {{ \Carbon\Carbon::parse($value->chapter_created_at)->diffForHumans() }}
+                                                </small>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="clear"></div>
                                 </div>

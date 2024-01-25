@@ -19,6 +19,9 @@
         .product__item__text {
             padding: 0;
         }
+        .anime-details {
+            position: relative;
+        }
         .anime__details__pic {
             height: 370px;
         }
@@ -30,6 +33,14 @@
             width: 6px;
             background: transparent;
             content: "";
+        }
+        .anime__details__title h3 {
+            text-transform: capitalize;
+        }
+        .breadcrumb__links a,
+        .breadcrumb__links span {
+            font-size: 20px;
+            color: #ffffff;
         }
         .fa-eye:before,
         .fa-bookmark:before,
@@ -53,6 +64,12 @@
             margin-bottom: 10px;
             padding: 0 20px;
         }
+        .anime__details__btn button:hover,
+        .anime__details__btn form:hover,
+        .anime__details__btn a:hover  {
+            color: #fff;
+            cursor: pointer;
+        }
         .anime__details__btn .follow-btn.active {
             background-color: #6C74FC;
         }
@@ -62,7 +79,19 @@
         a {
             color: #6C74FC;
         }
+        .anime__details__sidebar .background__fittel {
+            background-color: #1d1e39;
+            padding: 5px;
+            border-top: 1px solid #6C74FC;
+        }
+        .anime__details__sidebar .background__fittel img {
+            width: 90px;
+            height: 130px;
+        }
         .section-title h4:after, .section-title h5:after {
+            background: #6C74FC;
+        }
+        .anime__details__form form button{
             background: #6C74FC;
         }
         .anime__details__form {
@@ -76,6 +105,28 @@
         }
         .table td, .table th {
             border-top: 1px solid #222F5C;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+        }
+        .background img {
+            width: 100%;
+            filter: blur(30px);
+            opacity: .6;
+        }
+        .product__sidebar__comment__item__text h5 {
+            max-width: 100%;
+            max-height: 30px;
+            overflow: hidden;
+            line-height: 28px;
+        }
+        .submit {
+            font-size: 18px;
         }
         @media only screen and (min-width: 768px) and (max-width: 991px) {
             .anime__details__widget ul li span {
@@ -91,6 +142,9 @@
 @endpush
 
 @section('content')
+    <div class="background">
+        <img src="{{ Voyager::image($bookstory->image) }}" alt="">
+    </div>
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -123,7 +177,7 @@
                                 <div class="product__item__text">
                                     <ul>
                                         @foreach ($bookstory->pivote_bookstory_category as $key => $value)
-                                            <a href="#"><li>{{ $value->title }}</li></a>
+                                            <a href="{{ route('category', [$value->slug]) }}"><li>{{ $value->title }}</li></a>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -134,11 +188,11 @@
                                         <ul>
                                             <li class="mb-2">
                                                 <i class="fa-solid fa-rss"></i>
-                                                <span>Tình trạng</span> Đang Cập Nhật
+                                                <span>Tình trạng</span> {{ $bookstory->statusproblem }}
                                             </li>
                                             <li class="mb-2">
                                                 <i class="fa-solid fa-arrows-rotate"></i>
-                                                <span>Cập nhật</span> 41 phút trước
+                                                <span>Cập nhật</span> {{ $chapter_last ? $chapter_last->created_at->diffForHumans() : 0 }}
                                             </li>
                                             <li class="mb-2">
                                                 <i class="fa-solid fa-eye"></i>
@@ -153,18 +207,43 @@
                                 </div>
                             </div>
                             <div class="anime__details__btn mt-4">
-                                <a href="{{ route('chapter') }}" class="follow-btn active">
-                                    <i class="fa-solid fa-book"></i>
-                                    Đọc từ đầu
-                                </a>
+                                @if($chapter_first)
+                                    <a href="{{ route('chapter', [$chapter_first->bookstory->slug, $chapter_first->slug]) }}" class="follow-btn active">
+                                        <i class="fa-solid fa-book"></i>
+                                        Đọc từ đầu
+                                    </a>
+                                    <a href="{{ route('chapter', [$chapter_last->bookstory->slug, $chapter_last->slug]) }}" class="follow-btn">
+                                        <i class="fa-solid fa-book"></i>
+                                        Đọc mới nhất
+                                    </a>
+                                @else
+                                    <a href="" class="follow-btn active">
+                                        <i class="fa-solid fa-book"></i>
+                                        Đọc từ đầu
+                                    </a>
+                                @endif
                                 <a href="#" class="follow-btn">
                                     <i class="fa-solid fa-book-open"></i>
                                     Đọc tiếp
                                 </a>
-                                <a href="#" class="follow-btn">
-                                    <i class="fa fa-heart-o"></i>
-                                    Theo dõi
-                                </a>
+                                @if (Session::get('login_publisher'))
+                                    @if ($checkfollow)
+                                        <a class="follow-btn active" id="follow-btn" data-action="{{ route('unfollow', $bookstory) }}">
+                                            <i class="fa fa-heart-o"></i>
+                                            Hủy theo dõi
+                                        </a>
+                                    @else
+                                        <a class="follow-btn" id="follow-btn" data-action="{{ route('follow', $bookstory) }}">
+                                            <i class="fa fa-heart-o"></i>
+                                            theo dõi
+                                        </a>
+                                    @endif
+                                @else
+                                    <a href="#" class="follow-btn">
+                                        <i class="fa fa-heart-o"></i>
+                                        Theo dõi
+                                    </a>
+                                @endif
                                 <a href="#" class="follow-btn">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                     Báo lỗi
@@ -186,7 +265,7 @@
                         <div class="anime__details__text">
                             <p>{!! $bookstory->body !!}</p>
                             <p>
-                                <a href="{{ route('bookstory', [$value->slug]) }}">{!! $bookstory->title !!}</a>
+                                <a href="{{ route('bookstory', [$bookstory->slug]) }}">{!! $bookstory->title !!}</a>
                                 được cập nhật nhanh nhất và đầy đủ nhất tại Cmanga Bạn đọc đừng quên để lại bình luận và chia sẻ,
                                 ủng hộ Cmanga ra các chương mới nhất của truyện
                                 <a style="color: #fff">{!! $bookstory->title !!}</a> nhé.
@@ -198,7 +277,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8">
                     @include('pages.bookstory.listChapter')
-                    @include('pages.bookstory.Comment')
+                    @include('pages.bookstory.comment')
                 </div>
                 <div class="col-lg-4 col-md-4">
                     @include('pages.bookstory.sidebarCategory')
@@ -208,3 +287,32 @@
     </section>
     <!-- Anime Section End -->
 @endsection
+
+@push('js')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#follow-btn').on('click', function (e) { //Sử lý sự kiện click
+            e.preventDefault(); // Ngăn chặn hành vi load lại trang web
+            var action = $(this).data('action') //Lấy đường dẫn
+            var check = $(this).hasClass('active') //Kiểm tra
+
+            $.ajax({ //Thực hiện ajax
+                type: check ? 'DELETE' : 'POST',
+                url: action,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function (data) {
+                    console.log('Success:', data)
+                    $(this).toggleClass('active')
+                    var checkButton = check ? 'Theo dõi' : 'Hủy theo dõi'
+                    $(this).html('<i class="fa fa-heart-o"></i> ' + checkButton)
+                }.bind(this),
+                error: function (data) {
+                    console.log('Error:', data)
+                }
+            })
+        })
+    })
+</script>
+@endpush

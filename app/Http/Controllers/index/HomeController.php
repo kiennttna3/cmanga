@@ -15,7 +15,29 @@ class HomeController extends Controller
     public function index()
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
-        $bookstory = Bookstory::orderBy('title')->where('status', 'ACTIVE')->get();
+
+        $bookstory = Bookstory::select('bookstory.*')
+        ->selectSub(function($query) {
+            $query->select('title_name')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_title')
+        ->selectSub(function($query) {
+            $query->select('slug')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_slug')
+        ->selectSub(function($query) {
+            $query->select('created_at')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_created_at')
+        ->orderByRaw('CASE WHEN chapter_created_at > created_at THEN chapter_created_at ELSE created_at END DESC')
+        ->where('status', 'ACTIVE')
+        ->get();
 
         return view('pages.home')->with(compact('category','bookstory'));
     }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Bookstory;
 use App\Models\Chapter;
+use App\Models\Pivot_table_comment;
 
 class chapterController extends Controller
 {
@@ -27,7 +28,15 @@ class chapterController extends Controller
 
         $previous_chapter = Chapter::orderBy('id', 'DESC')->where('bookstory_id', $bookstory->id)->where('id', '<', $chapter->id)->where('status', 'ACTIVE')->value('slug');
 
-        return view('pages.chapter')->with(compact('category', 'bookstory', 'chapter', 'all_chapter', 'next_chapter', 'previous_chapter'));
+        $countComment = Pivot_table_comment::where('chapter_id', $chapter->id)->get();
+
+        $viewComment = Pivot_table_comment::select('pivot_table_comment.*', 'publisher.avatar', 'publisher.name')
+        ->join('publisher', 'publisher.id', '=', 'pivot_table_comment.publisher_id',)
+        ->where('pivot_table_comment.chapter_id', $chapter->id)
+        ->orderByDesc('created_at')
+        ->paginate(10);
+
+        return view('pages.chapter')->with(compact('category', 'bookstory', 'chapter', 'all_chapter', 'next_chapter', 'previous_chapter', 'countComment', 'viewComment'));
     }
 
     /**

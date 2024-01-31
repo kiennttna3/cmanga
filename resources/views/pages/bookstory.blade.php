@@ -1,9 +1,18 @@
 @extends('../layout')
 
 @push('css')
-    <style>
+    <style type="text/css">
+        .breadcrumb__links a,
+        .breadcrumb__links span {
+            font-size: 20px;
+            color: #ffffff;
+        }
+        .breadcrumb__links a.breadcrumb__title:after {
+            content: none;
+        }
         .background_container {
             background: #151D35;
+            border-radius: 5px;
         }
         .product__item__text ul li {
             margin-right: 7px;
@@ -36,11 +45,6 @@
         }
         .anime__details__title h3 {
             text-transform: capitalize;
-        }
-        .breadcrumb__links a,
-        .breadcrumb__links span {
-            font-size: 20px;
-            color: #ffffff;
         }
         .fa-eye:before,
         .fa-bookmark:before,
@@ -128,6 +132,35 @@
         .submit {
             font-size: 18px;
         }
+        .post-meta {
+            width: 81%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .pagination {
+            justify-content: center;
+        }
+        .product__pagination a {
+            border: 1px solid #ffffff;
+            margin: 5px;
+        }
+        .product__pagination .pagination .active {
+            display: inline-block;
+            font-size: 15px;
+            color: #b7b7b7;
+            font-weight: 600;
+            height: 50px;
+            width: 50px;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            line-height: 48px;
+            text-align: center;
+            -webkit-transition: all, 0.3s;
+            -o-transition: all, 0.3s;
+            transition: all, 0.3s;
+            border: 1px solid #ffffff;
+            margin: 5px;
+        }
         @media only screen and (min-width: 768px) and (max-width: 991px) {
             .anime__details__widget ul li span {
                 width: 130px;
@@ -142,6 +175,7 @@
 @endpush
 
 @section('content')
+    @include('pages.bookstory.overlay')
     <div class="background">
         <img src="{{ Voyager::image($bookstory->image) }}" alt="">
     </div>
@@ -152,7 +186,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="{{ route('home') }}"><i class="fa fa-home"></i> Truyện tranh</a>
-                        <span>{{ $bookstory->title }}</span>
+                        <a class="breadcrumb__title" href="{{ route('bookstory', [$bookstory->slug]) }}">{{ $bookstory->title }}</a>
                     </div>
                 </div>
             </div>
@@ -167,7 +201,7 @@
                 <div class="row pt-4 pl-2 pr-2">
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg" data-setbg="{{ Voyager::image($bookstory->image) }}" style="background-image: url('{{ Voyager::image($bookstory->image) }}');">
-
+                            <img class="product__item__pic">
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -200,7 +234,7 @@
                                             </li>
                                             <li class="mb-2">
                                                 <i class="fa-solid fa-bookmark"></i>
-                                                <span>Lượt theo dõi</span> 671
+                                                <span>Lượt theo dõi</span> {{ $bookstory->follow }}
                                             </li>
                                         </ul>
                                     </div>
@@ -229,12 +263,12 @@
                                 @if (Session::get('login_publisher'))
                                     @if ($checkfollow)
                                         <a class="follow-btn active" id="follow-btn" data-action="{{ route('unfollow', $bookstory) }}">
-                                            <i class="fa fa-heart-o"></i>
+                                            <i class="fa-regular fa-heart"></i>
                                             Hủy theo dõi
                                         </a>
                                     @else
                                         <a class="follow-btn" id="follow-btn" data-action="{{ route('follow', $bookstory) }}">
-                                            <i class="fa fa-heart-o"></i>
+                                            <i class="fa-solid fa-heart"></i>
                                             theo dõi
                                         </a>
                                     @endif
@@ -244,7 +278,7 @@
                                         Theo dõi
                                     </a>
                                 @endif
-                                <a href="#" class="follow-btn">
+                                <a id="openForm" class="btn follow-btn">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                     Báo lỗi
                                 </a>
@@ -289,30 +323,30 @@
 @endsection
 
 @push('js')
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#follow-btn').on('click', function (e) { //Sử lý sự kiện click
-            e.preventDefault(); // Ngăn chặn hành vi load lại trang web
-            var action = $(this).data('action') //Lấy đường dẫn
-            var check = $(this).hasClass('active') //Kiểm tra
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#follow-btn').on('click', function (e) { //Sử lý sự kiện click
+                e.preventDefault(); // Ngăn chặn hành vi load lại trang web
+                var action = $(this).data('action') //Lấy đường dẫn
+                var check = $(this).hasClass('active') //Kiểm tra
 
-            $.ajax({ //Thực hiện ajax
-                type: check ? 'DELETE' : 'POST',
-                url: action,
-                data: {
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function (data) {
-                    console.log('Success:', data)
-                    $(this).toggleClass('active')
-                    var checkButton = check ? 'Theo dõi' : 'Hủy theo dõi'
-                    $(this).html('<i class="fa fa-heart-o"></i> ' + checkButton)
-                }.bind(this),
-                error: function (data) {
-                    console.log('Error:', data)
-                }
+                $.ajax({ //Thực hiện ajax
+                    type: check ? 'DELETE' : 'POST',
+                    url: action,
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function (data) {
+                        console.log('Success:', data)
+                        $(this).toggleClass('active')
+                        var checkButton = check ? 'Theo dõi' : 'Hủy theo dõi'
+                        $(this).html('<i class="fa fa-heart-o"></i> ' + checkButton)
+                    }.bind(this),
+                    error: function (data) {
+                        console.log('Error:', data)
+                    }
+                })
             })
         })
-    })
-</script>
+    </script>
 @endpush

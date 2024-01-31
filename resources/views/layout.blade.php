@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="{{ asset('css/frontend/style.css') }}" type="text/css">
 
         <!-- Css custom -->
-        <style>
+        <style type="text/css">
             /* width */
             ::-webkit-scrollbar {
                 width: 8px;
@@ -64,6 +64,42 @@
             .text_capitalize {
                 text-transform: capitalize;
             }
+            .header__menu {
+                text-align: left;
+            }
+            .header__menu ul li .search {
+                background-color: #2d334f;
+                width: 100%;
+                border-radius: 50px;
+                padding: 0 45px 0 20px;
+                color: #fff;
+                font-family: inherit;
+                font-weight: inherit;
+                font-size: inherit;
+                height: 44px;
+                margin: 13px 0;
+                border: 2px solid #fff0;
+            }
+            .header__menu ul li.search_box {
+                width: 400px;
+                position: relative;
+            }
+            .header__menu ul li.search_icon {
+                position: absolute;
+                top: 50%;
+                transform: translate(-10px,-50%);
+            }
+            .header__menu ul li .search_switch {
+                border: none;
+                position: absolute;
+                right: 0;
+                transform: translate(-20px,-44%);
+                padding: 0;
+            }
+            .header__menu ul li.search_icon .icon_search {
+                color: #fff;
+                font-size: 19px;
+            }
             .header__menu ul li .dropdown {
                 width: 1000px;
                 left: -382px;
@@ -85,6 +121,9 @@
             }
             .header__menu ul li .dropdown li a:hover {
                 color: #6C74FC;
+            }
+            .dropdown-item:focus, .dropdown-item:hover {
+                background-color: transparent;
             }
             .header {
                 position: fixed;
@@ -114,7 +153,7 @@
             .header__right .header__menu ul li .dropdown li {
                 margin: 10px;
                 cursor: pointer;
-                line-height: 30px;
+                line-height: 20px;
                 border-radius: 150px;
             }
             .header__right .header__menu ul li .dropdown li:hover {
@@ -134,6 +173,17 @@
             }
             .actives {
                 background-color: #6C74FC;
+            }
+            .avatar_layout {
+                position: absolute;
+                top: 10px;
+                left: 12px;
+                border-radius:50%;
+                width:40px;
+                height:40px;
+            }
+            .breadcrumb__links a i {
+                color: #fff;
             }
             /* css form báo lỗi */
             #overlay {
@@ -180,18 +230,14 @@
                     position: fixed;
                     width: -webkit-fill-available;
                 }
-            }
-            @media only screen and (max-width: 767px) {
+                .header__menu {
+                    display: block
+                }
                 .header__right .header__menu {
                     display: block;
                 }
                 .header__right {
-                    right: 100px;
-                    top: -60px;
-                }
-                .header__right .header__menu ul li .dropdown {
-                    left: -110px;
-                    top: 40px;
+                    position: static;
                 }
                 .header__right .header__menu ul li a {
                     padding: 0px;
@@ -199,17 +245,50 @@
                 .header__right .header__menu ul li a.auth {
                     padding: 20px;
                 }
+                .header__menu ul li .search {
+                    width: auto;
+                }
+                .header__menu ul li.search_icon {
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(130px);
+                }
+                .header__menu ul li .search_switch {
+                    border: none;
+                    position: absolute;
+                    right: 0;
+                    transform: translate(120px,-44%);
+                    padding: 0;
+                }
+                .header__menu ul li.search_icon .icon_search {
+                    font-size: 15px;
+                }
+                .dropdown-menu {
+                    width: 96%;
+                    left: -100px;
+                }
             }
             @media only screen and (min-width: 768px) and (max-width: 991px) {
+                .header__menu {
+                    display: block
+                }
+                .header__menu ul li.search_icon {
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(200px);
+                }
+                .header__menu ul li .search_switch {
+                    border: none;
+                    position: absolute;
+                    right: 0;
+                    transform: translate(190px,-44%);
+                    padding: 0;
+                }
                 .header__right .header__menu {
                     display: block;
                 }
                 .header__right {
-                    right: 80px;
-                    top: -60px;
-                }
-                .header__right .header__menu ul li .dropdown {
-                    top: 30px;
+                    position: static;
                 }
                 .header__right .header__menu ul li a {
                     padding: 0px;
@@ -239,18 +318,30 @@
         <header class="header text_capitalize">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-2">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 col-3">
                         <div class="header__logo">
                             <a href="{{ route('home') }}">
                                 <img style="width: 100px;" src="{{ asset('img/logocmanga.png') }}" alt="">
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-8 col-xs-8 col-7">
                         <div class="header__nav">
-                            <nav class="header__menu mobile-menu">
+                            <nav class="header__menu">
                                 <ul>
-                                    <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
+                                    <form autocomplete="off" method="GET" action="{{ route('search') }}">
+                                        @csrf
+                                        <li class="search_box">
+                                            <input type="search" name="keyword" id="keywords" class="search" placeholder="Bạn muốn tìm truyện gì" aria-label="Search">
+                                            <div id="search_ajax"></div>
+                                        </li>
+                                        <li class="search_icon">
+                                            <button class="btn search_switch" type="submit">
+                                                <span class="icon_search"></span>
+                                            </button>
+                                        </li>
+                                    </form>
+                                    {{-- <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
                                     <li>
                                         <a style="cursor: pointer">Thể loại <span class="arrow_carrot-down"></span></a>
                                         <ul class="dropdown">
@@ -262,21 +353,21 @@
                                         </ul>
                                     </li>
                                     <li><a href="#">Our Blog</a></li>
-                                    <li><a href="#">Contacts</a></li>
+                                    <li><a href="#">Contacts</a></li> --}}
                                 </ul>
                             </nav>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-2 col-xs-2 col-2">
                         <div class="header__right">
                             <nav class="header__menu header_auth">
                                 <ul>
-                                    <li>
-                                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                                    </li>
                                     @if (Session::get('login_publisher'))
                                         <li>
-                                            <a class="auth" style="cursor: pointer"><span class="icon_profile"></span></a>
+                                            <a class="auth" style="cursor: pointer">
+                                                <span class="icon_profile"></span>
+                                                <img src="{{ Voyager::image(Session::get('avatar')) }}" id="media" class="avatar_layout" alt="">
+                                            </a>
                                             <ul class="dropdown">
                                                 <li>
                                                     <a href="{{ route('profile') }}">
@@ -285,7 +376,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">
+                                                    <a href="{{ route('favorite') }}">
                                                         <i class="fa-solid fa-heart"></i>
                                                         Danh sách theo dõi
                                                     </a>
@@ -422,9 +513,86 @@
                 })
             })
 
+            // js tìm kiếm bằng ajax
+            let timer
+            // Hàm để quản lý sự hiển thị của dropdown
+            function handleDropdownVisibility() {
+                // Ẩn dropdown khi click bên ngoài
+                $(document).on('click', function (e) {
+                    // Kiểm tra xem phần tử được click có nằm trong dropdown không
+                    if (!$(e.target).closest('.dropdow').length) {
+                        // Nếu không nằm trong dropdown, ẩn dropdown
+                        $('#search_ajax').fadeOut()
+                    }
+                })
+                // Ngăn chặn việc ẩn dropdown khi click vào ô tìm kiếm
+                $('#keywords').on('click', function (e) {
+                    // Ngừng sự kiện click để ngăn chặn việc ẩn dropdown
+                    e.stopPropagation()
+                    // Hiển thị dropdown
+                    $('#search_ajax').fadeIn()
+                })
+            }
+            // Sự kiện xử lý khi người dùng nhập liệu vào ô tìm kiếm
+            $('#keywords').keyup(function () {
+                // Lấy giá trị từ ô tìm kiếm
+                var keywords = $(this).val()
+                // Xóa bỏ timer trước đó (nếu có)
+                clearTimeout(timer)
+                // Kiểm tra nếu giá trị không rỗng
+                if (keywords != '') {
+                    // Đặt một timer trước khi thực hiện Ajax
+                    timer = setTimeout(() => {
+                        // Lấy giá trị của CSRF token
+                        var _token = $('input[name="_token"]').val()
+                        // Thực hiện yêu cầu Ajax đến server để tìm kiếm
+                        $.ajax({
+                            url: "{{ route('search_ajax') }}",
+                            method: "POST",
+                            data: {keywords: keywords, _token: _token},
+                            success: function (data) {
+                                // Cập nhật dropdown với kết quả tìm kiếm
+                                $('#search_ajax').html(data)
+                                // Kiểm tra xem phản hồi có chứa thông báo lỗi không
+                                if (data.includes("error-message")) {
+                                    // Hiển thị dropdown với thông báo lỗi
+                                    $('#search_ajax').fadeIn()
+                                } else {
+                                    // Gọi hàm để xử lý việc hiển thị dropdown
+                                    handleDropdownVisibility()
+                                }
+                            }
+                        })
+                    }, 200)
+
+                } else {
+                    // Nếu giá trị tìm kiếm rỗng, ẩn dropdown đi
+                    $('#search_ajax').fadeOut()
+                }
+            })
+
             function toggleActive(element) {
                 // Chuyển đổi trạng thái 'active' cho thẻ a được nhấp vào
                 element.classList.toggle('actives')
+
+                var list_Group = document.querySelectorAll('.list_Group')
+                var list_grid = document.querySelectorAll('.list_grid')
+
+                list_Group.forEach(function(item) {
+                    if (element.classList.contains('actives')) {
+                        item.style.display = 'none'
+                    } else {
+                        item.style.display = 'block'
+                    }
+                })
+
+                list_grid.forEach(function(item) {
+                    if (element.classList.contains('actives')) {
+                        item.style.display = 'block'
+                    } else {
+                        item.style.display = 'none'
+                    }
+                })
             }
         </script>
 

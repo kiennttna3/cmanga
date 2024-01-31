@@ -10,7 +10,7 @@ class Bookstory extends Model
     use HasFactory;
     public $timestamps = true; //Set time to false
     protected $fillable = [
-        'title', 'seo_title', 'excerpt', 'body', 'media', 'slug', 'meta_description', 'meta_keywords', 'status', 'featured', 'category_id'
+        'title', 'seo_title', 'excerpt', 'body', 'media', 'slug', 'meta_description', 'meta_keywords', 'status', 'featured', 'category_id', 'follow'
     ];
     protected $primarykey = 'id';
     protected $table = 'bookstory';

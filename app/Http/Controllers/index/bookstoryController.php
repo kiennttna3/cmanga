@@ -9,7 +9,8 @@ use App\Models\Category;
 use App\Models\Bookstory;
 use App\Models\Chapter;
 use App\Models\Pivote_Bookstory_Category;
-use App\Models\pivot_table_follow;
+use App\Models\Pivot_table_follow;
+use App\Models\Pivot_table_comment;
 
 class bookstoryController extends Controller
 {
@@ -66,9 +67,20 @@ class bookstoryController extends Controller
         ->take(8)
         ->get();
 
-        $checkfollow = pivot_table_follow::where('publisher_id', Session::get('id'))->where('bookstory_id', $bookstory->id)->exists();
+        $publisher = Session::get('id');
 
-        return view('pages.bookstory')->with(compact('category', 'bookstory', 'chapter', 'chapter_first' , 'chapter_last', 'categoryTogether', 'checkfollow'));
+        $checkfollow = Pivot_table_follow::where('publisher_id', $publisher)->where('bookstory_id', $bookstory->id)->exists();
+
+        $count = Pivot_table_comment::where('bookstory_id', $bookstory->id)->get();
+
+        $viewComment = Pivot_table_comment::select('pivot_table_comment.*', 'publisher.avatar', 'publisher.name', 'chapter.title_name', 'chapter.slug')
+        ->join('publisher', 'publisher.id', '=', 'pivot_table_comment.publisher_id')
+        ->leftjoin('chapter', 'chapter.id', '=', 'pivot_table_comment.chapter_id') //kết hợp thông tin từ bảng. Kết quả sẽ chứa tất cả các cột từ cả hai bảng, và nếu không có dữ liệu khớp, các cột từ bảng sẽ có giá trị NULL.
+        ->where('pivot_table_comment.bookstory_id', $bookstory->id)
+        ->orderByDesc('created_at')
+        ->paginate(10);
+
+        return view('pages.bookstory')->with(compact('category', 'bookstory', 'chapter', 'chapter_first' , 'chapter_last', 'categoryTogether', 'checkfollow', 'count', 'viewComment'));
     }
 
     /**

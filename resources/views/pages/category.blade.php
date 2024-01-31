@@ -4,7 +4,7 @@
 @endsection
 
 @push('css')
-    <style>
+    <style type="text/css">
         a {
             color: #fff;
         }
@@ -31,19 +31,19 @@
             padding: 10px 10px;
         }
         .product__item__pic .ep {
-                font-size: 16px;
-                color: #ffffff;
-                background: #6C74FC;
-                display: inline-block;
-                padding: 6px 12px;
-                border-radius: 0px;
-                border-top-left-radius: 5px;
-                border-bottom-left-radius: 5px;
-                position: absolute;
-                left: auto;
-                top: auto;
-                right: 0px;
-                bottom: 60px;
+            font-size: 16px;
+            color: #ffffff;
+            background: #6C74FC;
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 0px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            position: absolute;
+            left: auto;
+            top: auto;
+            right: 0px;
+            bottom: 60px;
         }
         .product__item__text h5 a:hover {
             color: #6C74FC;
@@ -95,27 +95,10 @@
         hr {
             background-color: #222F5C;
         }
-        .product__sidebar__view {
-            margin-bottom: 35px;
-        }
-        .comment_avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 100%;
-        }
-        .product__sidebar__item__text {
-            max-width: calc(100% - 80px);
-            max-height: 30px;
-            overflow: hidden;
-        }
         .background__fittel {
             background-color: #151D35;
             padding: 5px;
             border-top: 1px solid #6C74FC;
-        }
-        .filter__comment {
-            max-height: 1000px;
-            overflow: auto;
         }
         .nice-select.open .list,
         .nice-select .list {
@@ -140,6 +123,34 @@
         }
         .nice-select:hover {
             border-color: #2A3254;
+        }
+        /* .icon.item.disabled,
+        .icon.item {
+            opacity: 0;
+        } */
+        .pagination {
+            justify-content: center;
+        }
+        .product__pagination a {
+            border: 1px solid #ffffff;
+            margin: 5px;
+        }
+        .product__pagination .pagination .active {
+            display: inline-block;
+            font-size: 15px;
+            color: #b7b7b7;
+            font-weight: 600;
+            height: 50px;
+            width: 50px;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            line-height: 48px;
+            text-align: center;
+            -webkit-transition: all, 0.3s;
+            -o-transition: all, 0.3s;
+            transition: all, 0.3s;
+            border: 1px solid #ffffff;
+            margin: 5px;
         }
         @media only screen and (max-width: 1199.98px) {
             .product__item__pic .ep {
@@ -200,65 +211,17 @@
                     </div>
                     <div class="row">
                         @foreach ($bookstory as $key => $value)
-                            <div class="product__item col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-4 col-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="{{ Voyager::image($value->image) }}" style="background-image: url('{{ Voyager::image($value->image) }}');">
-                                        <a href="{{ route('bookstory', [$value->slug]) }}"><img class="product__item__pic" src="" alt=""></a>
-                                        @if ($value->featured)
-                                            <img class="hot_tags" src="{{ asset('img/hot_tags.png') }}">
-                                        @endif
-                                        <div class="ep">
-                                            <a href="#">
-                                                Đang đọc 100
-                                            </a>
-                                        </div>
-                                        <div class="background_option">
-                                            <div class="option_view">
-                                                <i class="fa fa-eye"></i>
-                                                11
-                                            </div>
-                                            <div class="option_follow">
-                                                <i class="fa fa-bookmark"></i>
-                                                9141
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product__item__text text_capitalize">
-                                        <h5>
-                                            <a href="{{ route('bookstory', [$value->slug]) }}">
-                                                {{ $value->title }}
-                                            </a>
-                                        </h5>
-                                    </div>
-                                    <div class="justify-content-between align-items-center mt-3 product__item__lastchapter">
-                                        <div class="btn-group">
-                                            <small class="text-muted">
-                                                <a href="{{url('truyen-tranh/'.$value->slug.'/'.$value->chapter_slug)}}">
-                                                    {{ $value->chapter_title }}
-                                                </a>
-                                            </small>
-                                        </div>
-                                        @if ($value->chapter_created_at)
-                                            <div class="btn-group">
-                                                <small class="text-muted">
-                                                    {{ \Carbon\Carbon::parse($value->chapter_created_at)->diffForHumans() }}
-                                                </small>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="clear"></div>
-                                </div>
+                            <div class="list_Group product__item col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-4 col-6">
+                                @include('pages.home.listGroup')
+                            </div>
+                            <div class="list_grid product__sidebar__comment col-lg-12" style="display: none;">
+                                @include('pages.home.listGrid')
                             </div>
                         @endforeach
                     </div>
                 </div>
                 <div class="product__pagination">
-                    <a href="#" class="current-page">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    {{-- <a href="#"><i class="fa fa-angle-double-right"></i></a> --}}
+                    {!! $bookstory->onEachSide(0)->links('pagination::default') !!}
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-8">

@@ -1,6 +1,6 @@
 @extends('../layout')
 @push('css')
-    <style>
+    <style type="text/css">
         .breadcrumb__links a,
         .breadcrumb__links span {
             font-size: 20px;
@@ -106,6 +106,35 @@
             opacity: 0;
             text-decoration: none;
         }
+        .post-meta {
+            width: 88%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .pagination {
+            justify-content: center;
+        }
+        .product__pagination a {
+            border: 1px solid #ffffff;
+            margin: 5px;
+        }
+        .product__pagination .pagination .active {
+            display: inline-block;
+            font-size: 15px;
+            color: #b7b7b7;
+            font-weight: 600;
+            height: 50px;
+            width: 50px;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            line-height: 48px;
+            text-align: center;
+            -webkit-transition: all, 0.3s;
+            -o-transition: all, 0.3s;
+            transition: all, 0.3s;
+            border: 1px solid #ffffff;
+            margin: 5px;
+        }
         @media only screen and (max-width: 575.98px) {
             .chapter_title {
                 font-size: 16px;
@@ -114,6 +143,7 @@
     </style>
 @endpush
 @section('content')
+    @include('pages.chapter.overlay')
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -143,7 +173,7 @@
                             $images = json_decode($chapter->media);
                         @endphp
                         @foreach ($images as $key => $value)
-                            <img src="{{ Voyager::image($value) }}" style="width: 100%" alt="">
+                            <img src="{{ Voyager::image($value) }}" style="width: 100%" alt="{{ $bookstory->title }} {{ $chapter->title_name }} trang {{ $key }}">
                         @endforeach
                     </div>
                 </div>
@@ -158,7 +188,7 @@
     <!-- Anime Section End -->
 
     <div class="footer-menu">
-        <a href="{{ route('home') }}" class="btn_home text-white">
+        <a href="{{ route('home') }}" class="btn btn_home text-white">
             <i class="fa fa-home"></i>
             Trang chủ
         </a>
@@ -171,7 +201,7 @@
             </select>
             <a class="btn {{$next_chapter == null ? 'isDisabled' : ''}}" href="{{url('truyen-tranh/'.$bookstory->slug.'/'.$next_chapter)}}"><i class="fa-solid fa-angle-right"></i></a>
         </div>
-        <a id="openFormBtn" class="btn_error text-white" onclick="openForm()">
+        <a id="openForm" class="btn btn_error text-white">
             <i class="fa-solid fa-triangle-exclamation"></i>
             Báo lỗi
         </a>
@@ -179,7 +209,7 @@
 @endsection
 
 @push('js')
-    <script>
+    <script type="text/javascript">
         var lastScrollTop = 0
 
         $(window).scroll(function() {

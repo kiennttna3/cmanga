@@ -5,72 +5,117 @@
             Bình luận
         </h5>
     </div>
-    <form action="#">
-        <textarea placeholder="Nội dung bình luận..."></textarea>
-        <button type="submit"><i class="fa fa-location-arrow"></i> Gửi</button>
+    <form id="myComment" method="POST" action="{{ route('postComment', [$bookstory->slug]) }}">
+        @csrf
+        <textarea class="form-control _ge_de_ol @error('body') is-invalid @enderror" name="body" rows="5" style="resize: none; border-radius: 20px" placeholder="Nội dung bình luận..." required autocomplete="body"></textarea>
+        @error('body')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+        @if (Session::get('login_publisher'))
+            <button type="submit">
+                <i class="fa fa-location-arrow"></i>
+                Gửi
+            </button>
+        @else
+            <button type="submit" disabled>
+                <i class="fa fa-location-arrow"></i>
+                Gửi
+            </button>
+        @endif
     </form>
 </div>
 <div class="anime__details__review">
     <div class="section-title">
+        @php
+            $count = count($count);
+        @endphp
         <h5>
             <i class="fa-solid fa-comments"></i>
+            {{ $count }}
             Bình luận
         </h5>
     </div>
-    <div class="anime__review__item">
-        <div class="anime__review__item__pic">
-            <img src="{{ asset('img/anime/review-1.jpg') }}" alt="">
-        </div>
-        <div class="anime__review__item__text">
-            <h6>Chris Curry - <span>1 Hour ago</span></h6>
-            <p>whachikan Just noticed that someone categorized this as belonging to the genre
-            "demons" LOL</p>
-        </div>
-    </div>
-    <div class="anime__review__item">
-        <div class="anime__review__item__pic">
-            <img src="{{ asset('img/anime/review-2.jpg') }}" alt="">
-        </div>
-        <div class="anime__review__item__text">
-            <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-            <p>Finally it came out ages ago</p>
-        </div>
-    </div>
-    <div class="anime__review__item">
-        <div class="anime__review__item__pic">
-            <img src="{{ asset('img/anime/review-3.jpg') }}" alt="">
-        </div>
-        <div class="anime__review__item__text">
-            <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-            <p>Where is the episode 15 ? Slow update! Tch</p>
-        </div>
-    </div>
-    <div class="anime__review__item">
-        <div class="anime__review__item__pic">
-            <img src="{{ asset('img/anime/review-4.jpg') }}" alt="">
-        </div>
-        <div class="anime__review__item__text">
-            <h6>Chris Curry - <span>1 Hour ago</span></h6>
-            <p>whachikan Just noticed that someone categorized this as belonging to the genre
-            "demons" LOL</p>
-        </div>
-    </div>
-    <div class="anime__review__item">
-        <div class="anime__review__item__pic">
-            <img src="{{ asset('img/anime/review-5.jpg') }}" alt="">
-        </div>
-        <div class="anime__review__item__text">
-            <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-            <p>Finally it came out ages ago</p>
-        </div>
-    </div>
-    <div class="anime__review__item">
-        <div class="anime__review__item__pic">
-            <img src="{{ asset('img/anime/review-6.jpg') }}" alt="">
-        </div>
-        <div class="anime__review__item__text">
-            <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-            <p>Where is the episode 15 ? Slow update! Tch</p>
-        </div>
+    <div class="anime__details__review1">
+        @foreach ($viewComment as $key => $value)
+            <div class="anime__review__item">
+                <div class="anime__review__item__pic">
+                    <img src="{{ Voyager::image($value->avatar) }}" alt="{{ $value->name }}">
+                </div>
+                <div class="anime__review__item__text">
+                    @if ($value->chapter_id)
+                        <h6>
+                            {{ $value->name }}
+                            <i class="fa-solid fa-angle-right"></i>
+                            <a title="{{ $bookstory->title }} {{ $value->title_name }}" class="text-black" href="{{ route('chapter', [$bookstory->slug, $value->slug]) }}">
+                                {{ $value->title_name }}
+                            </a>
+                        </h6>
+                    @else
+                        <h6>
+                            {{ $value->name }}
+                        </h6>
+                    @endif
+                    <p>{{ $value->body }}</p>
+                </div>
+                <div class="post-meta mt-2 text-white">
+                    <i class="fa-regular fa-clock"></i>
+                    Trả lời -
+                    <small class="text-muted" data-time="{{ $value->created_at }}">
+                        {{ \Carbon\Carbon::parse($value->created_at)->diffForHumans() }}
+                    </small>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
+<div class="product__pagination">
+    {!! $viewComment->onEachSide(0)->links('pagination::default') !!}
+</div>
+
+@push('js')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myComment').submit(function (e) {
+                e.preventDefault()
+                var formData = $(this).serialize()
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    dataType: 'json',
+                    success: function (data) {
+                        // Thêm comment mới vào giao diện
+                        var comment = data.comment
+                        var html =
+                            '<div class="anime__review__item">' +
+                                '<div class="anime__review__item__pic">' +
+                                    '<img src="' + '{{ Voyager::image('/') }}' + comment.avatar + '" alt="">' +
+                                '</div>' +
+                                '<div class="anime__review__item__text">' +
+                                    '<h6>' +
+                                        comment.name +
+                                    '</h6>' +
+                                    '<p>' + comment.body + '</p>' +
+                                '</div>' +
+                                '<div class="post-meta mt-2 text-white">' +
+                                    '<i class="fa-regular fa-clock"></i>' +
+                                    'Trả lời - <small class="text-muted">' +
+                                    '{{ \Carbon\Carbon::parse(' ')->diffForHumans() }}' + '</small>' +
+                                '</div>' +
+                            '</div>'
+
+                        $('.anime__details__review1').prepend(html)
+
+                        // Xóa nội dung trong textarea
+                        $('textarea[name=body]').val('')
+                    },
+                    error: function (data) {
+                        console.log('Error:', data)
+                    }
+                })
+            })
+        })
+    </script>
+@endpush

@@ -1,11 +1,48 @@
 @extends('../layout')
 @section('content')
     <style>
+        .background_image {
+            background-size:cover;
+            background-image: url({{ asset('img/background/background.png') }});
+            background-position: center center;
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:300px;
+            margin-top: 66px;
+        }
+        .grid_background_image {
+            height:180px;
+            display:block;
+            width:100%
+        }
+        .grid_profile {
+            position:relative;
+            z-index:9;
+            text-align:center;
+        }
         .blog-details {
             padding-top: 0px;
         }
         .site-btn {
             float: right;
+            background-color: #6C74FC;
+            border: 0 solid;
+            width: 150px;
+            height: 44px;
+            line-height: 44px;
+            font-size: 15px;
+            padding: 0 15px;
+            margin-bottom: 20px;
+            border-radius: 46px;
+            margin-left: 20px;
+        }
+        .btn-submit {
+            color: #fff;
+        }
+        .btn-submit:hover {
+            color: #6C74FC;
         }
         .profilepic {
             position: relative;
@@ -14,6 +51,16 @@
             margin-right: auto;
             border-radius: 50%;
             overflow: hidden;
+        }
+        .profilepic img {
+            border-radius:50%;
+            width:150px;
+            height:150px;
+            border: 5px solid black;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #2A3254;
+
         }
 
         .profilepic:hover .profilepic__content {
@@ -70,20 +117,25 @@
             cursor: pointer;
             width: 40%;
         }
+        .blog__details__form form input,
+        .blog__details__form form textarea {
+            background-color: #2A3254;
+            border-radius: 5px;
+        }
     </style>
-    <div style="background-size:cover; background-image: url({{ asset('img/background/background.png') }}); background-position: center center;position:absolute; top:0; left:0; width:100%; height:300px;margin-top: 66px;"></div>
-    <div style="height:180px; display:block; width:100%"></div>
-    <div style="position:relative; z-index:9; text-align:center;">
+    <div class="background_image"></div>
+    <div class="grid_background_image"></div>
+    <div class="grid_profile">
         <form action="#" method="POST" enctype="multipart/form-data">
             <div class="profilepic">
-                <img src="{{ Voyager::image(Session::get('avatar')) }}" id="media" class="avatar" style="border-radius:50%; width:150px; height:150px; border: 5px solid black; margin-left: auto; margin-right: auto; background-color: #2A3254;" alt="">
+                <img src="{{ Voyager::image(Session::get('avatar')) }}" id="media" class="avatar" alt="">
                 <div class="profilepic__content">
                     <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
                     <input class="transparent-input" type="file" name="media" id="file" onchange="displayMedia()">
                     <span class="profilepic__text">Đổi ảnh</span>
                 </div>
             </div>
-            <button class="text-white" type="submit">Lưu ảnh</button>
+            <button class="btn-submit" type="submit">Lưu ảnh</button>
         </form>
     </div>
     <!-- Blog Details Section Begin -->

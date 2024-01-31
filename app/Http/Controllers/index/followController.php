@@ -4,10 +4,11 @@ namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use App\Models\Bookstory;
-use App\Models\pivot_table_follow;
-use Illuminate\Support\Facades\Response;
+use App\Models\Category;
+use App\Models\Pivot_table_follow;
 
 class followController extends Controller
 {
@@ -16,20 +17,55 @@ class followController extends Controller
      */
     public function index()
     {
-        //
+        $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
+
+        $publisher = Session::get('id');
+
+        $bookstory = Bookstory::select('bookstory.*')
+        ->join('pivot_table_follow', 'bookstory.id', '=', 'pivot_table_follow.bookstory_id')
+        ->selectSub(function($query) {
+            $query->select('title_name')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_title')
+        ->selectSub(function($query) {
+            $query->select('slug')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_slug')
+        ->selectSub(function($query) {
+            $query->select('created_at')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_created_at')
+        ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
+        ->where('pivot_table_follow.publisher_id', $publisher)
+        ->where('status', 'ACTIVE')
+        ->paginate(20);
+
+        $count = Bookstory::select('bookstory.*')
+        ->join('pivot_table_follow', 'bookstory.id', '=', 'pivot_table_follow.bookstory_id')
+        ->where('pivot_table_follow.publisher_id', $publisher)
+        ->where('status', 'ACTIVE')
+        ->get();
+
+        return view('pages.follow')->with(compact('category', 'bookstory', 'count'));
     }
 
-    // private function FollowCount($id, $increment)
-    // {
-    //     $bookstory = Bookstory::find($id);
+    private function FollowCount($id, $increment)
+    {
+        $bookstory = Bookstory::find($id);
 
-    //     if ($bookstory) {
-    //         // Cập nhật bản ghi
-    //         $bookstory->update([
-    //             'follow' => $bookstory->follow + $increment, //Thêm giá trị
-    //         ]);
-    //     }
-    // }
+        if ($bookstory) {
+            // Cập nhật bản ghi
+            $bookstory->update([
+                'follow' => $bookstory->follow + $increment, //Thêm giá trị
+            ]);
+        }
+    }
 
     public function follow(Bookstory $bookstory)
     {
@@ -37,12 +73,11 @@ class followController extends Controller
 
         if ($publisher) {
             // Tạo bản ghi
-            pivot_table_follow::create([
+            Pivot_table_follow::create([
                 'publisher_id' => $publisher,
                 'bookstory_id' => $bookstory->id,
-                'created_at' => now(),
             ]);
-            // $this->FollowCount($bookstory->id, 1);
+            $this->FollowCount($bookstory->id, 1);
         }
         return Response::json(['success' => true]);
     }
@@ -53,8 +88,8 @@ class followController extends Controller
 
         if ($publisher) {
             // Xóa bản ghi
-            pivot_table_follow::where('publisher_id', $publisher)->where('bookstory_id', $bookstory->id)->delete();
-            // $this->FollowCount($bookstory->id, -1);
+            Pivot_table_follow::where('publisher_id', $publisher)->where('bookstory_id', $bookstory->id)->delete();
+            $this->FollowCount($bookstory->id, -1);
         }
         return Response::json(['success' => true]);
     }

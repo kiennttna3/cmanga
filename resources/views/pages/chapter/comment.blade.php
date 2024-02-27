@@ -70,11 +70,10 @@
         $(document).ready(function () {
             $('#myComment').submit(function (e) {
                 e.preventDefault()
-                var formData = $(this).serialize()
                 $.ajax({
                     type: 'POST',
                     url: $(this).attr('action'),
-                    data: formData,
+                    data: $(this).serialize(),
                     dataType: 'json',
                     success: function (data) {
                         // Thêm comment mới vào giao diện

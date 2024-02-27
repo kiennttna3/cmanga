@@ -225,6 +225,9 @@
                 color: #fff;
             }
             /* css form báo lỗi */
+            .page-up a {
+                background-color: #6C74FC;
+            }
             @media only screen and (max-width: 767px) {
                 .header {
                     position: fixed;
@@ -382,7 +385,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">
+                                                    <a href="{{ route('readHistory') }}">
                                                         <i class="fa-solid fa-clock-rotate-left"></i>
                                                         Lịch sử đọc truyện
                                                     </a>
@@ -484,35 +487,6 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <script type="text/javascript">
-            $(document).ready(function () {
-                // Hàm để hiển thị overlay và form
-                function open() {
-                    $('#overlay').fadeIn()
-                }
-
-                // Hàm để đóng overlay và form
-                function hide() {
-                    $('#overlay').fadeOut()
-                }
-
-                // Bắt sự kiện khi click vào nút mở form
-                $('#openForm').on('click', function () {
-                    open()
-                })
-
-                // Bắt sự kiện khi click vào nút đóng form
-                $('#closeForm').on('click', function () {
-                    hide()
-                })
-
-                // Bắt sự kiện khi click bên ngoài form để đóng form
-                $('#overlay').on('click', function (event) {
-                    if (event.target === this) {
-                        hide()
-                    }
-                })
-            })
-
             // js tìm kiếm bằng ajax
             let timer
             // Hàm để quản lý sự hiển thị của dropdown

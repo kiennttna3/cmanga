@@ -5,18 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Publisher extends Model
+class Pivot_table_readhistory extends Model
 {
     use HasFactory;
     public $timestamps = true; //Set time to false
     protected $fillable = [
-        'name', 'email', 'avatar', 'password'
+        'publisher_id', 'bookstory_id', 'chapter_id'
     ];
     protected $primarykey = 'id';
-    protected $table = 'publisher';
-
-    public function updateAvatar($imageName)
-    {
-        $this->update(['avatar' => $imageName]);
-    }
+    protected $table = 'pivot_table_readhistory';
 }

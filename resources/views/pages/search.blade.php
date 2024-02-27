@@ -180,7 +180,7 @@
 @endpush
 
 @section('content')
-    @include('pages.overlay')
+    @include('pages.home.overlay')
     <div class="container">
         <div class="row">
             <div class="col-lg-8">

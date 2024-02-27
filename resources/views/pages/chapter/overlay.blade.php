@@ -3,6 +3,7 @@
         .card_body .form-control {
             color: #fff;
             background-color: #2A3254;
+            border: none;
         }
         .card_body .nice-select.open .list,
         .card_body .nice-select .list {
@@ -43,7 +44,7 @@
 
             <label for="exampleInputEmail1" class="form-label text-white">Chọn lỗi</label>
             <select class="form-select mb-3 _ge_de_ol @error('error_type') is-invalid @enderror" name="error_type" id="error_type" aria-label="Default select example" required="" aria-required="true" required autocomplete="error_type">
-                <option selected>----Chọn loại lỗi----</option>
+                <option disabled>----Chọn loại lỗi----</option>
                 <option value="0">Ảnh lỗi, không thấy ảnh</option>
                 <option value="1">Chapter bị trùng</option>
                 <option value="2">Chapter chưa dịch</option>
@@ -70,3 +71,56 @@
         </form>
     </div>
 </div>
+
+@push('js')
+    <script type="text/javascript">
+        function validateForm() {
+            return true;
+        }
+        $(document).ready(function () {
+            // Hàm để hiển thị overlay và form
+            function open() {
+                $('#overlay').fadeIn()
+            }
+
+            // Hàm để đóng overlay và form
+            function hide() {
+                $('#overlay').fadeOut()
+            }
+
+            // Bắt sự kiện khi click vào nút mở form
+            $('#openForm').on('click', function () {
+                open()
+            })
+
+            // Bắt sự kiện khi click vào nút đóng form
+            $('#closeForm').on('click', function () {
+                hide()
+            })
+
+            // Bắt sự kiện khi click bên ngoài form để đóng form
+            $('#overlay').on('click', function (event) {
+                if (event.target === this) {
+                    hide()
+                }
+            })
+
+            // Bắt sự kiện khi form được submit
+            $('#myForm').on('submit', function (e) {
+                e.preventDefault()
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        console.log(response)
+                        hide()
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                })
+            })
+        })
+    </script>
+@endpush

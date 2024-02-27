@@ -126,12 +126,13 @@
     <div class="background_image"></div>
     <div class="grid_background_image"></div>
     <div class="grid_profile">
-        <form action="#" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('avatar') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="profilepic">
-                <img src="{{ Voyager::image(Session::get('avatar')) }}" id="media" class="avatar" alt="">
+                <img src="{{ Voyager::image(Session::get('avatar')) }}" id="avatar" class="avatar" alt="avatar">
                 <div class="profilepic__content">
                     <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
-                    <input class="transparent-input" type="file" name="media" id="file" onchange="displayMedia()">
+                    <input class="transparent-input" type="file" name="avatar" id="file" onchange="displayAvatar()">
                     <span class="profilepic__text">Đổi ảnh</span>
                 </div>
             </div>
@@ -146,16 +147,17 @@
                     <div class="blog__details__content">
                         <div class="blog__details__form">
                             <h4>Thông Tin Cá Nhân</h4>
-                            <form action="#">
+                            <form action="{{ route('updateRegister') }}" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <input type="text" placeholder="Tên hiển thị" value="{{ Session::get('name') }}">
+                                        <input type="text" name="name" placeholder="Tên hiển thị" value="{{ Session::get('name') }}">
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <input type="text" placeholder="Địa chỉ email" value="{{ Session::get('email') }}">
+                                        <input type="text" name="email" placeholder="Địa chỉ email" value="{{ Session::get('email') }}">
                                     </div>
                                     <div class="col-lg-12">
-                                        <textarea placeholder="Giới thiệu"></textarea>
+                                        <textarea name="body" placeholder="Giới thiệu">{!! Session::get('body') !!}</textarea>
                                         <button type="submit" class="site-btn">Lưu</button>
                                     </div>
                                 </div>
@@ -171,9 +173,9 @@
 
 @push('js')
     <script>
-        function displayMedia() {
+        function displayAvatar() {
             var input = document.getElementById('file');
-            var preview = document.getElementById('media');
+            var preview = document.getElementById('avatar');
 
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

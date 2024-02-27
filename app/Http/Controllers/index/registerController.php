@@ -41,7 +41,7 @@ class registerController extends Controller
             [
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|unique:publisher|max:255',
-                'password' => 'required|min:8|confirmed'
+                'password' => 'required|min:8|confirmed',
             ],
             [
                 'email.unique' => 'Địa chỉ email đã có, xin điền tên khác',

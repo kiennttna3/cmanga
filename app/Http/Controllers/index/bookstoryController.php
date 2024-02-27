@@ -21,6 +21,8 @@ class bookstoryController extends Controller
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
+        $publisher = Session::get('id');
+
         $bookstory = Bookstory::where('slug', $slug)->where('status', 'ACTIVE')->first();
 
         $chapter = Chapter::orderBy('title', 'DESC')->where('bookstory_id', $bookstory->id)->get();
@@ -37,9 +39,17 @@ class bookstoryController extends Controller
             $many_Bookstory_Category[] = $value->category_id;
         }
 
-        $categoryTogether = Bookstory::select('bookstory.*')
+        $categoryTogether = Bookstory::select('bookstory.*', 'bookstory.slug as slug_book', 'chapter.title_name', 'chapter.slug')
         ->join('pivote_bookstory_category', 'bookstory.id', '=', 'pivote_bookstory_category.bookstory_id')
         ->join('category', 'pivote_bookstory_category.category_id', '=', 'category.id')
+        ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
+            $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
+                 ->where(function($query) use ($publisher) {
+                     $query->whereNull('pivot_table_readhistory.chapter_id')
+                           ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                 });
+        })
+        ->leftjoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
         ->selectSub(function($query) {
             $query->select('title_name')->from('chapter')
                 ->whereColumn('bookstory_id', 'bookstory.id')
@@ -61,7 +71,6 @@ class bookstoryController extends Controller
         ->whereNotIn('bookstory.id', [$bookstory->id])
         ->whereIn('pivote_bookstory_category.category_id', $many_Bookstory_Category)
         ->where('bookstory.status', 'ACTIVE')
-        ->where('category.status', 'ACTIVE')
         ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
         ->distinct()
         ->take(8)

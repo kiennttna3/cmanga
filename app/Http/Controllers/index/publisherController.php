@@ -5,6 +5,7 @@ namespace App\Http\Controllers\index;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use App\Models\Publisher;
 
@@ -29,6 +30,7 @@ class publisherController extends Controller
         Session::forget('name');
         Session::forget('email');
         Session::forget('avatar');
+        Session::forget('body');
 
         return redirect()->route('home');
     }
@@ -46,7 +48,25 @@ class publisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $publisher_id = Session::get('id');
+        $publisher = Publisher::find($publisher_id);
+
+        // Kiểm tra xem có tệp tin ảnh mới được tải lên không
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Lưu ảnh vào thư mục storage của Voyager
+            Storage::put('public/publisher/' . $imageName, file_get_contents($image));
+
+            // Cập nhật đường dẫn ảnh trong cơ sở dữ liệu
+            $publisher->updateAvatar('publisher/' . $imageName);
+        }
+
+        // Cập nhật session
+        session(['avatar' => $publisher->avatar]);
+
+        return redirect()->back();
     }
 
     /**
@@ -68,9 +88,27 @@ class publisherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $publisher_id = Session::get('id');
+
+        $data = $request->validate([
+            'name' => 'nullable',
+            'email' => 'nullable|email',
+            'body' => 'nullable',
+        ]);
+
+        $publisher = Publisher::find($publisher_id);
+        $publisher->name = $data['name'];
+        $publisher->email = $data['email'];
+        $publisher->body = $data['body'];
+        $publisher->save();
+
+        session(['name' => $publisher->name]);
+        session(['email' => $publisher->email]);
+        session(['body' => $publisher->body]);
+
+        return redirect()->back();
     }
 
     /**

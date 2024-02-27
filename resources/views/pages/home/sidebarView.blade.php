@@ -5,8 +5,13 @@
         }
         .product__sidebar__view .product__sidebar__comment__item__text h5 {
             max-width: 100%;
-            max-height: 50px;
+            max-height: 30px;
             overflow: hidden;
+        }
+        .product__sidebar__view .a img {
+            border-radius: 5px;
+            width: 90px;
+            height: 130px;
         }
     </style>
 @endpush
@@ -15,83 +20,127 @@
         <h5>Top Lượt xem</h5>
     </div>
     <ul class="filter__controls">
-        <li class="active" data-filter="*">Ngày</li>
+        <li class="active" data-filter=".day">Ngày</li>
         <li data-filter=".week">Tuần</li>
         <li data-filter=".month">Tháng</li>
         <li data-filter=".years">Năm</li>
     </ul>
     <div class="filter__gallery background__fittel">
-        <div class="product__sidebar__comment__item mix day">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="{{ asset('img/sidebar/comment-1.jpg') }}" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text text_capitalize">
-                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                <div class="justify-content-between align-items-center mb-1">
-                    <div class="btn-group">
-                        <small class="text-muted">
-                            <a href="#">
-                                Chapter mới: 100
-                            </a>
-                        </small>
-                    </div>
+        @foreach ($viewDay as $key => $value)
+            <div class="product__sidebar__comment__item mix day">
+                <div class="product__sidebar__comment__item__pic">
+                    <a class="a" href="{{ route('bookstory', [$value->slug]) }}">
+                        <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
+                    </a>
                 </div>
-                <span style="float: right"><i class="fa fa-eye mt-6"></i> 19.141</span>
-            </div>
-        </div>
-        <div class="product__sidebar__comment__item mix week">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="{{ asset('img/sidebar/comment-2.jpg') }}" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text text_capitalize">
-                <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
-                <div class="justify-content-between align-items-center mb-1">
-                    <div class="btn-group">
-                        <small class="text-muted">
-                            <a href="#">
-                                Chapter mới: 100
-                            </a>
-                        </small>
+                <div class="product__sidebar__comment__item__text text_capitalize">
+                    <h5>
+                        <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug]) }}">
+                            {{ $value->title }}
+                        </a>
+                    </h5>
+                    <div class="justify-content-between align-items-center mb-1">
+                        <div class="btn-group">
+                            <small class="text-muted">
+                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
+                                    {{ $value->chapter_title }}
+                                </a>
+                            </small>
+                        </div>
                     </div>
+                    <span class="mt-5" style="float: right">
+                        <i class="fa fa-eye"></i>
+                        {{ $value->total_view }}
+                    </span>
                 </div>
-                <span style="float: right"><i class="fa fa-eye mt-6"></i> 19.141</span>
             </div>
-        </div>
-        <div class="product__sidebar__comment__item mix month">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="{{ asset('img/sidebar/comment-3.jpg') }}" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text text_capitalize">
-                <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
-                <div class="justify-content-between align-items-center mb-1">
-                    <div class="btn-group">
-                        <small class="text-muted">
-                            <a href="#">
-                                Chapter mới: 100
-                            </a>
-                        </small>
+        @endforeach
+        @foreach ($viewWeek as $key => $value)
+            <div class="product__sidebar__comment__item mix week">
+                <div class="product__sidebar__comment__item__pic">
+                    <a class="a" href="{{ route('bookstory', [$value->slug]) }}">
+                        <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
+                    </a>
+                </div>
+                <div class="product__sidebar__comment__item__text text_capitalize">
+                    <h5>
+                        <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug]) }}">
+                            {{ $value->title }}
+                        </a>
+                    </h5>
+                    <div class="justify-content-between align-items-center mb-1">
+                        <div class="btn-group">
+                            <small class="text-muted">
+                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
+                                    {{ $value->chapter_title }}
+                                </a>
+                            </small>
+                        </div>
                     </div>
+                    <span class="mt-5" style="float: right">
+                        <i class="fa fa-eye"></i>
+                        {{ $value->total_view }}
+                    </span>
                 </div>
-                <span style="float: right"><i class="fa fa-eye mt-6"></i> 19.141</span>
             </div>
-        </div>
+        @endforeach
+        @foreach ($viewMonth as $key => $value)
+            <div class="product__sidebar__comment__item mix month">
+                <div class="product__sidebar__comment__item__pic">
+                    <a class="a" href="{{ route('bookstory', [$value->slug]) }}">
+                        <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
+                    </a>
+                </div>
+                <div class="product__sidebar__comment__item__text text_capitalize">
+                    <h5>
+                        <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug]) }}">
+                            {{ $value->title }}
+                        </a>
+                    </h5>
+                    <div class="justify-content-between align-items-center mb-1">
+                        <div class="btn-group">
+                            <small class="text-muted">
+                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
+                                    {{ $value->chapter_title }}
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                    <span class="mt-5" style="float: right">
+                        <i class="fa fa-eye"></i>
+                        {{ $value->total_view }}
+                    </span>
+                </div>
+            </div>
+        @endforeach
+        @foreach ($viewYear as $key => $value)
         <div class="product__sidebar__comment__item mix years">
             <div class="product__sidebar__comment__item__pic">
-                <img src="{{ asset('img/sidebar/comment-4.jpg') }}" alt="">
+                <a class="a" href="{{ route('bookstory', [$value->slug]) }}">
+                    <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
+                </a>
             </div>
             <div class="product__sidebar__comment__item__text text_capitalize">
-                <h5><a href="#">Monogatari Series: Second Season</a></h5>
+                <h5>
+                    <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug]) }}">
+                        {{ $value->title }}
+                    </a>
+                </h5>
                 <div class="justify-content-between align-items-center mb-1">
                     <div class="btn-group">
                         <small class="text-muted">
-                            <a href="#">
-                                Chapter mới: 100
+                            <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
+                                {{ $value->chapter_title }}
                             </a>
                         </small>
                     </div>
                 </div>
-                <span style="float: right"><i class="fa fa-eye mt-6"></i> 19.141</span>
+                <span class="mt-5" style="float: right">
+                    <i class="fa fa-eye"></i>
+                    {{ $value->total_view }}
+                </span>
             </div>
         </div>
+    @endforeach
     </div>
 </div>

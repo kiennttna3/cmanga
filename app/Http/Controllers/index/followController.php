@@ -21,8 +21,16 @@ class followController extends Controller
 
         $publisher = Session::get('id');
 
-        $bookstory = Bookstory::select('bookstory.*')
+        $bookstory = Bookstory::select('bookstory.*', 'bookstory.slug as slug_book', 'chapter.title_name', 'chapter.slug')
         ->join('pivot_table_follow', 'bookstory.id', '=', 'pivot_table_follow.bookstory_id')
+        ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
+            $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
+                 ->where(function($query) use ($publisher) {
+                     $query->whereNull('pivot_table_readhistory.chapter_id')
+                           ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                 });
+        })
+        ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
         ->selectSub(function($query) {
             $query->select('title_name')->from('chapter')
                 ->whereColumn('bookstory_id', 'bookstory.id')
@@ -43,8 +51,14 @@ class followController extends Controller
         }, 'chapter_created_at')
         ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
         ->where('pivot_table_follow.publisher_id', $publisher)
-        ->where('status', 'ACTIVE')
-        ->paginate(20);
+        ->where('bookstory.status', 'ACTIVE')
+        ->paginate(21);
+
+        $check = Bookstory::select('pivot_table_readhistory.*')
+        ->join('pivot_table_readhistory', 'bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
+        ->where('pivot_table_readhistory.publisher_id', $publisher)
+        ->where('bookstory.status', 'ACTIVE')
+        ->first();
 
         $count = Bookstory::select('bookstory.*')
         ->join('pivot_table_follow', 'bookstory.id', '=', 'pivot_table_follow.bookstory_id')
@@ -52,7 +66,7 @@ class followController extends Controller
         ->where('status', 'ACTIVE')
         ->get();
 
-        return view('pages.follow')->with(compact('category', 'bookstory', 'count'));
+        return view('pages.follow')->with(compact('category', 'bookstory', 'check', 'count'));
     }
 
     private function FollowCount($id, $increment)

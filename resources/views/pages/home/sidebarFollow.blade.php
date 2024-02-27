@@ -24,30 +24,32 @@
             @foreach ($follow as $key => $value)
                 <div class="product__sidebar__comment__item">
                     <div class="product__sidebar__comment__item__pic">
-                        <a class="a" href="{{ route('bookstory', [$value->slug]) }}">
+                        <a class="a" href="{{ route('bookstory', [$value->slug_book]) }}">
                             <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
                         </a>
                     </div>
                     <div class="product__sidebar__comment__item__text text_capitalize">
                         <h5>
-                            <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug]) }}">
+                            <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug_book]) }}">
                                 {{ $value->title }}
                             </a>
                         </h5>
                         <div class="justify-content-between align-items-center mb-1">
                             <div class="btn-group">
                                 <small class="text-muted">
-                                    <a href="#">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        Đang đọc 10
-                                    </a>
+                                    @if ($value->title_name)
+                                        <a title="{{ $value->title }} {{ $value->title_name }}" href="{{ route('chapter', [$value->slug_book, $value->slug]) }}">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            {{ $value->title_name }}
+                                        </a>
+                                    @endif
                                 </small>
                             </div>
                         </div>
                         @if ($value->chapter_title)
                             <div class="btn-group mt-4">
                                 <small class="text-muted mt-4">
-                                    <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug.'/'.$value->chapter_slug)}}">
+                                    <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
                                         {{ $value->chapter_title }}
                                     </a>
                                 </small>

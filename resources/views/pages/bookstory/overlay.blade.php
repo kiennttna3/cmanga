@@ -3,6 +3,7 @@
         .card_body .form-control {
             color: #fff;
             background-color: #2A3254;
+            border: none;
         }
         .card_body .nice-select.open .list,
         .card_body .nice-select .list {
@@ -38,12 +39,12 @@
             @csrf
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label text-white">Truyện lỗi</label>
-                <input type="text" class="form-control" name="chapter_id" value="{{ $bookstory->title }}" readonly>
+                <input type="text" class="form-control" name="bookstory_id" value="{{ $bookstory->title }}" readonly>
             </div>
 
             <label for="exampleInputEmail1" class="form-label text-white">Chọn lỗi</label>
-            <select class="form-select mb-3 _ge_de_ol @error('error_type') is-invalid @enderror" name="error_type" aria-label="Default select example" required="" aria-required="true" required autocomplete="error_type">
-                <option selected>----Chọn loại lỗi----</option>
+            <select class="form-select mb-3 _ge_de_ol @error('error_type') is-invalid @enderror" id="error_type" name="error_type" oninput="validatePhoneInput(this)" aria-label="Default select example" required="" aria-required="true" required autocomplete="error_type">
+                <option disabled>----Chọn loại lỗi----</option>
                 <option value="0">Thiếu chapter</option>
                 <option value="1">Up sai truyện</option>
                 <option value="2">Lỗi khác</option>
@@ -68,3 +69,56 @@
         </form>
     </div>
 </div>
+
+@push('js')
+    <script type="text/javascript">
+        function validateForm() {
+            return true;
+        }
+        $(document).ready(function () {
+            // Hàm để hiển thị overlay và form
+            function open() {
+                $('#overlay').fadeIn()
+            }
+
+            // Hàm để đóng overlay và form
+            function hide() {
+                $('#overlay').fadeOut()
+            }
+
+            // Bắt sự kiện khi click vào nút mở form
+            $('#openForm').on('click', function () {
+                open()
+            })
+
+            // Bắt sự kiện khi click vào nút đóng form
+            $('#closeForm').on('click', function () {
+                hide()
+            })
+
+            // Bắt sự kiện khi click bên ngoài form để đóng form
+            $('#overlay').on('click', function (event) {
+                if (event.target === this) {
+                    hide()
+                }
+            })
+
+            // Bắt sự kiện khi form được submit
+            $('#myForm').on('submit', function (e) {
+                e.preventDefault()
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        console.log(response)
+                        hide()
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                })
+            })
+        })
+    </script>
+@endpush

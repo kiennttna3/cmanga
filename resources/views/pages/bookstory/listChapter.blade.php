@@ -23,11 +23,20 @@
             </thead>
             <tbody>
                 @foreach ($chapter as $key => $value)
+                    @php
+                        // Kiểm tra xem chapter đã được đọc hay chưa
+                        $isRead = \App\Models\Pivot_table_readhistory::where('publisher_id', Session::get('id'))
+                            ->where('chapter_id', $value->id)
+                            ->exists();
+
+                        $icon = $isRead ? '<i class="fa-solid fa-location-dot"></i>' : '';
+                    @endphp
                     <tr>
                         <td>
                             <li class="my-2 text-white" style="list-style: none;">
                                 <a style="text-decoration: none; font-weight:800;" href="{{ route('chapter', [$bookstory->slug, $value->slug]) }}">
                                     {{ $value->title_name }}
+                                    <a class="ml-1 text-danger">{!! $icon !!}</a>
                                 </a>
                             </li>
                         </td>
@@ -41,7 +50,7 @@
                         <td>
                             <li class="my-2 text-white footer__nav" style="list-style: none;">
                                 <a style="text-decoration: none;" >
-                                    1000
+                                    {{ $value->view }}
                                 </a>
                             </li>
                         </td>

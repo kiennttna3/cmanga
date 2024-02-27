@@ -49,6 +49,7 @@ class loginController extends Controller
             Session::put('name', $publisher->name);
             Session::put('email', $publisher->email);
             Session::put('avatar', $publisher->avatar);
+            Session::put('body', $publisher->body);
             return redirect()->route('home');
         } else {
             // Mật khẩu không đúng

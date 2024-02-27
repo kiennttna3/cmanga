@@ -230,7 +230,7 @@
                                             </li>
                                             <li class="mb-2">
                                                 <i class="fa-solid fa-eye"></i>
-                                                <span>Lượt xem</span> 221,411
+                                                <span>Lượt xem</span> {{ $bookstory->view }}
                                             </li>
                                             <li class="mb-2">
                                                 <i class="fa-solid fa-bookmark"></i>
@@ -299,7 +299,7 @@
                         <div class="anime__details__text">
                             <p>{!! $bookstory->body !!}</p>
                             <p>
-                                <a href="{{ route('bookstory', [$bookstory->slug]) }}">{!! $bookstory->title !!}</a>
+                                <a style="color: #6C74FC" href="{{ route('bookstory', [$bookstory->slug]) }}">{!! $bookstory->title !!}</a>
                                 được cập nhật nhanh nhất và đầy đủ nhất tại Cmanga Bạn đọc đừng quên để lại bình luận và chia sẻ,
                                 ủng hộ Cmanga ra các chương mới nhất của truyện
                                 <a style="color: #fff">{!! $bookstory->title !!}</a> nhé.

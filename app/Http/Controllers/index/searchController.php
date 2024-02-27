@@ -4,11 +4,13 @@ namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use TCG\Voyager\Facades\Voyager;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Carbon;
 use App\Models\Bookstory;
 use App\Models\Category;
 use App\Models\Pivot_table_comment;
-use TCG\Voyager\Facades\Voyager;
+use App\Models\Pivot_table_view;
 
 class searchController extends Controller
 {
@@ -19,11 +21,21 @@ class searchController extends Controller
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
+        $slide = Bookstory::orderBy('view', 'DESC')->where('featured', '1')->where('status', 'ACTIVE')->paginate(5);
+
         $publisher = Session::get('id');
 
         $keyword = $_GET['keyword'];
 
-        $bookstory = Bookstory::select('bookstory.*')
+        $bookstory = Bookstory::select('bookstory.*', 'bookstory.slug as slug_book', 'chapter.title_name', 'chapter.slug')
+        ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
+            $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
+                 ->where(function($query) use ($publisher) {
+                     $query->whereNull('pivot_table_readhistory.chapter_id')
+                           ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                 });
+        })
+        ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
         ->selectSub(function($query) {
             $query->select('title_name')->from('chapter')
                 ->whereColumn('bookstory_id', 'bookstory.id')
@@ -42,45 +54,147 @@ class searchController extends Controller
                 ->where('status', 'ACTIVE')
                 ->latest()->limit(1);
         }, 'chapter_created_at')
-        ->orderByRaw('CASE WHEN chapter_created_at > created_at THEN chapter_created_at ELSE created_at END DESC')
-        ->where('title', 'LIKE', '%'.$keyword.'%')
-        ->where('status', 'ACTIVE')
-        ->paginate(20);
-
-        $follow = Bookstory::select('bookstory.*')
-        ->join('pivot_table_follow', 'bookstory.id', '=', 'pivot_table_follow.bookstory_id')
-        ->selectSub(function($query) {
-            $query->select('title_name')->from('chapter')
-                ->whereColumn('bookstory_id', 'bookstory.id')
-                ->where('status', 'ACTIVE')
-                ->latest()->limit(1);
-        }, 'chapter_title')
-        ->selectSub(function($query) {
-            $query->select('slug')->from('chapter')
-                ->whereColumn('bookstory_id', 'bookstory.id')
-                ->where('status', 'ACTIVE')
-                ->latest()->limit(1);
-        }, 'chapter_slug')
-        ->selectSub(function($query) {
-            $query->select('created_at')->from('chapter')
-                ->whereColumn('bookstory_id', 'bookstory.id')
-                ->where('status', 'ACTIVE')
-                ->latest()->limit(1);
-        }, 'chapter_created_at')
-        ->where('pivot_table_follow.publisher_id', $publisher)
         ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
-        ->where('status', 'ACTIVE')
-        ->take(10)
+        ->where('bookstory.title', 'LIKE', '%'.$keyword.'%')
+        ->where('bookstory.status', 'ACTIVE')
+        ->paginate(21);
+
+        $check = Bookstory::select('pivot_table_readhistory.*')
+        ->join('pivot_table_readhistory', 'bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
+        ->where('pivot_table_readhistory.publisher_id', $publisher)
+        ->where('bookstory.status', 'ACTIVE')
+        ->first();
+
+        $follow = Bookstory::select('bookstory.*', 'bookstory.slug as slug_book', 'chapter.title_name', 'chapter.slug')
+        ->join('pivot_table_follow', 'bookstory.id', '=', 'pivot_table_follow.bookstory_id')
+        ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
+            $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
+                 ->where(function($query) use ($publisher) {
+                     $query->whereNull('pivot_table_readhistory.chapter_id')
+                           ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                 });
+        })
+        ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
+        ->selectSub(function($query) {
+            $query->select('title_name')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_title')
+        ->selectSub(function($query) {
+            $query->select('slug')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_slug')
+        ->selectSub(function($query) {
+            $query->select('created_at')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_created_at')
+        ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
+        ->where('pivot_table_follow.publisher_id', $publisher)
+        ->where('bookstory.status', 'ACTIVE')
+        ->take(5)
         ->get();
 
         $viewComment = Pivot_table_comment::select('pivot_table_comment.*', 'publisher.avatar', 'publisher.name', 'bookstory.title', 'bookstory.slug as slug_book', 'chapter.title_name', 'chapter.slug')
         ->join('publisher', 'publisher.id', '=', 'pivot_table_comment.publisher_id') //kết hợp thông tin từ bảng. Kết quả sẽ chứa tất cả các cột từ cả hai bảng, và nếu không có dữ liệu khớp, các cột từ bảng sẽ có giá trị NULL.
-        ->leftjoin('bookstory', 'bookstory.id', '=', 'pivot_table_comment.bookstory_id')
-        ->leftjoin('chapter', 'chapter.id', '=', 'pivot_table_comment.chapter_id')
+        ->leftJoin('bookstory', 'bookstory.id', '=', 'pivot_table_comment.bookstory_id')
+        ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_comment.chapter_id')
         ->orderByDesc('created_at')
+        ->take(20)
         ->get();
 
-        return view('pages.search')->with(compact('category', 'keyword', 'bookstory', 'follow', 'viewComment'));
+        $viewDay = Bookstory::select('bookstory.*', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
+        ->join('pivot_table_view', 'bookstory.id', '=', 'pivot_table_view.bookstory_id')
+        ->selectSub(function($query) {
+            $query->select('title_name')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_title')
+        ->selectSub(function($query) {
+            $query->select('slug')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_slug')
+        // ->where('pivot_table_view.created_at', '>=', now()->startOfDay())
+        ->whereDate('pivot_table_view.created_at', '=', Carbon::today())
+        ->groupBy('bookstory.id')
+        ->orderBy('total_view', 'desc')
+        ->where('bookstory.status', 'ACTIVE')
+        ->limit(5)
+        ->get();
+
+        $viewWeek = Bookstory::select('bookstory.*', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
+        ->join('pivot_table_view', 'bookstory.id', '=', 'pivot_table_view.bookstory_id')
+        ->selectSub(function($query) {
+            $query->select('title_name')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_title')
+        ->selectSub(function($query) {
+            $query->select('slug')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_slug')
+        ->whereBetween('pivot_table_view.created_at', [now()->startOfWeek(), now()->endOfWeek()])
+        ->groupBy('bookstory.id')
+        ->orderBy('total_view', 'desc')
+        ->where('bookstory.status', 'ACTIVE')
+        ->limit(5)
+        ->get();
+
+        $viewMonth = Bookstory::select('bookstory.*', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
+        ->join('pivot_table_view', 'bookstory.id', '=', 'pivot_table_view.bookstory_id')
+        ->selectSub(function($query) {
+            $query->select('title_name')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_title')
+        ->selectSub(function($query) {
+            $query->select('slug')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_slug')
+        // ->where('pivot_table_view.created_at', '>=', now()->startOfMonth())
+        ->whereMonth('pivot_table_view.created_at', '=', Carbon::today())
+        ->groupBy('bookstory.id')
+        ->orderBy('total_view', 'desc')
+        ->where('bookstory.status', 'ACTIVE')
+        ->limit(5)
+        ->get();
+
+        $viewYear = Bookstory::select('bookstory.*', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
+        ->join('pivot_table_view', 'bookstory.id', '=', 'pivot_table_view.bookstory_id')
+        ->selectSub(function($query) {
+            $query->select('title_name')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_title')
+        ->selectSub(function($query) {
+            $query->select('slug')->from('chapter')
+                ->whereColumn('bookstory_id', 'bookstory.id')
+                ->where('status', 'ACTIVE')
+                ->latest()->limit(1);
+        }, 'chapter_slug')
+        // ->where('pivot_table_view.created_at', '>=', now()->startOfYear())
+        ->whereYear('pivot_table_view.created_at', '=', Carbon::today())
+        ->groupBy('bookstory.id')
+        ->orderBy('total_view', 'desc')
+        ->where('bookstory.status', 'ACTIVE')
+        ->limit(5)
+        ->get();
+
+        return view('pages.search')->with(compact('category', 'slide', 'keyword', 'bookstory', 'check', 'follow', 'viewComment', 'viewDay', 'viewWeek', 'viewMonth', 'viewYear'));
     }
 
     public function search_ajax(Request $request)

@@ -13,6 +13,8 @@ use App\Http\Controllers\index\followController;
 use App\Http\Controllers\index\commentController;
 use App\Http\Controllers\index\searchController;
 use App\Http\Controllers\index\errorController;
+use App\Http\Controllers\index\readhistoryController;
+use App\Http\Controllers\index\bookFilterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,14 +31,23 @@ Route::middleware('web')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('/the-loai/{slug}', [categoryController::class, 'index'])->name('category');
+
     Route::get('/truyen-tranh/{slug}', [bookstoryController::class, 'index'])->name('bookstory');
+
     Route::get('/truyen-tranh/{slug_bookstory}/{slug}', [chapterController::class, 'index'])->name('chapter');
 
     Route::get('/trang-ca-nhan', [publisherController::class, 'index'])->name('profile');
+
     Route::get('/dang-nhap', [loginController::class, 'index'])->name('login');
     Route::post('/successLogin', [loginController::class, 'store'])->name('successLogin');
+
     Route::get('/dang-ky', [registerController::class, 'index'])->name('register');
     Route::post('/createRegister', [registerController::class, 'store'])->name('createRegister');
+
+    Route::post('/avatar', [publisherController::class, 'store'])->name('avatar');
+
+    Route::post('/updateRegister', [publisherController::class, 'update'])->name('updateRegister');
+
     Route::post('/dang-xuat', [publisherController::class, 'logout'])->name('logout');
 
     Route::get('/theo-doi', [followController::class, 'index'])->name('favorite');
@@ -51,6 +62,10 @@ Route::middleware('web')->group(function () {
 
     Route::post('/report-error/{slug}', [errorController::class, 'reportError'])->name('reportError');
     Route::post('/report-error/{slug_bookstory}/{slug}', [errorController::class, 'reportErrorChapter'])->name('reportErrorChapter');
+
+    Route::get('lich-su', [readhistoryController::class, 'index'])->name('readHistory');
+
+    Route::get('/truyen-tranh', [bookFilterController::class, 'index'])->name('filterBook');
 });
 
 Route::group(['prefix' => 'admin'], function () {

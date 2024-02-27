@@ -4,6 +4,7 @@ namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Models\Bookstory;
 use App\Models\Chapter;
 use App\Models\Pivot_table_error;
@@ -32,7 +33,7 @@ class errorController extends Controller
             'error_type' => $request->input('error_type'),
             'body' => $request->input('body')
         ]);
-        return redirect()->back();
+        return Response::json(['success' => true]);
     }
 
     public function reportErrorChapter(Request $request, $slug_bookstory, $slug)
@@ -52,7 +53,7 @@ class errorController extends Controller
             'error_type' => $request->input('error_type'),
             'body' => $request->input('body')
         ]);
-        return redirect()->back();
+        return Response::json(['success' => true]);
     }
 
     /**

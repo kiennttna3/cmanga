@@ -24,12 +24,26 @@
         $('.filter__controls li').on('click', function () {
             $('.filter__controls li').removeClass('active');
             $(this).addClass('active');
+
+            // Lọc và hiển thị danh sách tương ứng với class được chọn
+            var filterClass = $(this).data('filter');
+            if ($('.filter__gallery').length > 0) {
+                var containerEl = document.querySelector('.filter__gallery');
+                var mixer = mixitup(containerEl, {
+                    selectors: {
+                        target: '.product__sidebar__comment__item',
+                    },
+                    load: {
+                        filter: filterClass, // Hiển thị mục theo class được chọn
+                    },
+                });
+            }
         });
-        if ($('.filter__gallery').length > 0) {
-            var containerEl = document.querySelector('.filter__gallery');
-            var mixer = mixitup(containerEl);
-        }
+
+        // Hiển thị mặc định danh sách có class "day"
+        $('.filter__controls li[data-filter=".day"]').trigger('click');
     });
+
 
     /*------------------
         Background Set

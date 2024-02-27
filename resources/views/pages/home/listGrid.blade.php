@@ -22,11 +22,6 @@
             width: 90px;
             height: 130px;
         }
-        .list_grid h5 {
-            max-width: 100%;
-            max-height: 30px;
-            overflow: hidden;
-        }
         .list_grid .product__sidebar__comment__item__text h5 a:hover {
             color: #6C74FC;
         }
@@ -52,26 +47,30 @@
 @endpush
 <div class="product__sidebar__comment__item">
     <div class="product__sidebar__comment__item__pic">
-        <a href="{{ route('bookstory', [$value->slug]) }}">
+        <a href="{{ route('bookstory', [$value->slug_book]) }}">
             <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
         </a>
     </div>
     <div class="product__sidebar__comment__item__text text_capitalize">
         <h5>
-            <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug]) }}">
+            <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug_book]) }}">
+                {{ $value->title }}
                 @if ($value->featured)
                     <img class="hot_tags" src="{{ asset('img/hot_tags_2.png') }}">
                 @endif
-                {{ $value->title }}
             </a>
         </h5>
         <div class="justify-content-between align-items-center mb-1">
             <div class="btn-group">
                 <small class="text-muted">
-                    <a href="#">
-                        <i class="fa-solid fa-location-dot"></i>
-                        Đang đọc 10
-                    </a>
+                    @if ($check)
+                        @if ($value->title_name)
+                            <a title="{{ $value->title }} {{ $value->title_name }}" href="{{ route('chapter', [$value->slug_book, $value->slug]) }}">
+                                <i class="fa-solid fa-location-dot"></i>
+                                {{ $value->title_name }}
+                            </a>
+                        @endif
+                    @endif
                 </small>
             </div>
             <div class="background_option mt-1">
@@ -86,7 +85,7 @@
         @if ($value->chapter_title)
             <div class="btn-group mt-4">
                 <small class="text-muted mt-4">
-                    <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{ route('chapter', [$value->slug, $value->chapter_slug]) }}">
+                    <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{ route('chapter', [$value->slug_book, $value->chapter_slug]) }}">
                         {{ $value->chapter_title }}
                     </a>
                 </small>

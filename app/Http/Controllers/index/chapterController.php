@@ -4,10 +4,13 @@ namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Category;
 use App\Models\Bookstory;
 use App\Models\Chapter;
 use App\Models\Pivot_table_comment;
+use App\Models\Pivot_table_view;
+use App\Models\Pivot_table_readhistory;
 
 class chapterController extends Controller
 {
@@ -35,6 +38,42 @@ class chapterController extends Controller
         ->where('pivot_table_comment.chapter_id', $chapter->id)
         ->orderByDesc('created_at')
         ->paginate(10);
+
+        $chapter->view = (int)$chapter->view + 1;
+        $chapter->save();
+
+        // Tính tổng lượt xem của tất cả các chương của truyện
+        $bookstory->view = Chapter::where('bookstory_id', $bookstory->id)->where('status', 'ACTIVE')->sum('view');
+        $bookstory->save();
+
+        // Kiểm tra xem đã tồn tại bản ghi với bookstory_id và publisher_id tương ứng chưa
+        $checkview = Pivot_table_view::where('bookstory_id', $bookstory->id)
+        ->orderBy('created_at', 'desc')
+        ->first();
+
+        // Nếu chưa tồn tại hoặc là ngày mới, tạo mới bản ghi
+        if (!$checkview || !$checkview->created_at->isToday()) {
+            Pivot_table_view::create([
+                'bookstory_id' => $bookstory->id,
+                'view' => 1
+            ]);
+        } else {
+            // Nếu đã tồn tại và là cùng một ngày, cập nhật trường view
+            $checkview->update([
+                'view' => $checkview->view + 1,
+            ]);
+        }
+
+        // Lịch sử đọc chapter
+        $publisher = Session::get('id');
+        if ($publisher) {
+            Pivot_table_readhistory::updateOrCreate([
+                'publisher_id' => $publisher,
+                'bookstory_id' => $bookstory->id,
+            ],[
+                'chapter_id' => $chapter->id,
+            ]);
+        }
 
         return view('pages.chapter')->with(compact('category', 'bookstory', 'chapter', 'all_chapter', 'next_chapter', 'previous_chapter', 'countComment', 'viewComment'));
     }

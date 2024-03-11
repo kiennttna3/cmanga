@@ -256,12 +256,14 @@
                                         Đọc từ đầu
                                     </a>
                                 @endif
-                                <a href="#" class="follow-btn">
-                                    <i class="fa-solid fa-book-open"></i>
-                                    Đọc tiếp
-                                </a>
                                 @if (Session::get('login_publisher'))
-                                    @if ($checkfollow)
+                                    @if ($checkRead)
+                                        <a href="#" class="follow-btn">
+                                            <i class="fa-solid fa-book-open"></i>
+                                            Đọc tiếp
+                                        </a>
+                                    @endif
+                                    @if ($checkFollow)
                                         <a class="follow-btn active" id="follow-btn" data-action="{{ route('unfollow', $bookstory) }}">
                                             <i class="fa-regular fa-heart"></i>
                                             Hủy theo dõi
@@ -273,7 +275,7 @@
                                         </a>
                                     @endif
                                 @else
-                                    <a href="#" class="follow-btn">
+                                    <a class="follow-btn" onclick="checkFollow()">
                                         <i class="fa fa-heart-o"></i>
                                         Theo dõi
                                     </a>
@@ -348,5 +350,28 @@
                 })
             })
         })
+        function checkFollow() {
+            // Nếu không có thông báo nào hiển thị, tạo một instance mới
+            if (!notyf) {
+                notyf = new Notyf({
+                    duration: 5000,
+                    position: {
+                        x: 'right',
+                        y: 'bottom',
+                    },
+                    types: [
+                        {
+                            type: 'error',
+                            background: 'indianred',
+                            dismissible: true
+                        }
+                    ]
+                })
+            }
+            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+            setTimeout(() => {
+                notyf.error('Đăng nhập để sử dụng chức năng này!')
+            }, 100)
+        }
     </script>
 @endpush

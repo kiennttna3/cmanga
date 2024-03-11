@@ -47,7 +47,7 @@
 @endpush
 <div class="product__sidebar__comment__item">
     <div class="product__sidebar__comment__item__pic">
-        <a href="{{ route('bookstory', [$value->slug_book]) }}">
+        <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug_book]) }}">
             <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
         </a>
     </div>
@@ -76,9 +76,9 @@
             <div class="background_option mt-1">
                 <div class="option_view">
                     <i class="fa fa-bookmark"></i>
-                    11
+                    {{ formatNumber($value->follow) }}
                     <i class="fa fa-eye"></i>
-                    9141
+                    {{ formatNumber($value->view) }}
                 </div>
             </div>
         </div>

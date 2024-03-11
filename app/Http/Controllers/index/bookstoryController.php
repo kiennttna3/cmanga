@@ -11,6 +11,7 @@ use App\Models\Chapter;
 use App\Models\Pivote_Bookstory_Category;
 use App\Models\Pivot_table_follow;
 use App\Models\Pivot_table_comment;
+use App\Models\Pivot_table_readhistory;
 
 class bookstoryController extends Controller
 {
@@ -78,7 +79,9 @@ class bookstoryController extends Controller
 
         $publisher = Session::get('id');
 
-        $checkfollow = Pivot_table_follow::where('publisher_id', $publisher)->where('bookstory_id', $bookstory->id)->exists();
+        $checkFollow = Pivot_table_follow::where('publisher_id', $publisher)->where('bookstory_id', $bookstory->id)->exists();
+
+        $checkRead = Pivot_table_readhistory::where('publisher_id', $publisher)->where('bookstory_id', $bookstory->id)->exists();
 
         $count = Pivot_table_comment::where('bookstory_id', $bookstory->id)->get();
 
@@ -89,7 +92,7 @@ class bookstoryController extends Controller
         ->orderByDesc('created_at')
         ->paginate(10);
 
-        return view('pages.bookstory')->with(compact('category', 'bookstory', 'chapter', 'chapter_first' , 'chapter_last', 'categoryTogether', 'checkfollow', 'count', 'viewComment'));
+        return view('pages.bookstory')->with(compact('category', 'bookstory', 'chapter', 'chapter_first' , 'chapter_last', 'categoryTogether', 'checkFollow', 'checkRead', 'count', 'viewComment'));
     }
 
     /**

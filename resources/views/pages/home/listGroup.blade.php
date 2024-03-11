@@ -1,6 +1,6 @@
 <div class="product__item">
     <div class="product__item__pic set-bg" data-setbg="{{ Voyager::image($value->image) }}" style="background-image: url('{{ Voyager::image($value->image) }}');">
-        <a href="{{ route('bookstory', [$value->slug_book]) }}"><img class="product__item__pic"></a>
+        <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug_book]) }}"><img class="product__item__pic"></a>
         @if ($value->featured)
             <img class="hot_tags" src="{{ asset('img/hot_tags.png') }}">
         @endif
@@ -16,11 +16,11 @@
         <div class="background_option">
             <div class="option_view">
                 <i class="fa fa-eye"></i>
-                {{ $value->view }}
+                {{ formatNumber($value->view) }}
             </div>
             <div class="option_follow">
                 <i class="fa fa-bookmark"></i>
-                {{ $value->follow }}
+                {{ formatNumber($value->follow) }}
             </div>
         </div>
     </div>

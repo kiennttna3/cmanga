@@ -20,7 +20,7 @@ class HomeController extends Controller
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
-        $slide = Bookstory::orderBy('view', 'DESC')->where('featured', '1')->where('status', 'ACTIVE')->paginate(5);
+        $slide = Bookstory::orderBy('view', 'DESC')->where('featured', '1')->where('status', 'ACTIVE')->limit(5)->get();
 
         $publisher = Session::get('id');
 

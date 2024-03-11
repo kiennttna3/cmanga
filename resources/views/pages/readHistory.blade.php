@@ -127,9 +127,9 @@
                                                 <div class="background_option mt-1">
                                                     <div class="option_view">
                                                         <i class="fa fa-bookmark"></i>
-                                                        {{ $value->follow }}
+                                                        {{ formatNumber($value->follow) }}
                                                         <i class="fa fa-eye"></i>
-                                                        {{ $value->view }}
+                                                        {{ formatNumber($value->view) }}
                                                     </div>
                                                 </div>
                                             </div>

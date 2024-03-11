@@ -4,8 +4,12 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Bookstory;
 use App\Models\Pivote_Bookstory_Category;
+use App\Models\Pivot_table_follow;
+use App\Models\Pivot_table_error;
+use App\Models\Pivot_table_readhistory;
+use App\Models\Pivot_table_view;
+use App\Models\Pivot_table_comment;
 use Exception;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -93,6 +97,11 @@ class bookstoryController extends \TCG\Voyager\Http\Controllers\VoyagerBaseContr
         foreach ($ids as $id) {
             $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
             Pivote_Bookstory_Category::where('bookstory_id', [$data->id])->delete();
+            Pivot_table_follow::where('bookstory_id', [$data->id])->delete();
+            Pivot_table_error::where('bookstory_id', [$data->id])->delete();
+            Pivot_table_readhistory::where('bookstory_id', [$data->id])->delete();
+            Pivot_table_view::where('bookstory_id', [$data->id])->delete();
+            Pivot_table_comment::where('bookstory_id', [$data->id])->delete();
 
             // Check permission
             $this->authorize('delete', $data);

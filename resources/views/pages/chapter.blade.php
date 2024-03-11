@@ -176,6 +176,7 @@
                             <img src="{{ Voyager::image($value) }}" style="width: 100%" alt="{{ $bookstory->title }} {{ $chapter->title_name }} trang {{ $key }}">
                         @endforeach
                     </div>
+                    <div class="clear"></div>
                 </div>
             </div>
             <div class="row">

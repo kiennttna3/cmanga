@@ -45,11 +45,11 @@
             <label for="exampleInputEmail1" class="form-label text-white">Chọn lỗi</label>
             <select class="form-select mb-3 _ge_de_ol @error('error_type') is-invalid @enderror" name="error_type" id="error_type" aria-label="Default select example" required="" aria-required="true" required autocomplete="error_type">
                 <option disabled>----Chọn loại lỗi----</option>
-                <option value="0">Ảnh lỗi, không thấy ảnh</option>
-                <option value="1">Chapter bị trùng</option>
-                <option value="2">Chapter chưa dịch</option>
-                <option value="3">Up sai truyện</option>
-                <option value="4">Lỗi khác</option>
+                <option value="3">Ảnh lỗi, không thấy ảnh</option>
+                <option value="4">Chapter bị trùng</option>
+                <option value="5">Chapter chưa dịch</option>
+                <option value="1">Up sai truyện</option>
+                <option value="2">Lỗi khác</option>
             </select>
             @error('error_type')
                 <span class="invalid-feedback" role="alert">
@@ -114,13 +114,40 @@
                     data: $(this).serialize(),
                     success: function (response) {
                         console.log(response)
+                        $('textarea[name="body"]').val('')
                         hide()
+                        showNotyfication()
                     },
                     error: function (error) {
                         console.log(error)
                     }
                 })
             })
+
+            let notyf
+            function showNotyfication() {
+                // Nếu không có thông báo nào hiển thị, tạo một instance mới
+                if (!notyf) {
+                    notyf = new Notyf({
+                        duration: 5000,
+                        position: {
+                            x: 'right',
+                            y: 'bottom',
+                        },
+                        types: [
+                            {
+                                type: 'error',
+                                background: 'indianred',
+                                dismissible: true
+                            }
+                        ]
+                    })
+                }
+                // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+                setTimeout(() => {
+                    notyf.success('Báo cáo thành công!')
+                }, 100)
+            }
         })
     </script>
 @endpush

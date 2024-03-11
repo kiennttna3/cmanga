@@ -145,8 +145,14 @@ return [
 
         'widgets' => [
             'TCG\\Voyager\\Widgets\\UserDimmer',
-            'TCG\\Voyager\\Widgets\\PostDimmer',
-            'TCG\\Voyager\\Widgets\\PageDimmer',
+            'App\\Widgets\\PublisherDimmer',
+            'App\\Widgets\\CategoryDimmer',
+            'App\\Widgets\\BookstoryDimmer',
+            'App\\Widgets\\ChapterDimmer',
+            'App\\Widgets\\ErrorDimmer',
+            'App\\Widgets\\CommentDimmer',
+            'App\\Widgets\\ViewDimmer',
+            'App\\Widgets\\FollowDimmer',
         ],
 
     ],

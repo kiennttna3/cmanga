@@ -32,6 +32,8 @@
         <link rel="stylesheet" href="{{ asset('css/frontend/slicknav.min.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ asset('css/frontend/style.css') }}" type="text/css">
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
         <!-- Css custom -->
         <style type="text/css">
             /* width */
@@ -228,6 +230,34 @@
             .page-up a {
                 background-color: #6C74FC;
             }
+            .footer .footer__logo {
+                margin: 0 0 15px 0;
+            }
+            .footer p {
+                color: #fff;
+            }
+            .footer .hero__text {
+                position: relative;
+                z-index: 9;
+            }
+            .footer .hero__text .label {
+                font-size: 13px;
+                color: #fff;
+                background: #293158;
+                line-height: 30px;
+                padding: 0 10px;
+                display: inline-block;
+                position: relative;
+                top: 0;
+                opacity: 1;
+                list-style-type: none;
+                margin-right: 8px;
+                margin-bottom: 8px;
+                border-radius: 3px;
+            }
+            .clear {
+                clear: both;
+            }
             @media only screen and (max-width: 767px) {
                 .header {
                     position: fixed;
@@ -371,7 +401,7 @@
                                                 <span class="icon_profile"></span>
                                                 <img src="{{ Voyager::image(Session::get('avatar')) }}" id="media" class="avatar_layout" alt="">
                                             </a>
-                                            <ul class="dropdown">
+                                            <ul class="dropdown" style="display: none">
                                                 <li>
                                                     <a href="{{ route('profile') }}">
                                                         <i class="fa-solid fa-user-tie"></i>
@@ -436,26 +466,134 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <div class="footer__logo">
                             <a href="{{ route('home') }}"><img style="width: 100px;" src="{{ asset('img/logocmanga.png') }}" alt=""></a>
                         </div>
+                        <p>
+                            Luôn cập nhật liên tục các bộ truyện mới, truyện VIP để phục vụ độc giả
+                        </p>
+                        <p>
+                            Đọc truyện hoàn toàn miễn phí, hỗ trợ đa thiết bị.
+                        </p>
+                        <p>
+                            Email khiếu nại: kiennttna3@gmail.com
+                        </p>
+                        <p>
+                            Giới thiệu Liên hệ Chính sách
+                        </p>
+                        <p>
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> CMANGA
+                        </p>
                     </div>
                     <div class="col-lg-6">
-                        <div class="footer__nav">
-                            <ul>
-                                <li class="active"><a href="{{ route('home') }}">Homepage</a></li>
-                                <li><a href="#">Categories</a></li>
-                                <li><a href="#">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
+                        <div class="hero__text">
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    Truyện tranh
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    Truyen tranh online
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    Đọc truyện tranh
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    Truyện tranh hot
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    Truyện tranh hay
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    Truyện ngôn tình
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    Manhwa
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    Manhhua
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    truyenqq
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    mi2manga
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    doctruyen3q
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    toptruyen
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    nettruyen
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    vlogtruyen
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    blogtruyen
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    truyentranhaudio
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    ocumeo
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    tusachxinh
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    vcomycs
+                                </li>
+                            </a>
+                            <a href="{{ route('home') }}" class="label">
+                                <li>
+                                    truyengihot
+                                </li>
+                            </a>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-
+                        <p>
+                            Mọi thông tin và hình ảnh trên website đều được sưu tầm trên Internet.
+                            Chúng tôi không sở hữu hay chịu trách nhiệm bất kỳ thông tin nào trên web này.
+                            Nếu làm ảnh hưởng đến cá nhân hay tổ chức nào, khi được yêu cầu, chúng tôi sẽ xem xét và gỡ bỏ ngay lập tức.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -482,6 +620,8 @@
         <script src="{{ asset('js/frontend/jquery.slicknav.js') }}"></script>
         <script src="{{ asset('js/frontend/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('js/frontend/main.js') }}"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -545,15 +685,15 @@
                 }
             })
 
-            function toggleActive(element) {
+            function toggleActive(e) {
                 // Chuyển đổi trạng thái 'active' cho thẻ a được nhấp vào
-                element.classList.toggle('actives')
+                e.classList.toggle('actives')
 
                 var list_Group = document.querySelectorAll('.list_Group')
                 var list_grid = document.querySelectorAll('.list_grid')
 
                 list_Group.forEach(function(item) {
-                    if (element.classList.contains('actives')) {
+                    if (e.classList.contains('actives')) {
                         item.style.display = 'none'
                     } else {
                         item.style.display = 'block'
@@ -561,13 +701,43 @@
                 })
 
                 list_grid.forEach(function(item) {
-                    if (element.classList.contains('actives')) {
+                    if (e.classList.contains('actives')) {
                         item.style.display = 'block'
                     } else {
                         item.style.display = 'none'
                     }
                 })
             }
+            //menu người dùng
+            document.addEventListener('DOMContentLoaded', function () {
+                var auth = document.querySelector('.header__right .auth')
+                var dropdown = document.querySelector('.header__right .dropdown')
+
+                // Hàm kiểm tra phần tử tồn tại
+                function check(e) {
+                    return e !== null && typeof(e) !== 'undefined'
+                }
+
+                // Kiểm tra tồn tại
+                if (check(auth) && check(dropdown)) {
+                    // Bắt sự kiện click vào phần tử
+                    auth.addEventListener('click', function (event) {
+                        // Ngăn chặn sự kiện click từ việc lan rộng
+                        event.stopPropagation()
+                        // Hiển thị hoặc ẩn
+                        dropdown.style.display = (dropdown.style.display === 'none') ? 'block' : 'none'
+                    })
+
+                    // Bắt sự kiện click ra ngoài phần tử
+                    document.addEventListener('click', function (event) {
+                        // Nếu không click
+                        if (!auth.contains(event.target) && !dropdown.contains(event.target)) {
+                            // Ẩn
+                            dropdown.style.display = 'none'
+                        }
+                    })
+                }
+            })
         </script>
 
         @stack('js')

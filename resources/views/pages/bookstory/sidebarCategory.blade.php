@@ -26,7 +26,7 @@
         @foreach ($categoryTogether as $key => $value)
             <div class="product__sidebar__comment__item">
                 <div class="product__sidebar__comment__item__pic">
-                    <a class="a" href="{{ route('bookstory', [$value->slug_book]) }}">
+                    <a title="{{ $value->title }}" class="a" href="{{ route('bookstory', [$value->slug_book]) }}">
                         <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
                     </a>
                 </div>

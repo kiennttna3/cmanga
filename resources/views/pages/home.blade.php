@@ -43,7 +43,7 @@
             left: auto;
             top: auto;
             right: 0px;
-            bottom: 60px;
+            bottom: 80px;
         }
         .product__item__text h5 a:hover {
             color: #6C74FC;

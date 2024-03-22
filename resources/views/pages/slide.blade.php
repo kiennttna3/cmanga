@@ -10,10 +10,11 @@
             overflow: hidden;
         }
         .hero__slider .hero__items h2{
-            max-width: calc(100% - 120px);
+            max-width: calc(100%);
             width: 100%;
             overflow: hidden;
             margin-bottom: 12px;
+            height: 60px;
             z-index: 2;
             text-shadow: 0 0 0.2em #87F, 0 0 0.2em #87F, 0 0 0.2em #87F
         }
@@ -49,6 +50,11 @@
             border-radius: 4px;
             margin-bottom: 4px;
         }
+        .hero__text .category_box {
+            width: calc(100% - 60px);
+            overflow: hidden;
+            height: 30px;
+        }
         .overlay {
             position: absolute;
             top: 0;
@@ -63,7 +69,27 @@
                 display: none;
             }
             .overlay {
-                backdrop-filter: none;
+                filter: blur(0px);
+                backdrop-filter: blur(5px);
+            }
+        }
+        @media only screen and (max-width: 767px) {
+            .hero__slider .hero__items .bg_img {
+                display: none;
+            }
+            .overlay {
+                filter: blur(0px);
+                backdrop-filter: blur(5px);
+            }
+        }
+        @media only screen and (min-width: 768px) and (max-width: 992px) {
+            .hero__slider .hero__items .bg_img {
+                right: 52px;
+            }
+        }
+        @media only screen and (min-width: 992px) and (max-width: 1199px) {
+            .hero__slider .hero__items .bg_img {
+                right: 80px;
             }
         }
     </style>
@@ -75,11 +101,15 @@
                 <div class="overlay"></div>
                 <img class="bg_img" src="{{ Voyager::image($value->image) }}" alt="">
                 <div class="bg_filter row">
-                    <div class="col-xl-10">
+                    <div class="col-xl-9 col-lg-8 col-md-7 col-sm-12 col-12">
                         <div class="hero__text">
-                            @foreach ($value->pivote_bookstory_category as $key => $list)
-                                <div class="label">{{ $list->title }}</div>
-                            @endforeach
+                            <div class="category_box">
+                                @foreach ($value->pivote_bookstory_category as $key => $list)
+                                    <div class="label">
+                                        {{ $list->title }}
+                                    </div>
+                                @endforeach
+                            </div>
                             <h2>
                                 {{ $value->title }}
                             </h2>

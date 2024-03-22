@@ -18,7 +18,11 @@ class loginController extends Controller
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
-        return view('user.login')->with(compact('category'));
+        $pageMeta = [
+            'title' => 'Đăng nhập | Cmanga'
+        ];
+
+        return view('user.login')->with(compact('category', 'pageMeta'));
     }
 
     /**

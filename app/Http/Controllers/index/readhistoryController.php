@@ -51,7 +51,11 @@ class readhistoryController extends Controller
         ->where('status', 'ACTIVE')
         ->get();
 
-        return view('pages.readHistory')->with(compact('category', 'bookstory', 'count'));
+        $pageMeta = [
+            'title' => 'Lịch sử đọc truyện | Cmanga'
+        ];
+
+        return view('pages.readHistory')->with(compact('category', 'bookstory', 'count', 'pageMeta'));
     }
 
     /**

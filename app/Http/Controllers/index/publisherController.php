@@ -20,7 +20,11 @@ class publisherController extends Controller
 
         $publisher = Session::get('id');
 
-        return view('user.profile')->with(compact('category'));
+        $pageMeta = [
+            'title' => 'Trang cá nhân | '.Session::get('name')
+        ];
+
+        return view('user.profile')->with(compact('category', 'pageMeta'));
     }
 
     public function logout()

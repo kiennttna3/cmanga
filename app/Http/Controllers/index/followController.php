@@ -66,7 +66,11 @@ class followController extends Controller
         ->where('status', 'ACTIVE')
         ->get();
 
-        return view('pages.follow')->with(compact('category', 'bookstory', 'check', 'count'));
+        $pageMeta = [
+            'title' => 'Danh sách theo dõi | Cmanga'
+        ];
+
+        return view('pages.follow')->with(compact('category', 'bookstory', 'check', 'count', 'pageMeta'));
     }
 
     private function FollowCount($id, $increment)

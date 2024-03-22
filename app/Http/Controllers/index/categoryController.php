@@ -65,7 +65,7 @@ class categoryController extends Controller
         ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
         ->whereIn('bookstory.id', $many_Bookstory_Category)
         ->where('bookstory.status', 'ACTIVE')
-        ->paginate(21);
+        ->paginate(24);
 
         $check = Bookstory::select('pivot_table_readhistory.*')
         ->join('pivot_table_readhistory', 'bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
@@ -202,7 +202,11 @@ class categoryController extends Controller
         ->limit(5)
         ->get();
 
-        return view('pages.category')->with(compact('category', 'slide', 'category_book', 'bookstory', 'check', 'follow', 'viewComment', 'viewDay', 'viewWeek', 'viewMonth', 'viewYear'));
+        $pageMeta = [
+            'title' => 'Kho truyện khổng lồ - Cập nhật trong tích tắc - cmanga'
+        ];
+
+        return view('pages.category')->with(compact('category', 'slide', 'category_book', 'bookstory', 'check', 'follow', 'viewComment', 'viewDay', 'viewWeek', 'viewMonth', 'viewYear', 'pageMeta'));
     }
 
     /**

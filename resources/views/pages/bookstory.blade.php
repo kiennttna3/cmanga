@@ -101,9 +101,6 @@
         .anime__details__form {
             margin-bottom: 55px;
         }
-        .table_background {
-            border: 1px solid #222F5C;
-        }
         .table thead th {
             border-bottom: 2px solid #222F5C;
         }
@@ -161,6 +158,10 @@
             border: 1px solid #ffffff;
             margin: 5px;
         }
+        .tab-scroller {
+            max-height: 500px;
+            overflow: auto;
+        }
         @media only screen and (min-width: 768px) and (max-width: 991px) {
             .anime__details__widget ul li span {
                 width: 130px;
@@ -199,12 +200,12 @@
         <div class="container background_container">
             <div class="anime__details__content">
                 <div class="row pt-4 pl-2 pr-2">
-                    <div class="col-lg-3">
+                    <div class="margin_auto col-xl-3 col-lg-3 col-md-4 col-sm-6 col-10">
                         <div class="anime__details__pic set-bg" data-setbg="{{ Voyager::image($bookstory->image) }}" style="background-image: url('{{ Voyager::image($bookstory->image) }}');">
                             <img class="product__item__pic">
                         </div>
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-9 col-lg-9 col-md-8 col-sm-12 col-12">
                         <div class="anime__details__text">
                             <div class="anime__details__title">
                                 <h3>{{ $bookstory->title }}</h3>
@@ -311,11 +312,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-md-8">
+                <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12">
                     @include('pages.bookstory.listChapter')
                     @include('pages.bookstory.comment')
                 </div>
-                <div class="col-lg-4 col-md-4">
+                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
                     @include('pages.bookstory.sidebarCategory')
                 </div>
             </div>

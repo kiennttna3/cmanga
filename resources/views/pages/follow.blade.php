@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="product__sidebar__comment col-lg-12">
+                        <div class="product__sidebar__comment col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="background__fittel">
                                 @foreach ($bookstory as $key => $value)
                                     <div class="product__sidebar__comment__item">
@@ -104,8 +104,8 @@
                                                 <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
                                             </a>
                                         </div>
-                                        <div class="product__sidebar__comment__item__text text_capitalize">
-                                            <h5>
+                                        <div class="product__sidebar__comment__item__text">
+                                            <h5 class="text_capitalize">
                                                 <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug_book]) }}">
                                                     {{ $value->title }}
                                                     @if ($value->featured)
@@ -120,7 +120,9 @@
                                                             @if ($value->title_name)
                                                                 <a title="{{ $value->title }} {{ $value->title_name }}" href="{{ route('chapter', [$value->slug_book, $value->slug]) }}">
                                                                     <i class="fa-solid fa-location-dot"></i>
-                                                                    {{ $value->title_name }}
+                                                                    <div class="title_name">
+                                                                        Đang đọc {{ $value->title_name }}
+                                                                    </div>
                                                                 </a>
                                                             @endif
                                                         @endif

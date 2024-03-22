@@ -22,8 +22,8 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
-            padding: 15px 70px;
+            width: -webkit-fill-available;
+            padding: 15px calc(100% - 94%);
             transition: transform 0.5s ease;
             background-color: #151D35;
             box-shadow: 5px 5px 16px -4px #6c74fc;
@@ -78,7 +78,7 @@
         .nice-select.open .list,
         .nice-select .list {
             width: -webkit-fill-available;
-            background-color: #2d334f;
+            background-color: #0C1121;
             overflow-y: auto;
             max-height: 400px;
         }
@@ -140,6 +140,11 @@
                 font-size: 16px;
             }
         }
+        @media (max-width: 992px) {
+            .btn-text {
+                display: none;
+            }
+        }
     </style>
 @endpush
 @section('content')
@@ -164,7 +169,7 @@
     <section class="anime-details spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 margin_auto">
                     <div class="text-center mb-5">
                         <h4 class="chapter_title text-white">{{$chapter->bookstory->title}} - {{$chapter->title_name}}</h4>
                     </div>
@@ -173,7 +178,7 @@
                             $images = json_decode($chapter->media);
                         @endphp
                         @foreach ($images as $key => $value)
-                            <img src="{{ Voyager::image($value) }}" style="width: 100%" alt="{{ $bookstory->title }} {{ $chapter->title_name }} trang {{ $key }}">
+                            <img src="{{ Voyager::image($value) }}" style="width: 100%" page="{{ $key }}" alt="{{ $bookstory->title }} {{ $chapter->title_name }} trang {{ $key }}">
                         @endforeach
                     </div>
                     <div class="clear"></div>
@@ -188,23 +193,23 @@
     </section>
     <!-- Anime Section End -->
 
-    <div class="footer-menu">
-        <a href="{{ route('home') }}" class="btn btn_home text-white">
+    <div class="footer-menu row">
+        <a href="{{ route('home') }}" id="btn_home" class="btn btn_home text-white col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
             <i class="fa fa-home"></i>
-            Trang chủ
+            <span class="btn-text">Trang chủ</span>
         </a>
-        <div class="footer-menu-control">
+        <div class="footer-menu-control col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
             <a class="btn {{$previous_chapter == null ? 'isDisabled' : ''}}" href="{{url('truyen-tranh/'.$bookstory->slug.'/'.$previous_chapter)}}"><i class="fa-solid fa-angle-left"></i></a>
-            <select class="form-select mr-1 ml-1 select-chapter col-md-2" name="select-chapter" aria-label="Default select example">
+            <select class="form-select mr-1 ml-1 select-chapter" name="select-chapter" aria-label="Default select example">
                 @foreach ($all_chapter as $key => $value)
                     <option value="{{ route('chapter', [$bookstory->slug, $value->slug]) }}">{{ $value->title_name }}</option>
                 @endforeach
             </select>
             <a class="btn {{$next_chapter == null ? 'isDisabled' : ''}}" href="{{url('truyen-tranh/'.$bookstory->slug.'/'.$next_chapter)}}"><i class="fa-solid fa-angle-right"></i></a>
         </div>
-        <a id="openForm" class="btn btn_error text-white">
+        <a id="openForm" class="btn btn_error text-white col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
             <i class="fa-solid fa-triangle-exclamation"></i>
-            Báo lỗi
+            <span class="btn-text">Báo lỗi</span>
         </a>
     </div>
 @endsection
@@ -212,7 +217,6 @@
 @push('js')
     <script type="text/javascript">
         var lastScrollTop = 0
-
         $(window).scroll(function() {
             var st = $(this).scrollTop()
             if (st > lastScrollTop) {
@@ -246,8 +250,8 @@
                 current_text(list)
             }
 
-            function current_text(current) {
-                $('.select-chapter .current').text(current)
+            function current_text(e) {
+                $('.select-chapter .current').text(e)
             }
         })
     </script>

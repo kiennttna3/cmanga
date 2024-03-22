@@ -8,7 +8,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Laravel</title>
+        <title>{{ $pageMeta['title'] }}</title>
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -66,6 +68,10 @@
             .text_capitalize {
                 text-transform: capitalize;
             }
+            .margin_auto {
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
             .header__menu {
                 text-align: left;
             }
@@ -78,7 +84,7 @@
                 font-family: inherit;
                 font-weight: inherit;
                 font-size: inherit;
-                height: 44px;
+                height: 43px;
                 margin: 13px 0;
                 border: 2px solid #fff0;
             }
@@ -103,8 +109,11 @@
                 font-size: 19px;
             }
             .header__menu ul li .dropdown {
+                top: 62px;
                 width: 1000px;
                 left: -382px;
+                opacity: 1;
+                visibility: visible;
             }
             .header__menu ul li .dropdown li {
                 float: left;
@@ -151,6 +160,14 @@
                 padding: 10px 9px;
                 background-color: #222F5C;
                 box-shadow: 0 0 3px #0C1121;
+                animation: upAnimation ease 0.5s;
+                visibility: hidden;
+                opacity: 0;
+            }
+            .header__right .header__menu ul li .dropdown.show {
+                animation: downAnimation ease 0.5s;
+                visibility: visible;
+                opacity: 1;
             }
             .header__right .header__menu ul li .dropdown li {
                 margin: 10px;
@@ -255,10 +272,48 @@
                 margin-bottom: 8px;
                 border-radius: 3px;
             }
+            .title_name {
+                display: ruby;
+            }
+            .logo_moble {
+                display: none;
+            }
+            .header_auth .search_icon {
+                display: none;
+            }
+            .exit_search {
+                display: none;
+            }
             .clear {
                 clear: both;
             }
-            @media only screen and (max-width: 767px) {
+            @keyframes downAnimation {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes upAnimation {
+                from {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+            }
+            @media only screen and (min-width: 320px) and (max-width: 425px) {
+                .header_auth .search_icon {
+                    display: block;
+                    right: calc(100% - 170%) !important;
+                }
+            }
+            @media only screen and (max-width: 768px) {
                 .header {
                     position: fixed;
                     width: -webkit-fill-available;
@@ -278,13 +333,19 @@
                 .header__right .header__menu ul li a.auth {
                     padding: 20px;
                 }
-                .header__menu ul li .search {
-                    width: auto;
+                .header__nav {
+                    display: none;
+                    position: absolute;
+                    left: calc(100% - 145%);
+                    width: calc(100% + 86%);
+                    background-color: #070720;
+                    z-index: 2;
                 }
                 .header__menu ul li.search_icon {
                     position: absolute;
                     top: 50%;
-                    transform: translate(130px);
+                    transform: translate(calc(100% - 155px),-60%);
+                    z-index: 2;
                 }
                 .header__menu ul li .search_switch {
                     border: none;
@@ -296,19 +357,54 @@
                 .header__menu ul li.search_icon .icon_search {
                     font-size: 15px;
                 }
-                .dropdown-menu {
-                    width: 96%;
-                    left: -100px;
+                .header__menu ul li.search_box {
+                    width: calc(100% - 10%);
+                    max-width: 100%;
+                }
+                .avatar_layout {
+                    left: 0;
+                }
+                .logo_normal {
+                    display: none;
+                }
+                .logo_moble {
+                    display: block;
+                    height: 26px;
+                }
+                .header_auth .search_icon {
+                    display: block;
+                    right: calc(100% - 145%);
+                }
+                .exit_search {
+                    position: absolute;
+                    top: 15%;
+                    right: 0;
+                    color: white;
+                    font-size: 30px;
+                    display: block;
                 }
             }
-            @media only screen and (min-width: 768px) and (max-width: 991px) {
+            @media only screen and (min-width: 576px) and (max-width: 768px) {
+                .header__nav {
+                    display: none;
+                    position: absolute;
+                    left: calc(100% - 145%);
+                    width: calc(100% + 89%);
+                    background-color: #070720;
+                    z-index: 2;
+                }
+                .header__menu ul li.search_box {
+                    width: calc(100% - 8%);
+                    max-width: 100%;
+                }
+            }
+            @media only screen and (min-width: 768px) and (max-width: 992px) {
                 .header__menu {
                     display: block
                 }
                 .header__menu ul li.search_icon {
-                    position: absolute;
-                    top: 50%;
-                    transform: translate(200px);
+                    transform: translate(calc(100% - 220px),-50%);
+                    z-index: 2;
                 }
                 .header__menu ul li .search_switch {
                     border: none;
@@ -316,6 +412,17 @@
                     right: 0;
                     transform: translate(190px,-44%);
                     padding: 0;
+                }
+                .header__menu ul li.search_box {
+                    width: 640px;
+                }
+                .header__nav {
+                    display: none;
+                    position: absolute;
+                    left: calc(100% - 146%);
+                    width: calc(100% + 329px);
+                    background-color: #070720;
+                    z-index: 2;
                 }
                 .header__right .header__menu {
                     display: block;
@@ -329,13 +436,73 @@
                 .header__right .header__menu ul li a.auth {
                     padding: 20px;
                 }
+                .avatar_layout {
+                    left: 15px;
+                }
+                .logo_normal {
+                    display: none;
+                }
+                .logo_moble {
+                    display: block;
+                    height: 26px;
+                }
+                .header_auth .search_icon {
+                    display: block;
+                    right: calc(100% - 170%);
+                }
+                .exit_search {
+                    position: absolute;
+                    top: 15%;
+                    right: 10px;
+                    color: white;
+                    font-size: 30px;
+                    display: block;
+                }
+            }
+            @media only screen and (max-width: 992px) {
+                .header_auth .search_icon {
+                    right: calc(100% - 150%) !important;
+                }
             }
             @media only screen and (min-width: 992px) and (max-width: 1199px) {
+                .header__nav {
+                    display: none;
+                    position: absolute;
+                    left: calc(100% - 123%);
+                    width: calc(100% + 46%);
+                    background-color: #070720;
+                    z-index: 2;
+                }
+                .exit_search {
+                    position: absolute;
+                    top: 15%;
+                    right: 15px;
+                    color: white;
+                    font-size: 30px;
+                    display: block;
+                }
                 .header__right .header__menu ul li a {
                     padding: 0px;
                 }
                 .header__right .header__menu ul li a.auth {
                     padding: 20px;
+                }
+                .header__menu ul li.search_box {
+                    width: calc(100% - 50px);
+                }
+                .header__menu ul li.search_icon {
+                    z-index: 2;
+                }
+                .logo_normal {
+                    display: none;
+                }
+                .logo_moble {
+                    display: block;
+                    height: 26px;
+                }
+                .header_auth .search_icon {
+                    display: block;
+                    right: calc(100% - 50%);;
                 }
             }
         </style>
@@ -351,15 +518,16 @@
         <header class="header text_capitalize">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 col-3">
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3">
                         <div class="header__logo">
                             <a href="{{ route('home') }}">
-                                <img style="width: 100px;" src="{{ asset('img/logocmanga.png') }}" alt="">
+                                <img class="logo_normal" src="{{ asset('img/logocmanga.png') }}" alt="">
+                                <img class="logo_moble" src="{{ asset('img/logocmangamoblie.png')}}" alt="">
                             </a>
                         </div>
                     </div>
-                    <div class="col-xl-8 col-lg-8 col-md-7 col-sm-8 col-xs-8 col-7">
-                        <div class="header__nav">
+                    <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-6">
+                        <div id="header__nav" class="header__nav">
                             <nav class="header__menu">
                                 <ul>
                                     <form autocomplete="off" method="GET" action="{{ route('search') }}">
@@ -368,7 +536,7 @@
                                             <input type="search" name="keyword" id="keywords" class="search" placeholder="Bạn muốn tìm truyện gì" aria-label="Search">
                                             <div id="search_ajax"></div>
                                         </li>
-                                        <li class="search_icon">
+                                        <li id="search_icon" class="search_icon">
                                             <button class="btn search_switch" type="submit">
                                                 <span class="icon_search"></span>
                                             </button>
@@ -388,20 +556,26 @@
                                     <li><a href="#">Our Blog</a></li>
                                     <li><a href="#">Contacts</a></li> --}}
                                 </ul>
+                                <div id="exit_search" class="exit_search">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
                             </nav>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-2 col-xs-2 col-2">
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3">
                         <div class="header__right">
                             <nav class="header__menu header_auth">
                                 <ul>
+                                    <li class="search_icon">
+                                        <a id="icon_search" style="cursor: pointer"><span class="icon_search"></span></a>
+                                    </li>
                                     @if (Session::get('login_publisher'))
                                         <li>
-                                            <a class="auth" style="cursor: pointer">
+                                            <a id="auth" class="auth" style="cursor: pointer">
                                                 <span class="icon_profile"></span>
                                                 <img src="{{ Voyager::image(Session::get('avatar')) }}" id="media" class="avatar_layout" alt="">
                                             </a>
-                                            <ul class="dropdown" style="display: none">
+                                            <ul id="dropdown" class="dropdown">
                                                 <li>
                                                     <a href="{{ route('profile') }}">
                                                         <i class="fa-solid fa-user-tie"></i>
@@ -468,7 +642,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="footer__logo">
-                            <a href="{{ route('home') }}"><img style="width: 100px;" src="{{ asset('img/logocmanga.png') }}" alt=""></a>
+                            <a href="{{ route('home') }}"><img width="165px" src="{{ asset('img/logocmanga.png') }}" alt=""></a>
                         </div>
                         <p>
                             Luôn cập nhật liên tục các bộ truyện mới, truyện VIP để phục vụ độc giả
@@ -630,7 +804,7 @@
             // js tìm kiếm bằng ajax
             let timer
             // Hàm để quản lý sự hiển thị của dropdown
-            function handleDropdownVisibility() {
+            function dropDown() {
                 // Ẩn dropdown khi click bên ngoài
                 $(document).on('click', function (e) {
                     // Kiểm tra xem phần tử được click có nằm trong dropdown không
@@ -673,7 +847,7 @@
                                     $('#search_ajax').fadeIn()
                                 } else {
                                     // Gọi hàm để xử lý việc hiển thị dropdown
-                                    handleDropdownVisibility()
+                                    dropDown()
                                 }
                             }
                         })
@@ -685,58 +859,50 @@
                 }
             })
 
-            function toggleActive(e) {
-                // Chuyển đổi trạng thái 'active' cho thẻ a được nhấp vào
-                e.classList.toggle('actives')
-
-                var list_Group = document.querySelectorAll('.list_Group')
-                var list_grid = document.querySelectorAll('.list_grid')
-
-                list_Group.forEach(function(item) {
-                    if (e.classList.contains('actives')) {
-                        item.style.display = 'none'
-                    } else {
-                        item.style.display = 'block'
-                    }
-                })
-
-                list_grid.forEach(function(item) {
-                    if (e.classList.contains('actives')) {
-                        item.style.display = 'block'
-                    } else {
-                        item.style.display = 'none'
-                    }
-                })
-            }
-            //menu người dùng
             document.addEventListener('DOMContentLoaded', function () {
-                var auth = document.querySelector('.header__right .auth')
-                var dropdown = document.querySelector('.header__right .dropdown')
-
-                // Hàm kiểm tra phần tử tồn tại
-                function check(e) {
-                    return e !== null && typeof(e) !== 'undefined'
-                }
-
+                // menu người dùng
+                var auth = document.getElementById('auth')
+                var dropdown = document.getElementById('dropdown')
                 // Kiểm tra tồn tại
-                if (check(auth) && check(dropdown)) {
+                if (auth && dropdown) {
                     // Bắt sự kiện click vào phần tử
-                    auth.addEventListener('click', function (event) {
-                        // Ngăn chặn sự kiện click từ việc lan rộng
-                        event.stopPropagation()
+                    auth.addEventListener('click', function (e) {
                         // Hiển thị hoặc ẩn
-                        dropdown.style.display = (dropdown.style.display === 'none') ? 'block' : 'none'
+                        dropdown.classList.toggle('show')
                     })
-
                     // Bắt sự kiện click ra ngoài phần tử
-                    document.addEventListener('click', function (event) {
+                    document.addEventListener('click', function (e) {
                         // Nếu không click
-                        if (!auth.contains(event.target) && !dropdown.contains(event.target)) {
+                        if (!auth.contains(e.target) && !dropdown.contains(e.target)) {
                             // Ẩn
-                            dropdown.style.display = 'none'
+                            dropdown.classList.remove('show')
                         }
                     })
                 }
+
+                // search moble
+                var icon_search = document.getElementById('icon_search')
+                var header__nav = document.getElementById('header__nav')
+                var exit_search = document.getElementById('exit_search')
+                icon_search.addEventListener('click', function (e) {
+                    header__nav.style.display = 'block'
+                    icon_search.style.display = 'none'
+                })
+                exit_search.addEventListener('click', function (e) {
+                    header__nav.style.display = 'none'
+                    icon_search.style.display = 'block'
+                })
+                // rút gọn
+                var title_name = document.querySelectorAll(".title_name")
+                // Lặp qua tất cả các phần tử
+                title_name.forEach(function(e) {
+                    // Lấy nội dung văn bản của phần tử hiện tại và lưu vào biến
+                    var text = e.innerText
+                    // Thay thế tất cả các lần xuất hiện của từ trong biến bằng chuỗi rỗng.
+                    var newText = text.replace("chapter", "")
+                    // Gán lại nội dung văn bản mới vào phần tử hiện tại.
+                    e.innerText = newText
+                })
             })
         </script>
 

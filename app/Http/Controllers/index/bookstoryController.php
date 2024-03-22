@@ -26,7 +26,7 @@ class bookstoryController extends Controller
 
         $bookstory = Bookstory::where('slug', $slug)->where('status', 'ACTIVE')->first();
 
-        $chapter = Chapter::orderBy('title', 'DESC')->where('bookstory_id', $bookstory->id)->get();
+        $chapter = Chapter::orderBy('id', 'DESC')->where('bookstory_id', $bookstory->id)->get();
 
         $chapter_first = Chapter::orderBy('id')->where('bookstory_id', $bookstory->id)->where('status', 'ACTIVE')->first();
 
@@ -92,7 +92,11 @@ class bookstoryController extends Controller
         ->orderByDesc('created_at')
         ->paginate(10);
 
-        return view('pages.bookstory')->with(compact('category', 'bookstory', 'chapter', 'chapter_first' , 'chapter_last', 'categoryTogether', 'checkFollow', 'checkRead', 'count', 'viewComment'));
+        $pageMeta = [
+            'title' => $bookstory->title.' ['.$chapter_last->title_name.']'.' | Cmanga'
+        ];
+
+        return view('pages.bookstory')->with(compact('category', 'bookstory', 'chapter', 'chapter_first' , 'chapter_last', 'categoryTogether', 'checkFollow', 'checkRead', 'count', 'viewComment', 'pageMeta'));
     }
 
     /**

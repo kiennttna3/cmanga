@@ -75,7 +75,11 @@ class chapterController extends Controller
             ]);
         }
 
-        return view('pages.chapter')->with(compact('category', 'bookstory', 'chapter', 'all_chapter', 'next_chapter', 'previous_chapter', 'countComment', 'viewComment'));
+        $pageMeta = [
+            'title' => $bookstory->title.' - '.$chapter->title_name.' | Cmanga'
+        ];
+
+        return view('pages.chapter')->with(compact('category', 'bookstory', 'chapter', 'all_chapter', 'next_chapter', 'previous_chapter', 'countComment', 'viewComment', 'pageMeta'));
     }
 
     /**

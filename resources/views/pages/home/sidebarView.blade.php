@@ -33,8 +33,8 @@
                         <img src="{{ Voyager::image($value->image) }}" alt="{{ $value->title }}">
                     </a>
                 </div>
-                <div class="product__sidebar__comment__item__text text_capitalize">
-                    <h5>
+                <div class="product__sidebar__comment__item__text">
+                    <h5 class="text_capitalize">
                         <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug]) }}">
                             {{ $value->title }}
                         </a>
@@ -43,7 +43,9 @@
                         <div class="btn-group">
                             <small class="text-muted">
                                 <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
-                                    {{ $value->chapter_title }}
+                                    <div class="title_name">
+                                        Chap mới: {{ $value->chapter_title }}
+                                    </div>
                                 </a>
                             </small>
                         </div>

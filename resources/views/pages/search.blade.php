@@ -8,55 +8,6 @@
         a {
             color: #fff;
         }
-        .product__item__pic .background_option {
-            background-color: #293158;
-            position: absolute;
-            left: 0px;
-            bottom: 0px;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            min-width: -webkit-fill-available;
-            opacity: .9;
-        }
-        .product__item__pic .option_view {
-            font-size: 14px;
-            color: #ffffff;
-            display: inline-block;
-            padding: 10px 10px;
-        }
-        .product__item__pic .option_follow {
-            font-size: 14px;
-            color: #ffffff;
-            display: inline-block;
-            padding: 10px 10px;
-        }
-        .product__item__pic .ep {
-            font-size: 16px;
-            color: #ffffff;
-            background: #6C74FC;
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 0px;
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-            position: absolute;
-            left: auto;
-            top: auto;
-            right: 0px;
-            bottom: 60px;
-        }
-        .product__item__text h5 a:hover {
-            color: #6C74FC;
-        }
-        .product__item__lastchapter {
-            position: absolute;
-            bottom: 0px;
-            display: flex;
-            width: 88%;
-        }
-        .product__item__text {
-            padding-bottom: 10px;
-        }
         .product__pagination {
             padding-top: 0;
         }
@@ -80,14 +31,6 @@
         }
         .product__sidebar .section-title h5:after {
             background: #6C74FC;
-        }
-        .hot_tags {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            min-height: auto;
-            width: auto;
-            min-width: auto;
         }
         img {
             border-radius: 5px;
@@ -152,29 +95,80 @@
             border: 1px solid #ffffff;
             margin: 5px;
         }
-        @media only screen and (max-width: 1199.98px) {
-            .product__item__pic .ep {
-                font-size: 15px;
-                padding: 6px 12px;
-            }
+        .grid_list {
+            max-width: 100%;
+            flex: 0 0 100%;
+            margin-bottom: auto;
         }
-        @media only screen and (max-width: 991.98px) {
-            .product__item__pic .ep {
-                font-size: 14px;
-                padding: 6px 12px;
-            }
+        .grid_list .hot_tag {
+            display: block;
+            height: 18px !important;
+            width: auto !important;
+            margin-left: 5px;
+            margin-bottom: -3px;
+            display: inline;
         }
-        @media only screen and (max-width: 767.98px) {
-            .product__item__pic .ep {
-                font-size: 15px;
-                padding: 6px 12px;
-            }
+        .grid_list .product__item__pic {
+            height: 130px;
+            width: 90px;
+            margin-right: 15px;
         }
-        @media only screen and (max-width: 575.98px) {
-            .product__item__pic .ep {
-                font-size: 15px;
-                padding: 6px 12px;
-            }
+        .grid_list .product__item__pic .background_option {
+            background-color: transparent;
+            position: relative;
+            opacity: 1;
+            display: none;
+        }
+        .grid_list .product__item .background_option1 {
+            flex-direction: row-reverse;
+        }
+        .grid_list .product__item {
+            display: flex;
+        }
+        .grid_list .product__item__text {
+            padding: 0;
+            width: 86%;
+            height: -webkit-fill-available;
+        }
+        .grid_list .product__item__lastchapter {
+            width: -webkit-fill-available;
+            padding-left: 108px;
+            padding-right: 15px;
+            bottom: 28px;
+        }
+        .grid_list .hot_tags {
+            display: none;
+        }
+        .grid_list .hot_tag {
+            height: 18px !important;
+            width: auto !important;
+            margin-left: 5px;
+            margin-bottom: -3px;
+            display: inline;
+        }
+        .grid_list .product__item .ep {
+            display: none;
+        }
+        .grid_list .ep1 {
+            font-size: 16px;
+            color: #ffffff;
+            display: ruby;
+        }
+        .grid_list .product__item__option {
+            position: absolute;
+            display: flex;
+            width: -webkit-fill-available;
+            padding-left: 108px;
+            padding-right: 15px;
+            bottom: 70px;
+        }
+        .grid_list .product__item .option_follow,
+        .grid_list .product__item .option_view {
+            padding: 0 0 0 10px;
+        }
+        .grid_list .fa-bookmark:before,
+        .grid_list .fa-eye:before {
+            color: #6C74FC;
         }
     </style>
 @endpush
@@ -201,7 +195,7 @@
                                         <a id="openForm" class="current_page btn">
                                             <i class="fa-solid fa-filter"></i>
                                         </a>
-                                        <a class="current_page btn" onclick="toggleActive(this)">
+                                        <a class="current_page btn" id="current_page">
                                             <i class="fa-solid fa-list"></i>
                                         </a>
                                     </div>
@@ -211,11 +205,8 @@
                     </div>
                     <div class="row">
                         @foreach ($bookstory as $key => $value)
-                            <div class="list_Group product__item col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-4 col-6">
+                            <div class="list_Group product__item col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-4 col-6">
                                 @include('pages.home.listGroup')
-                            </div>
-                            <div class="list_grid product__sidebar__comment col-lg-12" style="display: none;">
-                                @include('pages.home.listGrid')
                             </div>
                         @endforeach
                     </div>
@@ -234,3 +225,35 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+        // Khi tất cả các phần tử trong DOM đã được tải xong
+        document.addEventListener("DOMContentLoaded", function() {
+                // Lấy tham chiếu đến phần tử
+                var currentPage = document.getElementById("current_page")
+                // Lấy tất cả các phần tử
+                var listGroup = document.querySelectorAll(".list_Group")
+                // Sự kiện click
+                currentPage.addEventListener("click", function() {
+                    currentPage.classList.toggle("actives")
+                    // Lặp qua tất cả các phần tử
+                    listGroup.forEach(function(listGroup) {
+                        listGroup.classList.toggle("grid_list")
+                    })
+                    // Kiểm tra có tồn tại
+                    var currentPageCheck = currentPage.classList.contains("actives") ? "actives" : ""
+                    // Lưu trạng thái vào localStorage
+                    localStorage.setItem("currentPageCheck", currentPageCheck)
+                })
+                // Khôi phục trạng thái từ localStorage khi trang được tải lại
+                var currentPageCheck = localStorage.getItem("currentPageCheck")
+                if (currentPageCheck === "actives") {
+                    currentPage.classList.add("actives")
+                    listGroup.forEach(function(listGroup) {
+                        listGroup.classList.add("grid_list")
+                    })
+                }
+            })
+    </script>
+@endpush

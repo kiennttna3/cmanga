@@ -150,13 +150,13 @@
                             <form action="{{ route('updateRegister') }}" method="POST">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                                         <input type="text" name="name" placeholder="Tên hiển thị" value="{{ Session::get('name') }}">
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                                         <input type="text" name="email" placeholder="Địa chỉ email" value="{{ Session::get('email') }}">
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <textarea name="body" placeholder="Giới thiệu">{!! Session::get('body') !!}</textarea>
                                         <button type="submit" class="site-btn">Lưu</button>
                                     </div>

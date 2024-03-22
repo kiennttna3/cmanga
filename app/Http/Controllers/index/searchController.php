@@ -57,7 +57,7 @@ class searchController extends Controller
         ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
         ->where('bookstory.title', 'LIKE', '%'.$keyword.'%')
         ->where('bookstory.status', 'ACTIVE')
-        ->paginate(21);
+        ->paginate(24);
 
         $check = Bookstory::select('pivot_table_readhistory.*')
         ->join('pivot_table_readhistory', 'bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
@@ -194,7 +194,11 @@ class searchController extends Controller
         ->limit(5)
         ->get();
 
-        return view('pages.search')->with(compact('category', 'slide', 'keyword', 'bookstory', 'check', 'follow', 'viewComment', 'viewDay', 'viewWeek', 'viewMonth', 'viewYear'));
+        $pageMeta = [
+            'title' => 'Kho truyện khổng lồ - Cập nhật trong tích tắc - cmanga'
+        ];
+
+        return view('pages.search')->with(compact('category', 'slide', 'keyword', 'bookstory', 'check', 'follow', 'viewComment', 'viewDay', 'viewWeek', 'viewMonth', 'viewYear', 'pageMeta'));
     }
 
     public function search_ajax(Request $request)
@@ -212,11 +216,11 @@ class searchController extends Controller
             ->where('title', 'LIKE', '%' . $data['keywords'] . '%')
             ->limit(5)
             ->get();
-            $output = '<ul class="dropdown-menu" style="display:block;background-color: #151D35;max-height: 500px;overflow: auto;">';
+            $output = '<ul class="dropdown-menu" style="display:block;background-color: #151D35;max-height: 500px;overflow: auto;max-width: 100%;">';
             if ($bookstory->count() > 0) {
                 foreach ($bookstory as $key => $value) {
                     $image = Voyager::image($value->image);
-                    $shortTentruyen = \Illuminate\Support\Str::limit($value->title, 28);
+                    $shortTentruyen = \Illuminate\Support\Str::limit($value->title, 100);
                     $output .= '
                     <li class="dropdown-item" style="text-decoration: none; margin-right: 0; padding: 0">
                         <div class="col-md-12">
@@ -226,7 +230,7 @@ class searchController extends Controller
                                         <img style="height: 100%; width: auto; min-width: 100%;" src="'.$image.'" alt="'.$value->title.'"/>
                                     </a>
                                 </div>
-                                <div class="text-white">
+                                <div class="text-white" style="max-width: calc(100% - 80px);width: 100%;max-height: 45px;overflow: hidden;">
                                     <a href="'. route('bookstory', [$value->slug]).'" style="text-decoration: none; padding: 0; color: #fff;height: fit-content;">
                                     '.$shortTentruyen.'
                                     </a>

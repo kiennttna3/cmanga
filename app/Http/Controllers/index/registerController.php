@@ -17,7 +17,11 @@ class registerController extends Controller
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
-        return view('user.register')->with(compact('category'));
+        $pageMeta = [
+            'title' => 'Đăng ký | Cmanga'
+        ];
+
+        return view('user.register')->with(compact('category', 'pageMeta'));
     }
 
     public function createRegister() {

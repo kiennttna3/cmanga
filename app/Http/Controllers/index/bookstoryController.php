@@ -93,7 +93,7 @@ class bookstoryController extends Controller
         ->paginate(10);
 
         $pageMeta = [
-            'title' => $bookstory->title.' ['.$chapter_last->title_name.']'.' | Cmanga'
+            'title' => $bookstory->title.' | Cmanga'
         ];
 
         return view('pages.bookstory')->with(compact('category', 'bookstory', 'chapter', 'chapter_first' , 'chapter_last', 'categoryTogether', 'checkFollow', 'checkRead', 'count', 'viewComment', 'pageMeta'));

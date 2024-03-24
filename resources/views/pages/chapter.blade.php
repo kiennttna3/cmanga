@@ -145,6 +145,16 @@
                 display: none;
             }
         }
+        @media only screen and (max-width: 425px) {
+            .breadcrumb__links a, .breadcrumb__links span {
+                font-size: calc(100% - 3px) !important;
+            }
+        }
+        @media only screen and (max-width: 320px) {
+            .breadcrumb__links a, .breadcrumb__links span {
+                font-size: calc(100% - 5px) !important;
+            }
+        }
     </style>
 @endpush
 @section('content')

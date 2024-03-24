@@ -243,27 +243,15 @@
                 // Lưu trạng thái vào localStorage
                 localStorage.setItem("currentPageCheck", currentPage.classList.contains("actives") ? "actives" : "")
             }
-            function Mobile() {
-                var mobile = window.innerWidth < 768
-                if(mobile) {
-                    Toggle()
-                    localStorage.setItem('currentPage', currentPage)
-                }
-            }
             // Sự kiện click
             currentPage.addEventListener("click", function() {
                 Toggle()
-            })
-            window.addEventListener('resize', function() {
-                Mobile()
             })
             // Khôi phục trạng thái từ localStorage khi trang được tải lại
             var currentPageCheck = localStorage.getItem("currentPageCheck")
             if (currentPageCheck === "actives") {
                 Toggle()
             }
-            // Kiểm tra kích thước cửa sổ khi trang web được tải
-            Mobile()
         })
     </script>
 @endpush

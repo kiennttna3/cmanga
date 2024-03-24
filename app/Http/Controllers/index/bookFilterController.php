@@ -104,7 +104,7 @@ class bookFilterController extends Controller
         ->take(21)
         ->get();
 
-        $viewDay = Bookstory::select('bookstory.*', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
+        $viewDay = Bookstory::select('bookstory.id', 'bookstory.title', 'bookstory.image', 'bookstory.slug', 'bookstory.status', 'bookstory.created_at', 'bookstory.view', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
         ->join('pivot_table_view', 'bookstory.id', '=', 'pivot_table_view.bookstory_id')
         ->selectSub(function($query) {
             $query->select('title_name')->from('chapter')
@@ -120,13 +120,13 @@ class bookFilterController extends Controller
         }, 'chapter_slug')
         // ->where('pivot_table_view.created_at', '>=', now()->startOfDay())
         ->whereDate('pivot_table_view.created_at', '=', Carbon::today())
-        ->groupBy('bookstory.id')
+        ->groupBy('bookstory.id', 'bookstory.title', 'bookstory.image', 'bookstory.slug', 'bookstory.status', 'bookstory.created_at', 'bookstory.view')
         ->orderBy('total_view', 'desc')
         ->where('bookstory.status', 'ACTIVE')
         ->limit(5)
         ->get();
 
-        $viewWeek = Bookstory::select('bookstory.*', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
+        $viewWeek = Bookstory::select('bookstory.id', 'bookstory.title', 'bookstory.image', 'bookstory.slug', 'bookstory.status', 'bookstory.created_at', 'bookstory.view', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
         ->join('pivot_table_view', 'bookstory.id', '=', 'pivot_table_view.bookstory_id')
         ->selectSub(function($query) {
             $query->select('title_name')->from('chapter')
@@ -141,13 +141,13 @@ class bookFilterController extends Controller
                 ->latest()->limit(1);
         }, 'chapter_slug')
         ->whereBetween('pivot_table_view.created_at', [now()->startOfWeek(), now()->endOfWeek()])
-        ->groupBy('bookstory.id')
+        ->groupBy('bookstory.id', 'bookstory.title', 'bookstory.image', 'bookstory.slug', 'bookstory.status', 'bookstory.created_at', 'bookstory.view')
         ->orderBy('total_view', 'desc')
         ->where('bookstory.status', 'ACTIVE')
         ->limit(5)
         ->get();
 
-        $viewMonth = Bookstory::select('bookstory.*', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
+        $viewMonth = Bookstory::select('bookstory.id', 'bookstory.title', 'bookstory.image', 'bookstory.slug', 'bookstory.status', 'bookstory.created_at', 'bookstory.view', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
         ->join('pivot_table_view', 'bookstory.id', '=', 'pivot_table_view.bookstory_id')
         ->selectSub(function($query) {
             $query->select('title_name')->from('chapter')
@@ -163,13 +163,13 @@ class bookFilterController extends Controller
         }, 'chapter_slug')
         // ->where('pivot_table_view.created_at', '>=', now()->startOfMonth())
         ->whereMonth('pivot_table_view.created_at', '=', Carbon::today())
-        ->groupBy('bookstory.id')
+        ->groupBy('bookstory.id', 'bookstory.title', 'bookstory.image', 'bookstory.slug', 'bookstory.status', 'bookstory.created_at', 'bookstory.view')
         ->orderBy('total_view', 'desc')
         ->where('bookstory.status', 'ACTIVE')
         ->limit(5)
         ->get();
 
-        $viewYear = Bookstory::select('bookstory.*', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
+        $viewYear = Bookstory::select('bookstory.id', 'bookstory.title', 'bookstory.image', 'bookstory.slug', 'bookstory.status', 'bookstory.created_at', 'bookstory.view', Pivot_table_view::raw('sum(pivot_table_view.view) as total_view'))
         ->join('pivot_table_view', 'bookstory.id', '=', 'pivot_table_view.bookstory_id')
         ->selectSub(function($query) {
             $query->select('title_name')->from('chapter')
@@ -185,7 +185,7 @@ class bookFilterController extends Controller
         }, 'chapter_slug')
         // ->where('pivot_table_view.created_at', '>=', now()->startOfYear())
         ->whereYear('pivot_table_view.created_at', '=', Carbon::today())
-        ->groupBy('bookstory.id')
+        ->groupBy('bookstory.id', 'bookstory.title', 'bookstory.image', 'bookstory.slug', 'bookstory.status', 'bookstory.created_at', 'bookstory.view')
         ->orderBy('total_view', 'desc')
         ->where('bookstory.status', 'ACTIVE')
         ->limit(5)

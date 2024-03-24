@@ -307,10 +307,10 @@
                     transform: translateY(-10px);
                 }
             }
-            @media only screen and (min-width: 320px) and (max-width: 425px) {
+            @media only screen and (max-width: 425px) {
                 .header_auth .search_icon {
                     display: block;
-                    right: calc(100% - 170%) !important;
+                    right: calc(100% - 160%) !important;
                 }
             }
             @media only screen and (max-width: 768px) {
@@ -459,9 +459,9 @@
                     display: block;
                 }
             }
-            @media only screen and (max-width: 992px) {
+            @media only screen and (min-width: 992px) and (max-width: 992px) {
                 .header_auth .search_icon {
-                    right: calc(100% - 150%) !important;
+                    right: calc(100% - 170%) !important;
                 }
             }
             @media only screen and (min-width: 992px) and (max-width: 1199px) {

@@ -240,7 +240,7 @@
                 listGroup.forEach(function(e) {
                     e.classList.toggle("grid_list")
                 })
-                // Lưu trạng thái vào localStorage
+                // Lưu trạng thái vào localStorage.
                 localStorage.setItem("currentPageCheck", currentPage.classList.contains("actives") ? "actives" : "")
             }
             // Sự kiện click

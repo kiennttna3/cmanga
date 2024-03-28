@@ -35,7 +35,7 @@
                         <tr>
                             <td>
                                 <li class="my-2 text-white" style="list-style: none;">
-                                    <a style="text-decoration: none; font-weight:800;" href="{{ route('chapter', [$bookstory->slug, $value->slug]) }}">
+                                    <a class="chapter_lite chapter_line" href="{{ route('chapter', [$bookstory->slug, $value->slug]) }}">
                                         {{ $value->title_name }}
                                         <a class="ml-1 text-danger">{!! $icon !!}</a>
                                     </a>
@@ -43,14 +43,14 @@
                             </td>
                             <td>
                                 <li class="my-2 text-white footer__nav" style="list-style: none;">
-                                    <a style="text-decoration: none;">
+                                    <a class="chapter_lite">
                                         {{ $value->created_at->diffForHumans() }}
                                     </a>
                                 </li>
                             </td>
                             <td>
                                 <li class="my-2 text-white footer__nav" style="list-style: none;">
-                                    <a style="text-decoration: none;" >
+                                    <a class="chapter_lite">
                                         {{ $value->view }}
                                     </a>
                                 </li>

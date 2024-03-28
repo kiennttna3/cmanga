@@ -117,7 +117,7 @@
             }
             .header__menu ul li .dropdown li {
                 float: left;
-                width: 200px;
+                width: -webkit-fill-available;
             }
             .header__menu ul li .dropdown li a {
                 width: fit-content;
@@ -213,7 +213,7 @@
                 width: 100%;
                 height: 100%;
                 background: rgba(0, 0, 0, 0.5);
-                z-index: 1; /* Ensure the overlay is on top */
+                z-index: 2; /* Ensure the overlay is on top */
             }
 
             #formContainer {
@@ -273,7 +273,7 @@
                 border-radius: 3px;
             }
             .title_name {
-                display: ruby;
+                display: inline-block;
             }
             .logo_moble {
                 display: none;
@@ -307,6 +307,21 @@
                     transform: translateY(-10px);
                 }
             }
+            @media only screen and (max-width: 320px) {
+                .product__sidebar__view .filter__controls li {
+                    font-size: 10px;
+                }
+                .header__menu ul li .dropdown li a {
+                    font-size: 12px;
+                }
+                .header__right .header__menu ul li .dropdown {
+                    left: -150px;
+                    padding: 4px 12px;
+                }
+                .header__right .header__menu ul li .dropdown li {
+                    margin: 6px;
+                }
+            }
             @media only screen and (max-width: 425px) {
                 .header_auth .search_icon {
                     display: block;
@@ -337,7 +352,7 @@
                     display: none;
                     position: absolute;
                     left: calc(100% - 145%);
-                    width: calc(100% + 86%);
+                    width: calc(100% + 90%);
                     background-color: #070720;
                     z-index: 2;
                 }
@@ -389,7 +404,7 @@
                     display: none;
                     position: absolute;
                     left: calc(100% - 145%);
-                    width: calc(100% + 89%);
+                    width: calc(100% + 89.5%);
                     background-color: #070720;
                     z-index: 2;
                 }
@@ -420,7 +435,7 @@
                     display: none;
                     position: absolute;
                     left: calc(100% - 146%);
-                    width: calc(100% + 329px);
+                    width: calc(100% + 330px);
                     background-color: #070720;
                     z-index: 2;
                 }

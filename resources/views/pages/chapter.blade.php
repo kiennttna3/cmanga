@@ -154,6 +154,11 @@
             .breadcrumb__links a, .breadcrumb__links span {
                 font-size: calc(100% - 5px) !important;
             }
+            .anime__review__item__text h6,
+            .anime__review__item__text p,
+            .post-meta {
+                font-size: 10px;
+            }
         }
     </style>
 @endpush

@@ -72,6 +72,22 @@
             border: 1px solid #ffffff;
             margin: 5px;
         }
+
+        @media only screen and (max-width: 320px) {
+            .product__sidebar__comment img {
+                height: 120px;
+                width: 80px;
+            }
+            .product__sidebar__comment__item__text h5 a {
+                font-size: 15px;
+            }
+            .btn-group,
+            .product__sidebar__comment .background_option,
+            .product__sidebar__comment__item__text span,
+            .text-muted {
+                font-size: 12px;
+            }
+        }
     </style>
 @endpush
 

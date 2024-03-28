@@ -128,11 +128,11 @@
         <h6>
             <a title="{{ $value->title }}" href="{{ route('bookstory', [$value->slug_book]) }}">
                 {{ $value->title }}
-                @if ($value->featured)
-                    <img class="hot_tag" src="{{ asset('img/hot_tags.png') }}">
-                @endif
             </a>
         </h6>
+        @if ($value->featured)
+            <img class="hot_tag" src="{{ asset('img/hot_tags.png') }}">
+        @endif
     </div>
     <div class="product__item__option justify-content-between align-items-center">
         <div class="btn-group ep1">

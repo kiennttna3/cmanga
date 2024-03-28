@@ -99,6 +99,7 @@
             max-width: 100%;
             flex: 0 0 100%;
             margin-bottom: auto;
+            height: 160px;
         }
         .grid_list .hot_tag {
             display: block;
@@ -112,6 +113,7 @@
             height: 130px;
             width: 90px;
             margin-right: 15px;
+            z-index: 1;
         }
         .grid_list .product__item__pic .background_option {
             background-color: transparent;
@@ -132,8 +134,8 @@
         }
         .grid_list .product__item__lastchapter {
             width: -webkit-fill-available;
-            padding-left: 108px;
-            padding-right: 15px;
+            padding-left: calc(100% - 86%);
+            padding-right: calc(100% - 98%);
             bottom: 28px;
         }
         .grid_list .hot_tags {
@@ -152,7 +154,6 @@
         .grid_list .ep1 {
             font-size: 16px;
             color: #ffffff;
-            display: ruby;
         }
         .grid_list .product__item__option {
             position: absolute;
@@ -170,6 +171,118 @@
         .grid_list .fa-eye:before {
             color: #6C74FC;
         }
+        .grid_list .product__item__text h6 {
+            max-width: calc(100%);
+            width: 100%;
+            max-height: 42px;
+            overflow: hidden;
+        }
+        .grid_list .product__item__text h6 a {
+            font-size: 16px;
+            line-height: 20px;
+        }
+        .grid_list .product__item .background_option1 {
+            padding: 24px 0 0 0;
+        }
+        @media only screen and (min-width: 992px) and (max-width: 1199px) {
+            .grid_list .product__item__lastchapter,
+            .grid_list .product__item__option {
+                padding-left: calc(100% - 84%);
+                padding-right: calc(100% - 98%);
+            }
+        }
+        @media only screen and (min-width: 768px) and (max-width: 768px) {
+            .grid_list .product__item__lastchapter,
+            .grid_list .product__item__option {
+                padding-left: calc(100% - 85%) !important;
+                padding-right: calc(100% - 98%) !important;
+            }
+        }
+        @media only screen and (min-width: 576px) and (max-width: 768px) {
+            .grid_list .product__item__lastchapter,
+            .grid_list .product__item__option {
+                padding-left: calc(100% - 81%);
+                padding-right: calc(100% - 97%);
+            }
+        }
+        @media only screen and (min-width: 425px) and (max-width: 576px) {
+            .grid_list .product__item__lastchapter,
+            .grid_list .product__item__option {
+                padding-left: 100px;
+                padding-right: calc(100% - 97%);
+            }
+            .grid_list .product__item .background_option1 {
+                padding: 22px 0 0 0;
+            }
+
+        }
+        @media only screen and (min-width: 375px) and (max-width: 425px) {
+            .grid_list .product__item__lastchapter,
+            .grid_list .product__item__option {
+                padding-left: 95px;
+                padding-right: calc(100% - 97%);
+            }
+            .grid_list .product__item .background_option1 {
+                padding: 22px 0 0 0;
+            }
+        }
+        @media only screen and (min-width: 320px) and (max-width: 375px) {
+            .grid_list .product__item__lastchapter,
+            .grid_list .product__item__option {
+                padding-left: 90px;
+                padding-right: calc(100% - 97%);
+            }
+            .grid_list .product__item .background_option1 {
+                padding: 22px 0 0 0;
+            }
+        }
+        @media only screen and (max-width: 320px) {
+            .grid_list .product__item__lastchapter,
+            .grid_list .product__item__option {
+                padding-left: 86px;
+                padding-right: calc(100% - 97%);
+            }
+            .product__sidebar .section-title h5,
+            .product__sidebar__comment__item__text h5 {
+                font-size: 14px;
+            }
+            .grid_list .product__item .option_follow,
+            .grid_list .product__item .option_view,
+            .product__item__text ul li,
+            .product__sidebar__comment__item__text h5,
+            .grid_list .ep1,
+            .text-muted {
+                font-size: 12px;
+            }
+            .grid_list .product__item__text h6 a {
+                font-size: 14px;
+            }
+            .grid_list .product__item__pic {
+                height: 110px;
+            }
+            .product__pagination .pagination .active,
+            .pagination_set.product__pagination a {
+                width: 40px;
+                height: 40px;
+                line-height: 38px;
+            }
+            .grid_list .product__item .background_option1 {
+                padding: 16px 0 0 0;
+            }
+            .anime__review__item__text h6,
+            .text-muted,
+            .product__sidebar__comment__item__text span {
+                font-size: 10px;
+                margin: 22px 0 0 0 !important;
+            }
+            .product__sidebar__comment .a img {
+                width: 60px !important;
+                height: 90px !important;
+            }
+            .text-muted {
+                margin: 0 !important;
+            }
+        }
     </style>
 @endpush
 
@@ -177,11 +290,11 @@
     @include('pages.home.overlay')
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
                 <div class="product__page__content">
                     <div class="product__page__title">
                         <div class="row">
-                            <div class="col-lg-9 col-md-8 col-sm-10 col-xs-6 col-12">
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-12">
                                 <div class="section-title">
                                     <h4>
                                         <i class="fa-solid fa-arrows-rotate"></i>
@@ -189,7 +302,7 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-4 col-sm-2 col-xs-4 col-12">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-12">
                                 <div class="product__page__filter">
                                     <div class="product__pagination flex_center" style="text-align: inherit; display: flex;flex-direction: row-reverse;">
                                         <a id="openForm" class="current_page btn">
@@ -205,7 +318,7 @@
                     </div>
                     <div class="row">
                         @foreach ($bookstory as $key => $value)
-                            <div class="list_Group product__item col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-4 col-6">
+                            <div class="list_Group product__item col-xl-3 col-lg-4 col-md-4 col-sm-4 col-6">
                                 @include('pages.home.listGroup')
                             </div>
                         @endforeach
@@ -215,7 +328,7 @@
                     {!! $bookstory->onEachSide(0)->links('pagination::default') !!}
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-8">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
                 <div class="product__sidebar">
                     @include('pages.home.sidebarFollow')
                     @include('pages.home.sidebarView')
@@ -230,30 +343,35 @@
     <script type="text/javascript">
         // Khi tất cả các phần tử trong DOM đã được tải xong
         document.addEventListener("DOMContentLoaded", function() {
-                // Lấy tham chiếu đến phần tử
-                var currentPage = document.getElementById("current_page")
-                // Lấy tất cả các phần tử
-                var listGroup = document.querySelectorAll(".list_Group")
-                // Sự kiện click
-                currentPage.addEventListener("click", function() {
-                    currentPage.classList.toggle("actives")
-                    // Lặp qua tất cả các phần tử
-                    listGroup.forEach(function(listGroup) {
-                        listGroup.classList.toggle("grid_list")
-                    })
-                    // Kiểm tra có tồn tại
-                    var currentPageCheck = currentPage.classList.contains("actives") ? "actives" : ""
-                    // Lưu trạng thái vào localStorage
-                    localStorage.setItem("currentPageCheck", currentPageCheck)
+            // Lấy tham chiếu đến phần tử
+            var currentPage = document.getElementById("current_page")
+            // Lấy tất cả các phần tử
+            var listGroup = document.querySelectorAll(".list_Group")
+            var isActive = false
+            function Toggle() {
+                currentPage.classList.toggle("actives")
+                // Lặp qua tất cả các phần tử
+                listGroup.forEach(function(e) {
+                    e.classList.toggle("grid_list")
                 })
-                // Khôi phục trạng thái từ localStorage khi trang được tải lại
-                var currentPageCheck = localStorage.getItem("currentPageCheck")
-                if (currentPageCheck === "actives") {
-                    currentPage.classList.add("actives")
-                    listGroup.forEach(function(listGroup) {
-                        listGroup.classList.add("grid_list")
-                    })
+                isActive = !isActive
+                // Lưu trạng thái vào localStorage.
+                localStorage.setItem("currentPageCheck", isActive ? "actives" : "")
+            }
+            // Sự kiện click
+            currentPage.addEventListener("click", function() {
+                Toggle()
+            })
+            // Khôi phục trạng thái từ localStorage khi trang được tải lại
+            var currentPageCheck = localStorage.getItem("currentPageCheck")
+            if (currentPageCheck === "actives") {
+                Toggle()
+            }
+            window.addEventListener("resize", function() {
+                if (!isActive && window.innerWidth < 768) {
+                    Toggle()
                 }
             })
+        })
     </script>
 @endpush

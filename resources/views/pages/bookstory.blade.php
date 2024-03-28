@@ -30,6 +30,7 @@
         }
         .anime-details {
             position: relative;
+            width: 96%;
         }
         .anime__details__pic {
             height: 370px;
@@ -67,6 +68,7 @@
             font-weight: 500;
             margin-bottom: 10px;
             padding: 0 20px;
+            vertical-align: inherit;
         }
         .anime__details__btn button:hover,
         .anime__details__btn form:hover,
@@ -158,6 +160,12 @@
             border: 1px solid #ffffff;
             margin: 5px;
         }
+        .chapter_lite {
+            text-decoration: none;
+        }
+        .chapter_line {
+            font-weight:800;
+        }
         .tab-scroller {
             max-height: 500px;
             overflow: auto;
@@ -169,17 +177,64 @@
         }
         @media only screen and (max-width: 479px) {
             .anime__details__widget ul li span {
-                width: 130px;
+                width: calc(100% - 50%);
+            }
+            .table thead th {
+                font-size: 14px;
+            }.chapter_lite {
+                font-size: 10px;
             }
         }
         @media only screen and (max-width: 425px) {
             .breadcrumb__links a, .breadcrumb__links span {
-                font-size: calc(100% - 3px) !important;
+                font-size: calc(100%) !important;
             }
         }
         @media only screen and (max-width: 320px) {
             .breadcrumb__links a, .breadcrumb__links span {
-                font-size: calc(100% - 5px) !important;
+                font-size: calc(100%) !important;
+            }
+            .anime__details__pic {
+                height: 240px;
+            }
+            .anime__details__title h3 {
+                font-size: 18px;
+            }
+            .product__item__text ul li,
+            .anime__details__widget ul li,
+            .table thead th,
+            .product__sidebar__comment__item__text h5 {
+                font-size: 12px;
+            }
+            .anime__details__widget ul li span {
+                width: calc(100% - 54%);
+            }
+            .anime__details__btn .follow-btn,
+            .anime__review__item__text h6,
+            .anime__review__item__text p,
+            .text-muted,
+            .product__sidebar__comment__item__text span,
+            .post-meta {
+                font-size: 10px;
+            }
+            .chapter_lite {
+                font-size: 9px;
+            }
+            .product__pagination .pagination .active,
+            .pagination_set.product__pagination a {
+                width: 40px;
+                height: 40px;
+                line-height: 38px;
+            }
+            .product__sidebar__comment .a img {
+                width: 60px !important;
+                height: 90px !important;
+            }
+            .text-muted {
+                margin: 0 !important;
+            }
+            .product__sidebar__comment__item__text span {
+                margin: 24px 0 0 0 !important;
             }
         }
     </style>
@@ -206,7 +261,7 @@
     <!-- Breadcrumb End -->
 
     <!-- Anime Section Begin -->
-    <section class="anime-details spad">
+    <section class="anime-details spad margin_auto">
         <div class="container background_container">
             <div class="anime__details__content">
                 <div class="row pt-4 pl-2 pr-2">

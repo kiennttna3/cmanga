@@ -70,7 +70,7 @@
         @endforeach
     </div>
 </div>
-<div class="product__pagination">
+<div class="pagination_set product__pagination">
     {!! $viewComment->onEachSide(0)->links('pagination::default') !!}
 </div>
 

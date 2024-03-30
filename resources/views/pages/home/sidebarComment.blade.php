@@ -29,6 +29,15 @@
         .btn_group {
             width: -webkit-fill-available;
         }
+        @media only screen and (max-width: 320px) {
+            .filter__comment .product__sidebar__comment__item__text span {
+                font-size: 10px;
+                margin: 4px 0 0 0 !important;
+            }
+            .product__sidebar__item__text {
+                max-width: calc(100% - 24%);
+            }
+        }
     </style>
 @endpush
 <div class="product__sidebar__comment">

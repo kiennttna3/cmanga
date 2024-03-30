@@ -175,19 +175,73 @@
                 width: 130px;
             }
         }
-        @media only screen and (max-width: 479px) {
+        @media only screen and (min-width: 576px) and (max-width: 768px) {
             .anime__details__widget ul li span {
-                width: calc(100% - 50%);
+                width: calc(100% - 60%);
+            }
+            .anime__details__btn .follow-btn {
+                font-size: 12px;
+            }
+            .notyf {
+                right: 0;
+                width: 50%;
+                left: auto;
+                font-size: 14px;
+            }
+        }
+        @media only screen and (min-width: 425px) and (max-width: 576px) {
+            .anime__details__widget ul li span {
+                width: calc(100% - 60%);
+            }
+            .anime__details__btn .follow-btn {
+                font-size: 12px;
+            }
+            .notyf {
+                right: 0;
+                width: 50%;
+                left: auto;
+                font-size: 8px;
             }
             .table thead th {
                 font-size: 14px;
-            }.chapter_lite {
+            }
+            .chapter_lite {
                 font-size: 10px;
             }
+            .anime__details__title h3 {
+                font-size: 22px;
+            }
+            .anime__details__text p {
+                font-size: 14px;
+            }
         }
-        @media only screen and (max-width: 425px) {
+        @media only screen and (max-width: 479px) {
             .breadcrumb__links a, .breadcrumb__links span {
                 font-size: calc(100%) !important;
+            }
+            .anime__details__widget ul li span {
+                width: calc(100% - 60%);
+            }
+            .anime__details__btn .follow-btn {
+                font-size: 10px;
+            }
+            .anime__details__title h3 {
+                font-size: 22px;
+            }
+            .anime__details__text p {
+                font-size: 14px;
+            }
+            .table thead th {
+                font-size: 14px;
+            }
+            .chapter_lite {
+                font-size: 10px;
+            }
+            .notyf {
+                right: 0;
+                width: 60%;
+                left: auto;
+                font-size: 8px;
             }
         }
         @media only screen and (max-width: 320px) {
@@ -236,6 +290,12 @@
             .product__sidebar__comment__item__text span {
                 margin: 24px 0 0 0 !important;
             }
+            .notyf {
+                right: 0;
+                width: 60%;
+                left: auto;
+                font-size: 6px;
+            }
         }
     </style>
 @endpush
@@ -249,7 +309,7 @@
     <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="breadcrumb__links">
                         <a href="{{ route('home') }}"><i class="fa fa-home"></i> Truyện tranh</a>
                         <a class="breadcrumb__title" href="{{ route('bookstory', [$bookstory->slug]) }}">{{ $bookstory->title }}</a>

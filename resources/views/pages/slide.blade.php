@@ -51,9 +51,10 @@
             margin-bottom: 4px;
         }
         .hero__text .category_box {
-            width: calc(100% - 60px);
+            max-width: calc(100%);
+            width: 100%;
             overflow: hidden;
-            height: 30px;
+            height: 56px;
         }
         .overlay {
             position: absolute;
@@ -63,6 +64,63 @@
             height: 100%;
             filter: blur(10px);
             backdrop-filter: blur(10px);
+        }
+        @media only screen and (max-width: 320px) {
+            .hero__slider .hero__items h2 {
+                font-size: 16px;
+                margin-top: 10px;
+            }
+            .hero__text .label {
+                font-size: 6px;
+            }
+            .hero__text a span {
+                font-size: 8px;
+            }
+            .hero__text a i {
+                font-size: 12px;
+                padding: 12px 5px 16px 8px;
+            }
+            .hero__items {
+                padding: 130px 0 42px 16px;
+            }
+        }
+        @media only screen and (min-width: 320px) and (max-width: 375px) {
+            .hero__slider .hero__items h2 {
+                font-size: 20px;
+                margin-top: 10px;
+            }
+            .hero__text .label {
+                font-size: 10px;
+            }
+            .hero__text a span {
+                font-size: 10px;
+            }
+            .hero__text a i {
+                font-size: 15px;
+                padding: 13px 5px 16px 8px;
+            }
+            .hero__items {
+                padding: 130px 0 42px 16px;
+            }
+        }
+        @media only screen and (min-width: 375px) and (max-width: 425px) {
+            .hero__slider .hero__items h2 {
+                font-size: 20px;
+                margin-top: 10px;
+            }
+            .hero__text .label {
+                font-size: 10px;
+            }
+            .hero__text a span {
+                font-size: 10px;
+            }
+            .hero__text a i {
+                font-size: 15px;
+                padding: 13px 5px 16px 8px;
+            }
+            .hero__items {
+                padding: 140px 0 42px 16px;
+            }
         }
         @media only screen and (max-width: 575.98px) {
             .hero__slider .hero__items .bg_img {
@@ -84,7 +142,7 @@
         }
         @media only screen and (min-width: 768px) and (max-width: 992px) {
             .hero__slider .hero__items .bg_img {
-                right: 52px;
+                display: none;
             }
         }
         @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -101,7 +159,7 @@
                 <div class="overlay"></div>
                 <img class="bg_img" src="{{ Voyager::image($value->image) }}" alt="">
                 <div class="bg_filter row">
-                    <div class="col-xl-9 col-lg-8 col-md-7 col-sm-12 col-12">
+                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
                         <div class="hero__text">
                             <div class="category_box">
                                 @foreach ($value->pivote_bookstory_category as $key => $list)

@@ -135,29 +135,59 @@
             border: 1px solid #ffffff;
             margin: 5px;
         }
-        @media only screen and (max-width: 575.98px) {
-            .chapter_title {
-                font-size: 16px;
-            }
-        }
-        @media (max-width: 992px) {
+        @media only screen and (max-width: 992px) {
             .btn-text {
                 display: none;
             }
         }
+        @media only screen and (max-width: 768px) {
+            .breadcrumb__links a, .breadcrumb__links span {
+                font-size: calc(100%) !important;
+            }
+            .chapter_title {
+                font-size: calc(100%);
+            }
+        }
+        @media only screen and (max-width: 576px) {
+            .breadcrumb__links a, .breadcrumb__links span {
+                font-size: calc(100%) !important;
+            }
+            .chapter_title {
+                font-size: calc(100% - 10%);
+            }
+        }
         @media only screen and (max-width: 425px) {
             .breadcrumb__links a, .breadcrumb__links span {
-                font-size: calc(100% - 3px) !important;
+                font-size: calc(100%) !important;
+            }
+            .chapter_title {
+                font-size: calc(100% - 30%);
             }
         }
         @media only screen and (max-width: 320px) {
             .breadcrumb__links a, .breadcrumb__links span {
-                font-size: calc(100% - 5px) !important;
+                font-size: calc(100%) !important;
+            }
+            .chapter_title {
+                font-size: calc(100% - 40%);
             }
             .anime__review__item__text h6,
             .anime__review__item__text p,
             .post-meta {
                 font-size: 10px;
+            }
+            .footer-menu .footer-menu-control a {
+                font-size: 14px;
+                line-height: 24px;
+                height: 35px;
+                width: 35px;
+            }
+            .footer-menu .nice-select {
+                font-size: 10px
+            }
+            .footer-menu .btn_error,
+            .footer-menu .btn_home {
+                font-size: 14px;
             }
         }
     </style>
@@ -168,7 +198,7 @@
     <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="breadcrumb__links">
                         <a href="{{ route('home') }}"><i class="fa fa-home"></i> Truyện tranh</a>
                         <a href="{{ route('bookstory', [$bookstory->slug]) }}">{{ $bookstory->title }}</a>

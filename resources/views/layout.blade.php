@@ -308,9 +308,6 @@
                 }
             }
             @media only screen and (max-width: 320px) {
-                .product__sidebar__view .filter__controls li {
-                    font-size: 10px;
-                }
                 .header__menu ul li .dropdown li a {
                     font-size: 12px;
                 }

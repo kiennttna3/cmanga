@@ -1,3 +1,25 @@
+@push('css')
+    <style type="text/css">
+        .nice-select.open .list,
+        .nice-select .list {
+            width: -webkit-fill-available;
+            background-color: #374151;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+        .nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+            background-color: #6C74FC;
+        }
+        .nice-select {
+            background-color: #2A3254;
+            color: #fff;
+            border: none;
+        }
+        .nice-select:hover {
+            border-color: #2A3254;
+        }
+    </style>
+@endpush
 <div id="overlay">
     <div class="card-body" id="formContainer">
         <span id="closeForm">&times;</span>

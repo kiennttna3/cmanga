@@ -13,6 +13,22 @@
             width: 90px;
             height: 130px;
         }
+        @media only screen and (min-width: 992px) and (max-width: 1199px) {
+            .product__sidebar__view .filter__controls li {
+                font-size: 10px;
+            }
+        }
+        @media only screen and (max-width: 320px) {
+            .product__sidebar__view .filter__controls li {
+                font-size: 10px;
+            }
+        }
+        @media only screen and (max-width: 320px) {
+            .filter__gallery .product__sidebar__comment__item__text span {
+                font-size: 10px;
+                margin: 48px 0 0 0 !important;
+            }
+        }
     </style>
 @endpush
 <div class="product__sidebar__view">

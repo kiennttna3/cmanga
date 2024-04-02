@@ -104,7 +104,6 @@
         .grid_list .product__item__text {
             padding: 0;
             width: -webkit-fill-available;
-            height: -webkit-fill-available;
         }
         .grid_list .product__item__lastchapter {
             position: static;

@@ -19,7 +19,7 @@ class readhistoryController extends Controller
 
         $publisher = Session::get('id');
 
-        $bookstory = Bookstory::select('pivot_table_readhistory.*', 'bookstory.title', 'bookstory.image', 'bookstory.view', 'bookstory.slug as slug_book', 'bookstory.follow', 'chapter.title_name', 'chapter.slug')
+        $bookstory = Bookstory::select('pivot_table_readhistory.*', 'bookstory.title', 'bookstory.image', 'bookstory.view', 'bookstory.slug as slug_book', 'bookstory.follow', 'bookstory.featured', 'chapter.title_name', 'chapter.slug')
         ->join('pivot_table_readhistory', 'bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
         ->join('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
         ->selectSub(function($query) {

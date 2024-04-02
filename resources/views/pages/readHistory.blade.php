@@ -79,13 +79,13 @@
                 width: 80px;
             }
             .product__sidebar__comment__item__text h5 a {
-                font-size: 15px;
+                font-size: 12px;
             }
             .btn-group,
             .product__sidebar__comment .background_option,
             .product__sidebar__comment__item__text span,
             .text-muted {
-                font-size: 12px;
+                font-size: 10px;
             }
         }
     </style>
@@ -104,7 +104,7 @@
                             <div class="col-lg-9 col-md-8 col-sm-10 col-xs-6 col-12">
                                 <div class="section-title mb-2">
                                     <h5>
-                                        Danh sách truyện đã theo dõi ({{ $count }})
+                                        Danh sách truyện đã đọc ({{ $count }})
                                     </h5>
                                 </div>
                             </div>

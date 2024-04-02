@@ -79,13 +79,13 @@
                 width: 80px;
             }
             .product__sidebar__comment__item__text h5 a {
-                font-size: 15px;
+                font-size: 12px;
             }
             .btn-group,
             .product__sidebar__comment .background_option,
             .product__sidebar__comment__item__text span,
             .text-muted {
-                font-size: 12px;
+                font-size: 10px;
             }
         }
     </style>

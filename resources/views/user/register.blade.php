@@ -12,6 +12,11 @@
         .login__register .primary-btn {
             background: #6C74FC;
         }
+        .login__form .capslock_warning {
+            margin: 10px 12px 0 12px;
+            font-size: 14px;
+            color: yellow;
+        }
     </style>
 @endpush
 @section('content')
@@ -74,6 +79,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <p id="capslock-warning" class="capslock_warning" hidden>⚠️ Caps Lock Đang được bật</p>
                             </div>
                             <button type="submit" name="submit" id="submit" class="site-btn">Đăng Ký</button>
                         </form>
@@ -102,3 +108,21 @@
     </section>
     <!-- Signup Section End -->
 @endsection
+
+@push('js')
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            const conf_pass = document.getElementById('password-confirm')
+            const warn = document.getElementById('capslock-warning')
+            function checkCapsLock(e) {
+                if(e.getModifierState && e.getModifierState('CapsLock')) {
+                    warn.hidden = false
+                } else {
+                    warn.hidden= true
+                }
+            }
+            conf_pass.addEventListener('keyup', checkCapsLock)
+            conf_pass.addEventListener('focus', checkCapsLock)
+        })
+    </script>
+@endpush

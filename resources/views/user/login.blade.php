@@ -12,6 +12,11 @@
         .login__register .primary-btn {
             background: #6C74FC;
         }
+        .login__form .capslock_warning {
+            margin: 10px 12px 0 12px;
+            font-size: 14px;
+            color: yellow;
+        }
     </style>
 @endpush
 @section('content')
@@ -56,6 +61,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <p id="capslock-warning" class="capslock_warning" hidden>⚠️ Caps Lock Đang được bật</p>
                             </div>
                             <button type="submit" name="submit" id="submit" class="site-btn">Đăng Nhập</button>
                         </form>
@@ -89,3 +95,5 @@
     </section>
     <!-- Login Section End -->
 @endsection
+
+

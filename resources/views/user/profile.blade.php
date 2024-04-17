@@ -154,7 +154,7 @@
                                         <input type="text" name="name" placeholder="Tên hiển thị" value="{{ Session::get('name') }}">
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <input type="text" name="email" placeholder="Địa chỉ email" value="{{ Session::get('email') }}">
+                                        <input type="text" name="email" placeholder="Địa chỉ email" value="{{ Session::get('email') }}" disabled>
                                     </div>
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <textarea name="body" placeholder="Giới thiệu">{!! Session::get('body') !!}</textarea>

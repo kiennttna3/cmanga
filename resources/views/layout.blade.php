@@ -915,6 +915,19 @@
                     // Gán lại nội dung văn bản mới vào phần tử hiện tại.
                     e.innerText = newText
                 })
+
+                // Kiểm tra capsLock
+                var pass = document.getElementById('password')
+                var warn = document.getElementById('capslock-warning')
+                function checkCapsLock(e) {
+                    if(e.getModifierState && e.getModifierState('CapsLock')) {
+                        warn.hidden = false
+                    } else {
+                        warn.hidden= true
+                    }
+                }
+                pass.addEventListener('keyup', checkCapsLock)
+                pass.addEventListener('focus', checkCapsLock)
             })
         </script>
 

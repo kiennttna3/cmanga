@@ -24,7 +24,7 @@ class PublisherDimmer extends AbstractWidget
     public function run()
     {
         $count = Publisher::count();
-        $string = trans_choice('Tài khoản người dùng', $count);
+        $string = trans_choice('User người dùng', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-people',

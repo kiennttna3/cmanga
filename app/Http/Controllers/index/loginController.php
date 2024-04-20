@@ -4,6 +4,7 @@ namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Category;
@@ -54,10 +55,12 @@ class loginController extends Controller
             Session::put('email', $publisher->email);
             Session::put('avatar', $publisher->avatar);
             Session::put('body', $publisher->body);
-            return redirect()->route('home');
+            // return redirect()->route('home');
+            return Response::json(['success' => true]);
         } else {
             // Mật khẩu không đúng
-            return redirect()->back()->withErrors(['email' => 'Email hoặc mật khẩu không chính xác']);
+            return Response::json(['success' => false]);
+            // return redirect()->back()->withErrors(['email' => 'Email hoặc mật khẩu không chính xác']);
         }
     }
 

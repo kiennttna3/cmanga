@@ -237,12 +237,6 @@
             .chapter_lite {
                 font-size: 10px;
             }
-            .notyf {
-                right: 0;
-                width: 60%;
-                left: auto;
-                font-size: 8px;
-            }
         }
         @media only screen and (max-width: 320px) {
             .breadcrumb__links a, .breadcrumb__links span {
@@ -289,12 +283,6 @@
             }
             .product__sidebar__comment__item__text span {
                 margin: 24px 0 0 0 !important;
-            }
-            .notyf {
-                right: 0;
-                width: 60%;
-                left: auto;
-                font-size: 6px;
             }
         }
     </style>

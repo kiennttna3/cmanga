@@ -318,11 +318,41 @@
                 .header__right .header__menu ul li .dropdown li {
                     margin: 6px;
                 }
+                .notyf {
+                    right: 0;
+                    width: 60%;
+                    left: auto;
+                    font-size: 6px;
+                }
             }
             @media only screen and (max-width: 425px) {
                 .header_auth .search_icon {
                     display: block;
                     right: calc(100% - 160%) !important;
+                }
+            }
+            @media only screen and (max-width: 479px) {
+                .notyf {
+                    right: 0;
+                    width: 60%;
+                    left: auto;
+                    font-size: 8px;
+                }
+            }
+            @media only screen and (min-width: 425px) and (max-width: 576px) {
+                .notyf {
+                    right: 0;
+                    width: 50%;
+                    left: auto;
+                    font-size: 8px;
+                }
+            }
+            @media only screen and (min-width: 576px) and (max-width: 768px) {
+                .notyf {
+                    right: 0;
+                    width: 50%;
+                    left: auto;
+                    font-size: 14px;
                 }
             }
             @media only screen and (max-width: 768px) {
@@ -915,20 +945,40 @@
                     // Gán lại nội dung văn bản mới vào phần tử hiện tại.
                     e.innerText = newText
                 })
-
-                // Kiểm tra capsLock
-                var pass = document.getElementById('password')
-                var warn = document.getElementById('capslock-warning')
-                function checkCapsLock(e) {
-                    if(e.getModifierState && e.getModifierState('CapsLock')) {
-                        warn.hidden = false
-                    } else {
-                        warn.hidden= true
-                    }
-                }
-                pass.addEventListener('keyup', checkCapsLock)
-                pass.addEventListener('focus', checkCapsLock)
             })
+
+            //Thông bái khi đăng nhập thành công
+            $(document).ready(function() {
+                var loginSuccess = sessionStorage.getItem('loginSuccess')
+                if (loginSuccess) {
+                    LoginSuccess()
+                    sessionStorage.removeItem('loginSuccess')
+                }
+            })
+            let notyf
+            function LoginSuccess() {
+                // Nếu không có thông báo nào hiển thị, tạo một instance mới
+                if (!notyf) {
+                    notyf = new Notyf({
+                        duration: 5000,
+                        position: {
+                            x: 'right',
+                            y: 'bottom',
+                        },
+                        types: [
+                            {
+                                type: 'error',
+                                background: 'indianred',
+                                dismissible: true
+                            }
+                        ]
+                    })
+                }
+                // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+                setTimeout(() => {
+                    notyf.success('Đăng nhập thành công!')
+                }, 300)
+            }
         </script>
 
         @stack('js')

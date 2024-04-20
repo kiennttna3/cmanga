@@ -117,7 +117,6 @@
             })
         })
 
-        let notyf
         function checkComment() {
             // Nếu không có thông báo nào hiển thị, tạo một instance mới
             if (!notyf) {

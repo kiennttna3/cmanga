@@ -111,18 +111,19 @@
 
 @push('js')
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            const conf_pass = document.getElementById('password-confirm')
-            const warn = document.getElementById('capslock-warning')
-            function checkCapsLock(e) {
-                if(e.getModifierState && e.getModifierState('CapsLock')) {
-                    warn.hidden = false
-                } else {
-                    warn.hidden= true
-                }
+        var pass = document.getElementById('password')
+        const conf_pass = document.getElementById('password-confirm')
+        const warn = document.getElementById('capslock-warning')
+        function checkCapsLock(e) {
+            if(e.getModifierState && e.getModifierState('CapsLock')) {
+                warn.hidden = false
+            } else {
+                warn.hidden= true
             }
-            conf_pass.addEventListener('keyup', checkCapsLock)
-            conf_pass.addEventListener('focus', checkCapsLock)
-        })
+        }
+        pass.addEventListener('keyup', checkCapsLock)
+        pass.addEventListener('focus', checkCapsLock)
+        conf_pass.addEventListener('keyup', checkCapsLock)
+        conf_pass.addEventListener('focus', checkCapsLock)
     </script>
 @endpush

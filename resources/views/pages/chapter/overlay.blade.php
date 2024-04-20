@@ -112,19 +112,18 @@
                     type: 'POST',
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
-                    success: function (response) {
-                        console.log(response)
+                    success: function (data) {
+                        console.log('Success:', data)
                         $('textarea[name="body"]').val('')
                         hide()
                         showNotyfication()
                     },
-                    error: function (error) {
-                        console.log(error)
+                    error: function (data) {
+                        console.log('Error:', data)
                     }
                 })
             })
 
-            let notyf
             function showNotyfication() {
                 // Nếu không có thông báo nào hiển thị, tạo một instance mới
                 if (!notyf) {

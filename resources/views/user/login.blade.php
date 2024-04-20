@@ -96,4 +96,93 @@
     <!-- Login Section End -->
 @endsection
 
+@push('js')
+    <script type="text/javascript">
+        // Kiểm tra capsLock
+        var pass = document.getElementById('password')
+        var warn = document.getElementById('capslock-warning')
+        function checkCapsLock(e) {
+            if(e.getModifierState && e.getModifierState('CapsLock')) {
+                warn.hidden = false
+            } else {
+                warn.hidden= true
+            }
+        }
+        pass.addEventListener('keyup', checkCapsLock)
+        pass.addEventListener('focus', checkCapsLock)
 
+        // Check login
+        $(document).ready(function() {
+            $('#submit').click(function(e) {
+                e.preventDefault()
+                var email = $('#email').val()
+                var password = $('#password').val()
+
+                if (email.trim().length === 0 || password.trim().length === 0) {
+                    return checkInput()
+                }
+
+                var formData = {
+                    email: email,
+                    password: password,
+                    _token: $('input[name="_token"]').val()
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("successLogin") }}',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.success) {
+                            sessionStorage.setItem('loginSuccess', true)
+                            window.location.href = '{{ route("home") }}'
+                        } else {
+                            checkLogin()
+                            console.log('Success:', data)
+                        }
+                    },
+                    error: function (data) {
+                        console.log('Error:', data)
+                    }
+                })
+            })
+        })
+        function Notyfi() {
+            notyf = new Notyf({
+                duration: 5000,
+                position: {
+                    x: 'right',
+                    y: 'bottom',
+                },
+                types: [
+                    {
+                        type: 'error',
+                        background: 'indianred',
+                        dismissible: true
+                    }
+                ]
+            })
+        }
+        function checkInput() {
+            // Nếu không có thông báo nào hiển thị, tạo một instance mới
+            if (!notyf) {
+                Notyfi()
+            }
+            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+            setTimeout(() => {
+                notyf.error('Bạn chưa nhập đủ thông tin!')
+            }, 100)
+        }
+        function checkLogin() {
+            // Nếu không có thông báo nào hiển thị, tạo một instance mới
+            if (!notyf) {
+                Notyfi()
+            }
+            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+            setTimeout(() => {
+                notyf.error('Email hoặc mật khẩu không chính xác!')
+            }, 100)
+        }
+    </script>
+@endpush

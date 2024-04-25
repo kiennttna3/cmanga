@@ -947,12 +947,16 @@
                 })
             })
 
-            //Thông bái khi đăng nhập thành công
+            //Thông báo sau khi thành công
             $(document).ready(function() {
                 var loginSuccess = sessionStorage.getItem('loginSuccess')
+                var registerSuccess = sessionStorage.getItem('registerSuccess')
                 if (loginSuccess) {
                     LoginSuccess()
                     sessionStorage.removeItem('loginSuccess')
+                } else if(registerSuccess) {
+                    RegisterSuccess()
+                    sessionStorage.removeItem('registerSuccess')
                 }
             })
             let notyf
@@ -977,6 +981,30 @@
                 // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
                 setTimeout(() => {
                     notyf.success('Đăng nhập thành công!')
+                }, 300)
+            }
+
+            function RegisterSuccess() {
+                // Nếu không có thông báo nào hiển thị, tạo một instance mới
+                if (!notyf) {
+                    notyf = new Notyf({
+                        duration: 5000,
+                        position: {
+                            x: 'right',
+                            y: 'bottom',
+                        },
+                        types: [
+                            {
+                                type: 'error',
+                                background: 'indianred',
+                                dismissible: true
+                            }
+                        ]
+                    })
+                }
+                // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+                setTimeout(() => {
+                    notyf.success('Đăng ký thành công!')
                 }, 300)
             }
         </script>

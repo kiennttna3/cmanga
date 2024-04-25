@@ -58,7 +58,7 @@
                     <div class="justify-content-between align-items-center mb-1">
                         <div class="btn-group">
                             <small class="text-muted">
-                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
+                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{ route('chapter', [$value->slug, $value->chapter_slug]) }}">
                                     <div class="title_name">
                                         Chap mới: {{ $value->chapter_title }}
                                     </div>
@@ -89,7 +89,7 @@
                     <div class="justify-content-between align-items-center mb-1">
                         <div class="btn-group">
                             <small class="text-muted">
-                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
+                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{ route('chapter', [$value->slug, $value->chapter_slug]) }}">
                                     {{ $value->chapter_title }}
                                 </a>
                             </small>
@@ -118,7 +118,7 @@
                     <div class="justify-content-between align-items-center mb-1">
                         <div class="btn-group">
                             <small class="text-muted">
-                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
+                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{ route('chapter', [$value->slug, $value->chapter_slug]) }}">
                                     {{ $value->chapter_title }}
                                 </a>
                             </small>
@@ -147,7 +147,7 @@
                 <div class="justify-content-between align-items-center mb-1">
                     <div class="btn-group">
                         <small class="text-muted">
-                            <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{url('truyen-tranh/'.$value->slug_book.'/'.$value->chapter_slug)}}">
+                            <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{ route('chapter', [$value->slug, $value->chapter_slug]) }}">
                                 {{ $value->chapter_title }}
                             </a>
                         </small>

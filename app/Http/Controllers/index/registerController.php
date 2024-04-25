@@ -4,6 +4,7 @@ namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Models\Category;
 use App\Models\Publisher;
 use Illuminate\Support\Facades\Hash;
@@ -52,6 +53,8 @@ class registerController extends Controller
                 'email.required' => 'Địa chỉ email không được để trống',
                 'name.required' => 'Tên hiển thị không được để trống',
                 'password.required' => 'Mật khẩu không được để trống',
+                'password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự',
+                'password.confirmed' => 'Mật khẩu xác nhận không khớp',
             ]
         );
         $publisher = new Publisher();
@@ -60,7 +63,8 @@ class registerController extends Controller
         $publisher->password = Hash::make($data['password']);
         $publisher->avatar = 'publisher/defaultlogo.png';
         $publisher->save();
-        return redirect()->route('login');
+        // return redirect()->route('login');
+        return Response::json(['success' => true]);
     }
 
     /**

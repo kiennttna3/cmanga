@@ -42,7 +42,7 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Đăng Ký</h3>
-                        <form method="POST" action="{{ route('createRegister') }}">
+                        <form method="POST" id="myForm" action="{{ route('createRegister') }}">
                             @csrf
                             <div class="input__item">
                                 <input id="email" type="email" name="email" class="form-control _ge_de_ol @error('email') is-invalid @enderror" type="email" placeholder="Địa chỉ email" required="" aria-required="true" value="{{ old('email') }}" required autocomplete="email" tabindex="" autofocus>
@@ -125,5 +125,105 @@
         pass.addEventListener('focus', checkCapsLock)
         conf_pass.addEventListener('keyup', checkCapsLock)
         conf_pass.addEventListener('focus', checkCapsLock)
+
+        //check register
+        $(document).ready(function() {
+            $('#submit').click(function(e) {
+                e.preventDefault()
+                var email = $('#email').val()
+                var name = $('#name').val()
+                var password = $('#password').val()
+                var password_confirmation = $('#password-confirm').val()
+                var _token = $('input[name="_token"]').val()
+
+                if (email.trim().length === 0 || name.trim().length === 0 || password.trim().length === 0 || password_confirmation.trim().length === 0) {
+                    return checkInput()
+                } else if (password.length < 8 || password_confirmation.length < 8) {
+                    return checkpass()
+                } else if (password != password_confirmation) {
+                    return checkcf()
+                }
+
+                var formData = {
+                    email: email,
+                    name: name,
+                    password: password,
+                    password_confirmation: password_confirmation,
+                    _token: _token
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("createRegister") }}',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(data) {
+                        sessionStorage.setItem('registerSuccess', true)
+                        window.location.href = '{{ route("login") }}'
+                        console.log('Success:', data)
+                    },
+                    error: function (data) {
+                        checkRegister()
+                        console.log('Error:', data)
+                    }
+                })
+            })
+        })
+        function Notyfi() {
+            notyf = new Notyf({
+                duration: 5000,
+                position: {
+                    x: 'right',
+                    y: 'bottom',
+                },
+                types: [
+                    {
+                        type: 'error',
+                        background: 'indianred',
+                        dismissible: true
+                    }
+                ]
+            })
+        }
+        function checkInput() {
+            // Nếu không có thông báo nào hiển thị, tạo một instance mới
+            if (!notyf) {
+                Notyfi()
+            }
+            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+            setTimeout(() => {
+                notyf.error('Bạn chưa nhập đủ thông tin!')
+            }, 100)
+        }
+        function checkpass() {
+            // Nếu không có thông báo nào hiển thị, tạo một instance mới
+            if (!notyf) {
+                Notyfi()
+            }
+            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+            setTimeout(() => {
+                notyf.error('Mật khẩu phải lớn hơn 8 ký tự')
+            }, 100)
+        }
+        function checkcf() {
+            // Nếu không có thông báo nào hiển thị, tạo một instance mới
+            if (!notyf) {
+                Notyfi()
+            }
+            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+            setTimeout(() => {
+                notyf.error('Xác nhận mật khẩu không trùng khớp!')
+            }, 100)
+        }
+        function checkRegister() {
+            // Nếu không có thông báo nào hiển thị, tạo một instance mới
+            if (!notyf) {
+                Notyfi()
+            }
+            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
+            setTimeout(() => {
+                notyf.error('Tài khoản email đã tồn tại!')
+            }, 100)
+        }
     </script>
 @endpush

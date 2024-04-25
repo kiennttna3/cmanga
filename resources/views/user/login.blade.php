@@ -117,6 +117,7 @@
                 e.preventDefault()
                 var email = $('#email').val()
                 var password = $('#password').val()
+                var _token = $('input[name="_token"]').val()
 
                 if (email.trim().length === 0 || password.trim().length === 0) {
                     return checkInput()
@@ -125,7 +126,7 @@
                 var formData = {
                     email: email,
                     password: password,
-                    _token: $('input[name="_token"]').val()
+                    _token: _token
                 }
 
                 $.ajax({

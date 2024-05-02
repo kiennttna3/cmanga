@@ -34,11 +34,8 @@
         <link rel="stylesheet" href="{{ asset('css/frontend/slicknav.min.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ asset('css/frontend/style.css') }}" type="text/css">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-
         <!-- Css custom -->
         <style type="text/css">
-            /* width */
             ::-webkit-scrollbar {
                 width: 8px;
             }
@@ -46,22 +43,16 @@
                 width: 8px;
                 height: 5px;
             }
-
-            /* Track */
             ::-webkit-scrollbar-track {
                 background: #33333300;
                 border: thin solid #33333300;
                 border-radius: 10px;
             }
-
-            /* Handle */
             ::-webkit-scrollbar-thumb {
                 background: #2d334f;
                 border: thin solid #33333300;
                 border-radius: 10px;
             }
-
-            /* Handle on hover */
             ::-webkit-scrollbar-thumb:hover {
                 background: #2d334f;
             }
@@ -204,6 +195,7 @@
             .breadcrumb__links a i {
                 color: #fff;
             }
+
             /* css form báo lỗi */
             #overlay {
                 display: none;
@@ -213,9 +205,8 @@
                 width: 100%;
                 height: 100%;
                 background: rgba(0, 0, 0, 0.5);
-                z-index: 2; /* Ensure the overlay is on top */
+                z-index: 2;
             }
-
             #formContainer {
                 position: absolute;
                 top: 45%;
@@ -225,11 +216,10 @@
                 padding: 20px;
                 border-radius: 8px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-                max-width: 80%; /* Adjust the maximum width as needed */
-                width: 500px; /* Set a fixed width for smaller screens */
-                z-index: 2; /* Ensure the form is on top of the overlay */
+                max-width: 80%;
+                width: 500px;
+                z-index: 2;
             }
-
             #closeForm {
                 position: absolute;
                 top: 10px;
@@ -244,6 +234,7 @@
                 color: #fff;
             }
             /* css form báo lỗi */
+
             .page-up a {
                 background-color: #6C74FC;
             }
@@ -287,6 +278,41 @@
             .clear {
                 clear: both;
             }
+
+            /* css thông báo */
+            .notif-container {
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                z-index: 999;
+            }
+            .notif {
+                background-color: #4f46e5;
+                width: 280px;
+                font-size: 15px;
+                color: #fff;
+                padding: 10px;
+                margin: 10px;
+                border-radius: 5px;
+                animation: slideIn 0.5s, pushUp 0.5s forwards 0.5s;
+            }
+            .notif.leave {
+                animation: slideOut 0.5s;
+            }
+            /* css thông báo */
+
+            @keyframes slideIn {
+                0% {transform: translateX(100%);}
+                100% {transform: translateX(-20px);}
+            }
+            @keyframes slideOut {
+                0% {transform: translateX(0);}
+                100% {transform: translateX(120%);}
+            }
+            @keyframes pushUp {
+                0% {transform: translateY(0);}
+                100% {transform: translateY(0);}
+            }
             @keyframes downAnimation {
                 from {
                     opacity: 0;
@@ -318,11 +344,9 @@
                 .header__right .header__menu ul li .dropdown li {
                     margin: 6px;
                 }
-                .notyf {
-                    right: 0;
-                    width: 60%;
-                    left: auto;
-                    font-size: 6px;
+                .notif {
+                    width: 200px;
+                    font-size: 12px;
                 }
             }
             @media only screen and (max-width: 425px) {
@@ -330,28 +354,26 @@
                     display: block;
                     right: calc(100% - 160%) !important;
                 }
+                .notif {
+                    width: 200px;
+                    font-size: 12px;
+                }
             }
             @media only screen and (max-width: 479px) {
-                .notyf {
-                    right: 0;
-                    width: 60%;
-                    left: auto;
-                    font-size: 8px;
+                .notif {
+                    width: 200px;
+                    font-size: 12px;
                 }
             }
             @media only screen and (min-width: 425px) and (max-width: 576px) {
-                .notyf {
-                    right: 0;
-                    width: 50%;
-                    left: auto;
-                    font-size: 8px;
+                .notif {
+                    width: 240px;
+                    font-size: 13px;
                 }
             }
             @media only screen and (min-width: 576px) and (max-width: 768px) {
-                .notyf {
-                    right: 0;
-                    width: 50%;
-                    left: auto;
+                .notif {
+                    width: 250px;
                     font-size: 14px;
                 }
             }
@@ -552,6 +574,8 @@
         @stack('css')
     </head>
     <body class="antialiased">
+        <!-- Notyf -->
+        <div class="notif-container"></div>
         <!-- Page Preloder -->
         <div id="preloder">
             <div class="loader"></div>
@@ -837,8 +861,6 @@
         <script src="{{ asset('js/frontend/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('js/frontend/main.js') }}"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -947,6 +969,31 @@
                 })
             })
 
+            //Thông báo
+            function showNotyf(message) {
+                // Tạo một phần tử div cho thông báo
+                var notyf = document.createElement('div')
+                notyf.classList.add('notif')
+                notyf.textContent = message
+
+                var container = document.querySelector('.notif-container')
+                //Thêm phần tử con
+                container.appendChild(notyf)
+
+                setTimeout(function() {
+                    notyf.classList.add('leave')
+                    setTimeout(function() {
+                        notyf.classList.remove('notif')
+                        // Xóa phần tử con
+                        container.removeChild(notyf)
+                    }, 500)
+                }, 5000)
+            }
+
+            function checkPublisher() {
+                showNotyf('Vui lòng đăng nhập để sử dụng chức năng này!')
+            }
+
             //Thông báo sau khi thành công
             $(document).ready(function() {
                 var loginSuccess = sessionStorage.getItem('loginSuccess')
@@ -961,51 +1008,11 @@
             })
             let notyf
             function LoginSuccess() {
-                // Nếu không có thông báo nào hiển thị, tạo một instance mới
-                if (!notyf) {
-                    notyf = new Notyf({
-                        duration: 5000,
-                        position: {
-                            x: 'right',
-                            y: 'bottom',
-                        },
-                        types: [
-                            {
-                                type: 'error',
-                                background: 'indianred',
-                                dismissible: true
-                            }
-                        ]
-                    })
-                }
-                // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
-                setTimeout(() => {
-                    notyf.success('Đăng nhập thành công!')
-                }, 300)
+                showNotyf('Đăng nhập thành công!')
             }
 
             function RegisterSuccess() {
-                // Nếu không có thông báo nào hiển thị, tạo một instance mới
-                if (!notyf) {
-                    notyf = new Notyf({
-                        duration: 5000,
-                        position: {
-                            x: 'right',
-                            y: 'bottom',
-                        },
-                        types: [
-                            {
-                                type: 'error',
-                                background: 'indianred',
-                                dismissible: true
-                            }
-                        ]
-                    })
-                }
-                // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
-                setTimeout(() => {
-                    notyf.success('Đăng ký thành công!')
-                }, 300)
+                showNotyf('Đăng ký thành công!')
             }
         </script>
 

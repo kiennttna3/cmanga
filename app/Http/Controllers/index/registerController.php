@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\Category;
 use App\Models\Publisher;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class registerController extends Controller
 {
@@ -42,29 +43,33 @@ class registerController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate(
-            [
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|unique:publisher|max:255',
-                'password' => 'required|min:8|confirmed',
-            ],
-            [
-                'email.unique' => 'Địa chỉ email đã có, xin điền tên khác',
-                'email.required' => 'Địa chỉ email không được để trống',
-                'name.required' => 'Tên hiển thị không được để trống',
-                'password.required' => 'Mật khẩu không được để trống',
-                'password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự',
-                'password.confirmed' => 'Mật khẩu xác nhận không khớp',
-            ]
-        );
-        $publisher = new Publisher();
-        $publisher->name = $data['name'];
-        $publisher->email = $data['email'];
-        $publisher->password = Hash::make($data['password']);
-        $publisher->avatar = 'publisher/defaultlogo.png';
-        $publisher->save();
-        // return redirect()->route('login');
-        return Response::json(['success' => true]);
+        try {
+            $data = $request->validate(
+                [
+                    'name' => 'required|string|max:255',
+                    'email' => 'required|string|email|unique:publisher|max:255',
+                    'password' => 'required|min:8|confirmed',
+                ],
+                [
+                    'email.unique' => 'Địa chỉ email đã có, xin điền tên khác',
+                    'email.required' => 'Địa chỉ email không được để trống',
+                    'name.required' => 'Tên hiển thị không được để trống',
+                    'password.required' => 'Mật khẩu không được để trống',
+                    'password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự',
+                    'password.confirmed' => 'Mật khẩu xác nhận không khớp',
+                ]
+            );
+            $publisher = new Publisher();
+            $publisher->name = $data['name'];
+            $publisher->email = $data['email'];
+            $publisher->password = Hash::make($data['password']);
+            $publisher->avatar = 'publisher/defaultlogo.png';
+            $publisher->save();
+            // return redirect()->route('login');
+            return Response::json(['success' => true]);
+        } catch (ValidationException $e) {
+            return Response::json(['success' => false]);
+        }
     }
 
     /**

@@ -137,11 +137,11 @@
                 var _token = $('input[name="_token"]').val()
 
                 if (email.trim().length === 0 || name.trim().length === 0 || password.trim().length === 0 || password_confirmation.trim().length === 0) {
-                    return checkInput()
-                } else if (password.length < 8 || password_confirmation.length < 8) {
-                    return checkpass()
+                    return showNotyf('Bạn chưa nhập đủ thông tin!')
+                } else if (password.length < 8) {
+                    return showNotyf('Mật khẩu phải lớn hơn hoặc bằng 8 ký tự!')
                 } else if (password != password_confirmation) {
-                    return checkcf()
+                    return showNotyf('Xác nhận mật khẩu không trùng khớp!')
                 }
 
                 var formData = {
@@ -158,72 +158,19 @@
                     data: formData,
                     dataType: 'json',
                     success: function(data) {
-                        sessionStorage.setItem('registerSuccess', true)
-                        window.location.href = '{{ route("login") }}'
-                        console.log('Success:', data)
+                        if (data.success) {
+                            sessionStorage.setItem('registerSuccess', true)
+                            window.location.href = '{{ route("login") }}'
+                        } else {
+                            showNotyf('Tài khoản email đã tồn tại!')
+                            console.log('Success:', data)
+                        }
                     },
                     error: function (data) {
-                        checkRegister()
                         console.log('Error:', data)
                     }
                 })
             })
         })
-        function Notyfi() {
-            notyf = new Notyf({
-                duration: 5000,
-                position: {
-                    x: 'right',
-                    y: 'bottom',
-                },
-                types: [
-                    {
-                        type: 'error',
-                        background: 'indianred',
-                        dismissible: true
-                    }
-                ]
-            })
-        }
-        function checkInput() {
-            // Nếu không có thông báo nào hiển thị, tạo một instance mới
-            if (!notyf) {
-                Notyfi()
-            }
-            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
-            setTimeout(() => {
-                notyf.error('Bạn chưa nhập đủ thông tin!')
-            }, 100)
-        }
-        function checkpass() {
-            // Nếu không có thông báo nào hiển thị, tạo một instance mới
-            if (!notyf) {
-                Notyfi()
-            }
-            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
-            setTimeout(() => {
-                notyf.error('Mật khẩu phải lớn hơn 8 ký tự')
-            }, 100)
-        }
-        function checkcf() {
-            // Nếu không có thông báo nào hiển thị, tạo một instance mới
-            if (!notyf) {
-                Notyfi()
-            }
-            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
-            setTimeout(() => {
-                notyf.error('Xác nhận mật khẩu không trùng khớp!')
-            }, 100)
-        }
-        function checkRegister() {
-            // Nếu không có thông báo nào hiển thị, tạo một instance mới
-            if (!notyf) {
-                Notyfi()
-            }
-            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
-            setTimeout(() => {
-                notyf.error('Tài khoản email đã tồn tại!')
-            }, 100)
-        }
     </script>
 @endpush

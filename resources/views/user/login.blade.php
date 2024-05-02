@@ -120,7 +120,7 @@
                 var _token = $('input[name="_token"]').val()
 
                 if (email.trim().length === 0 || password.trim().length === 0) {
-                    return checkInput()
+                    return showNotyf('Bạn chưa nhập đủ thông tin!')
                 }
 
                 var formData = {
@@ -139,7 +139,7 @@
                             sessionStorage.setItem('loginSuccess', true)
                             window.location.href = '{{ route("home") }}'
                         } else {
-                            checkLogin()
+                            showNotyf('Email hoặc mật khẩu không chính xác!')
                             console.log('Success:', data)
                         }
                     },
@@ -149,41 +149,5 @@
                 })
             })
         })
-        function Notyfi() {
-            notyf = new Notyf({
-                duration: 5000,
-                position: {
-                    x: 'right',
-                    y: 'bottom',
-                },
-                types: [
-                    {
-                        type: 'error',
-                        background: 'indianred',
-                        dismissible: true
-                    }
-                ]
-            })
-        }
-        function checkInput() {
-            // Nếu không có thông báo nào hiển thị, tạo một instance mới
-            if (!notyf) {
-                Notyfi()
-            }
-            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
-            setTimeout(() => {
-                notyf.error('Bạn chưa nhập đủ thông tin!')
-            }, 100)
-        }
-        function checkLogin() {
-            // Nếu không có thông báo nào hiển thị, tạo một instance mới
-            if (!notyf) {
-                Notyfi()
-            }
-            // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
-            setTimeout(() => {
-                notyf.error('Email hoặc mật khẩu không chính xác!')
-            }, 100)
-        }
     </script>
 @endpush

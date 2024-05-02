@@ -116,37 +116,13 @@
                         console.log('Success:', data)
                         $('textarea[name="body"]').val('')
                         hide()
-                        showNotyfication()
+                        showNotyf('Báo cáo thành công!')
                     },
                     error: function (data) {
                         console.log('Error:', data)
                     }
                 })
             })
-
-            function showNotyfication() {
-                // Nếu không có thông báo nào hiển thị, tạo một instance mới
-                if (!notyf) {
-                    notyf = new Notyf({
-                        duration: 5000,
-                        position: {
-                            x: 'right',
-                            y: 'bottom',
-                        },
-                        types: [
-                            {
-                                type: 'error',
-                                background: 'indianred',
-                                dismissible: true
-                            }
-                        ]
-                    })
-                }
-                // Hiển thị thông báo với độ trễ nhỏ để đảm bảo xếp chồng
-                setTimeout(() => {
-                    notyf.success('Báo cáo thành công!')
-                }, 100)
-            }
         })
     </script>
 @endpush

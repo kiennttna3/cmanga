@@ -92,15 +92,18 @@
             transition: opacity .2s ease-in-out;
         }
 
+        .profilepic__content:hover {
+            background-color: #000000;
+            opacity: 0.6 !important;
+        }
+
         .profilepic__icon {
             color: white;
-            cursor: pointer;
         }
 
         .fas {
             font-size: 20px;
             margin-bottom: 8px;
-            cursor: pointer;
         }
 
         .profilepic__text {
@@ -108,13 +111,11 @@
             font-size: 10px;
             width: 40%;
             text-align: center;
-            cursor: pointer;
         }
         .transparent-input {
             position: absolute;
             opacity: 0;
             background-color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
             width: 40%;
         }
         .blog__details__form form input,
@@ -151,14 +152,14 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <input type="text" name="name" placeholder="Tên hiển thị" value="{{ Session::get('name') }}">
+                                        <input id="name" type="text" name="name" placeholder="Tên hiển thị" value="{{ Session::get('name') }}">
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <input type="text" name="email" placeholder="Địa chỉ email" value="{{ Session::get('email') }}" disabled>
+                                        <input id="email" type="text" name="email" placeholder="Địa chỉ email" value="{{ Session::get('email') }}" readonly>
                                     </div>
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <textarea name="body" placeholder="Giới thiệu">{!! Session::get('body') !!}</textarea>
-                                        <button type="submit" class="site-btn">Lưu</button>
+                                        <button id="submit" type="submit" class="site-btn">Lưu</button>
                                     </div>
                                 </div>
                             </form>
@@ -174,19 +175,45 @@
 @push('js')
     <script>
         function displayAvatar() {
-            var input = document.getElementById('file');
-            var preview = document.getElementById('avatar');
+            var input = document.getElementById('file')
+            var preview = document.getElementById('avatar')
 
             if (input.files && input.files[0]) {
-                var reader = new FileReader();
+                var reader = new FileReader()
 
                 reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                };
+                    preview.src = e.target.result
+                    preview.style.display = 'block'
+                }
 
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(input.files[0])
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ngăn chặn sự kiện nhập liệu và điều khiển từ phím
+            document.getElementById('email').addEventListener('keydown', function(e) {
+                e.preventDefault()
+            });
+
+            // Ngăn chặn sự kiện focus
+            document.getElementById('email').addEventListener('focus', function(e) {
+                this.blur()
+            });
+
+            //Kiểm tra
+            document.getElementById("submit").addEventListener("click", function(e) {
+                var name = document.getElementById("name").value
+                var email = document.getElementById("email").value
+
+                if (email.trim().length === 0) {
+                    e.preventDefault()
+                    return showNotyf('Email không được bỏ trống!')
+                } else if (name.trim().length === 0) {
+                    e.preventDefault()
+                    return showNotyf('Tên hiển thị không được bỏ trống!')
+                }
+            })
+        })
     </script>
 @endpush

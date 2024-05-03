@@ -303,11 +303,13 @@
 
             @keyframes slideIn {
                 0% {transform: translateX(100%);}
-                100% {transform: translateX(-20px);}
+                70% {transform: translateX(0);}
+                90% {transform: translateX(-20px);}
+                100% {transform: translateX(0);}
             }
             @keyframes slideOut {
                 0% {transform: translateX(0);}
-                100% {transform: translateX(120%);}
+                100% {transform: translateX(150%);}
             }
             @keyframes pushUp {
                 0% {transform: translateY(0);}
@@ -331,6 +333,44 @@
                 to {
                     opacity: 0;
                     transform: translateY(-10px);
+                }
+            }
+            @keyframes loader {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                    border: 4px solid #6C74FC;
+                    border-left-color: transparent;
+                }
+                50% {
+                    -webkit-transform: rotate(180deg);
+                    transform: rotate(180deg);
+                    border: 4px solid #6C74FC;
+                    border-left-color: transparent;
+                }
+                100% {
+                    -webkit-transform: rotate(360deg);
+                    transform: rotate(360deg);
+                    border: 4px solid #6C74FC;
+                    border-left-color: transparent;
+                }
+            }
+
+            @-webkit-keyframes loader {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                    border: 4px solid #6C74FC;
+                    border-left-color: transparent;
+                }
+                50% {
+                    -webkit-transform: rotate(180deg);
+                    border: 4px solid #6C74FC;
+                    border-left-color: transparent;
+                }
+                100% {
+                    -webkit-transform: rotate(360deg);
+                    border: 4px solid #6C74FC;
+                    border-left-color: transparent;
                 }
             }
             @media only screen and (max-width: 320px) {
@@ -986,7 +1026,7 @@
                         notyf.classList.remove('notif')
                         // Xóa phần tử con
                         container.removeChild(notyf)
-                    }, 500)
+                    }, 300)
                 }, 5000)
             }
 

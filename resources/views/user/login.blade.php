@@ -137,7 +137,7 @@
                     success: function(data) {
                         if (data.success) {
                             sessionStorage.setItem('loginSuccess', true)
-                            window.location.href = '{{ route("home") }}'
+                            window.location.href = data.redirectTo
                         } else {
                             showNotyf('Email hoặc mật khẩu không chính xác!')
                             console.log('Success:', data)

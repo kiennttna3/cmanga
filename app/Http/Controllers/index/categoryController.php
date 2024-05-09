@@ -17,7 +17,7 @@ class categoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($slug)
+    public function index(Request $request, $slug)
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
@@ -205,6 +205,8 @@ class categoryController extends Controller
         $pageMeta = [
             'title' => 'Kho truyện khổng lồ - Cập nhật trong tích tắc - cmanga'
         ];
+
+        Session::put('previous_url', $request->url());
 
         return view('pages.category')->with(compact('category', 'slide', 'category_book', 'bookstory', 'check', 'follow', 'viewComment', 'viewDay', 'viewWeek', 'viewMonth', 'viewYear', 'pageMeta'));
     }

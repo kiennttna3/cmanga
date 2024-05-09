@@ -996,6 +996,7 @@
                     header__nav.style.display = 'none'
                     icon_search.style.display = 'block'
                 })
+
                 // rút gọn
                 var title_name = document.querySelectorAll(".title_name")
                 // Lặp qua tất cả các phần tử

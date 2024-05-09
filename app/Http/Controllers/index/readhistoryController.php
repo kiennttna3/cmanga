@@ -19,7 +19,7 @@ class readhistoryController extends Controller
 
         $publisher = Session::get('id');
 
-        $bookstory = Bookstory::select('pivot_table_readhistory.*', 'bookstory.title', 'bookstory.image', 'bookstory.view', 'bookstory.slug as slug_book', 'bookstory.follow', 'bookstory.featured', 'chapter.title_name', 'chapter.slug')
+        $bookstory = Bookstory::select('bookstory.*', 'bookstory.title', 'bookstory.image', 'bookstory.view', 'bookstory.slug as slug_book', 'bookstory.follow', 'bookstory.featured', 'chapter.title_name', 'chapter.slug')
         ->join('pivot_table_readhistory', 'bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
         ->join('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
         ->selectSub(function($query) {
@@ -40,7 +40,7 @@ class readhistoryController extends Controller
                 ->where('status', 'ACTIVE')
                 ->latest()->limit(1);
         }, 'chapter_created_at')
-        ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
+        ->orderByRaw('CASE WHEN pivot_table_readhistory.updated_at > pivot_table_readhistory.created_at THEN pivot_table_readhistory.updated_at ELSE pivot_table_readhistory.created_at END DESC')
         ->where('pivot_table_readhistory.publisher_id', $publisher)
         ->where('bookstory.status', 'ACTIVE')
         ->paginate(21);

@@ -18,7 +18,7 @@ class bookstoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($slug)
+    public function index(Request $request, $slug)
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
@@ -31,6 +31,13 @@ class bookstoryController extends Controller
         $chapter_first = Chapter::orderBy('id')->where('bookstory_id', $bookstory->id)->where('status', 'ACTIVE')->first();
 
         $chapter_last = Chapter::orderBy('id', 'DESC')->where('bookstory_id', $bookstory->id)->where('status', 'ACTIVE')->first();
+
+        $chapter_continue = Pivot_table_readhistory::select('pivot_table_readhistory.*', 'chapter.slug')
+        ->join('publisher', 'publisher.id', '=', 'pivot_table_readhistory.publisher_id')
+        ->join('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
+        ->where('pivot_table_readhistory.bookstory_id', $bookstory->id)
+        ->orderByDesc('updated_at')
+        ->first();
 
         $pivote_Bookstory_Category = Pivote_Bookstory_Category::where('bookstory_id', $bookstory->id)->get();
 
@@ -74,7 +81,7 @@ class bookstoryController extends Controller
         ->where('bookstory.status', 'ACTIVE')
         ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
         ->distinct()
-        ->take(8)
+        ->take(5)
         ->get();
 
         $publisher = Session::get('id');
@@ -90,13 +97,15 @@ class bookstoryController extends Controller
         ->leftjoin('chapter', 'chapter.id', '=', 'pivot_table_comment.chapter_id') //kết hợp thông tin từ bảng. Kết quả sẽ chứa tất cả các cột từ cả hai bảng, và nếu không có dữ liệu khớp, các cột từ bảng sẽ có giá trị NULL.
         ->where('pivot_table_comment.bookstory_id', $bookstory->id)
         ->orderByDesc('created_at')
-        ->paginate(10);
+        ->paginate(5);
 
         $pageMeta = [
             'title' => $bookstory->title.' | Cmanga'
         ];
 
-        return view('pages.bookstory')->with(compact('category', 'bookstory', 'chapter', 'chapter_first' , 'chapter_last', 'categoryTogether', 'checkFollow', 'checkRead', 'count', 'viewComment', 'pageMeta'));
+        Session::put('previous_url', $request->url());
+
+        return view('pages.bookstory')->with(compact('category', 'bookstory', 'chapter', 'chapter_first' , 'chapter_last', 'chapter_continue', 'categoryTogether', 'checkFollow', 'checkRead', 'count', 'viewComment', 'pageMeta'));
     }
 
     /**

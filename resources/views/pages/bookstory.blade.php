@@ -372,7 +372,7 @@
                                 @endif
                                 @if (Session::get('login_publisher'))
                                     @if ($checkRead)
-                                        <a href="#" class="follow-btn">
+                                        <a href="{{ route('chapter', [$bookstory->slug, $chapter_continue->slug]) }}" class="follow-btn">
                                             <i class="fa-solid fa-book-open"></i>
                                             Đọc tiếp
                                         </a>
@@ -457,6 +457,11 @@
                         $(this).toggleClass('active')
                         var checkButton = check ? 'Theo dõi' : 'Hủy theo dõi'
                         $(this).html('<i class="fa fa-heart-o"></i> ' + checkButton)
+                        if(!check) {
+                            showNotyf('Theo dõi thành công!')
+                        } else {
+                            showNotyf('Hủy theo dõi thành công!')
+                        }
                     }.bind(this),
                     error: function (data) {
                         console.log('Error:', data)

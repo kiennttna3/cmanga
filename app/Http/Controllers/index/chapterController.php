@@ -17,7 +17,7 @@ class chapterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($slug_bookstory, $slug)
+    public function index(Request $request, $slug_bookstory, $slug)
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
@@ -37,7 +37,7 @@ class chapterController extends Controller
         ->join('publisher', 'publisher.id', '=', 'pivot_table_comment.publisher_id',)
         ->where('pivot_table_comment.chapter_id', $chapter->id)
         ->orderByDesc('created_at')
-        ->paginate(10);
+        ->paginate(5);
 
         $chapter->view = (int)$chapter->view + 1;
         $chapter->save();
@@ -78,6 +78,8 @@ class chapterController extends Controller
         $pageMeta = [
             'title' => $bookstory->title.' - '.$chapter->title_name.' | Cmanga'
         ];
+
+        Session::put('previous_url', $request->url());
 
         return view('pages.chapter')->with(compact('category', 'bookstory', 'chapter', 'all_chapter', 'next_chapter', 'previous_chapter', 'countComment', 'viewComment', 'pageMeta'));
     }

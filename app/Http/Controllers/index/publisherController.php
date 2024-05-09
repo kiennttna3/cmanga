@@ -36,7 +36,7 @@ class publisherController extends Controller
         Session::forget('avatar');
         Session::forget('body');
 
-        return redirect()->route('home');
+        return redirect()->route('login');
     }
 
     /**

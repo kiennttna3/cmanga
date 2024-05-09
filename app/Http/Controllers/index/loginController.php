@@ -55,8 +55,11 @@ class loginController extends Controller
             Session::put('email', $publisher->email);
             Session::put('avatar', $publisher->avatar);
             Session::put('body', $publisher->body);
+
+            // Lưu URL trước đó vào session
+            $previousUrl = Session::get('previous_url');
             // return redirect()->route('home');
-            return Response::json(['success' => true]);
+            return Response::json(['success' => true, 'redirectTo' => $previousUrl ?: route('home')]);
         } else {
             // Mật khẩu không đúng
             return Response::json(['success' => false]);

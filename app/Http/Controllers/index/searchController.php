@@ -198,8 +198,6 @@ class searchController extends Controller
             'title' => 'Kho truyện khổng lồ - Cập nhật trong tích tắc - cmanga'
         ];
 
-        Session::put('previous_url', $request->url());
-
         return view('pages.search')->with(compact('category', 'slide', 'keyword', 'bookstory', 'check', 'follow', 'viewComment', 'viewDay', 'viewWeek', 'viewMonth', 'viewYear', 'pageMeta'));
     }
 

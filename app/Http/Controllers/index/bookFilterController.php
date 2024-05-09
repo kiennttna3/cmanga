@@ -381,8 +381,6 @@ class bookFilterController extends Controller
             'title' => 'Kho truyện khổng lồ - Cập nhật trong tích tắc - cmanga'
         ];
 
-        Session::put('previous_url', $request->url());
-
         return view('pages.home')->with(compact('category', 'slide', 'bookstory', 'check', 'follow', 'viewComment', 'viewDay', 'viewWeek', 'viewMonth', 'viewYear', 'pageMeta'));
     }
 

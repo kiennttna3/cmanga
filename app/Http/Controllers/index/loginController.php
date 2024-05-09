@@ -59,7 +59,7 @@ class loginController extends Controller
             // Lưu URL trước đó vào session
             $previousUrl = Session::get('previous_url');
             // return redirect()->route('home');
-            return Response::json(['success' => true, 'redirectTo' => $previousUrl ?: route('home')]);
+            return Response::json(['success' => true, 'redirectTo' => $previousUrl]);
         } else {
             // Mật khẩu không đúng
             return Response::json(['success' => false]);

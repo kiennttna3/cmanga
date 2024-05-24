@@ -53,8 +53,7 @@ class bookstoryController extends Controller
         ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
             $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
                  ->where(function($query) use ($publisher) {
-                     $query->whereNull('pivot_table_readhistory.chapter_id')
-                           ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                     $query->Where('pivot_table_readhistory.publisher_id', $publisher);
                  });
         })
         ->leftjoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')

@@ -25,37 +25,6 @@ class bookFilterController extends Controller
 
         $publisher = Session::get('id');
 
-        $bookstory = Bookstory::select('bookstory.*', 'bookstory.slug as slug_book', 'chapter.title_name', 'chapter.slug')
-        ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
-            $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
-                 ->where(function($query) use ($publisher) {
-                     $query->whereNull('pivot_table_readhistory.chapter_id')
-                           ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
-                 });
-        })
-        ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
-        ->selectSub(function($query) {
-            $query->select('title_name')->from('chapter')
-                ->whereColumn('bookstory_id', 'bookstory.id')
-                ->where('status', 'ACTIVE')
-                ->latest()->limit(1);
-        }, 'chapter_title')
-        ->selectSub(function($query) {
-            $query->select('slug')->from('chapter')
-                ->whereColumn('bookstory_id', 'bookstory.id')
-                ->where('status', 'ACTIVE')
-                ->latest()->limit(1);
-        }, 'chapter_slug')
-        ->selectSub(function($query) {
-            $query->select('created_at')->from('chapter')
-                ->whereColumn('bookstory_id', 'bookstory.id')
-                ->where('status', 'ACTIVE')
-                ->latest()->limit(1);
-        }, 'chapter_created_at')
-        ->orderByRaw('CASE WHEN chapter_created_at > bookstory.created_at THEN chapter_created_at ELSE bookstory.created_at END DESC')
-        ->where('bookstory.status', 'ACTIVE')
-        ->paginate(24);
-
         $check = Bookstory::select('pivot_table_readhistory.*')
         ->join('pivot_table_readhistory', 'bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
         ->where('pivot_table_readhistory.publisher_id', $publisher)
@@ -67,8 +36,7 @@ class bookFilterController extends Controller
         ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
             $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
                  ->where(function($query) use ($publisher) {
-                     $query->whereNull('pivot_table_readhistory.chapter_id')
-                           ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                     $query->Where('pivot_table_readhistory.publisher_id', $publisher);
                  });
         })
         ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
@@ -213,8 +181,7 @@ class bookFilterController extends Controller
                     ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
                         $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
                              ->where(function($query) use ($publisher) {
-                                 $query->whereNull('pivot_table_readhistory.chapter_id')
-                                       ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                                 $query->Where('pivot_table_readhistory.publisher_id', $publisher);
                              });
                     })
                     ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
@@ -245,8 +212,7 @@ class bookFilterController extends Controller
                     ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
                         $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
                              ->where(function($query) use ($publisher) {
-                                 $query->whereNull('pivot_table_readhistory.chapter_id')
-                                       ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                                 $query->Where('pivot_table_readhistory.publisher_id', $publisher);
                              });
                     })
                     ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
@@ -280,8 +246,7 @@ class bookFilterController extends Controller
                     ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
                         $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
                              ->where(function($query) use ($publisher) {
-                                 $query->whereNull('pivot_table_readhistory.chapter_id')
-                                       ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                                 $query->Where('pivot_table_readhistory.publisher_id', $publisher);
                              });
                     })
                     ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
@@ -313,8 +278,7 @@ class bookFilterController extends Controller
                     ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
                         $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
                              ->where(function($query) use ($publisher) {
-                                 $query->whereNull('pivot_table_readhistory.chapter_id')
-                                       ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                                 $query->Where('pivot_table_readhistory.publisher_id', $publisher);
                              });
                     })
                     ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
@@ -346,8 +310,7 @@ class bookFilterController extends Controller
                     ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
                         $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
                              ->where(function($query) use ($publisher) {
-                                 $query->whereNull('pivot_table_readhistory.chapter_id')
-                                       ->orWhere('pivot_table_readhistory.publisher_id', $publisher);
+                                 $query->Where('pivot_table_readhistory.publisher_id', $publisher);
                              });
                     })
                     ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')

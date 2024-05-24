@@ -13,7 +13,7 @@ class readhistoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
@@ -54,6 +54,8 @@ class readhistoryController extends Controller
         $pageMeta = [
             'title' => 'Lịch sử đọc truyện | Cmanga'
         ];
+
+        Session::put('previous_url', $request->url());
 
         return view('pages.readHistory')->with(compact('category', 'bookstory', 'count', 'pageMeta'));
     }

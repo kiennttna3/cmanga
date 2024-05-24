@@ -15,7 +15,7 @@ class followController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $category = Category::orderBy('title')->where('status', 'ACTIVE')->get();
 
@@ -68,6 +68,8 @@ class followController extends Controller
         $pageMeta = [
             'title' => 'Danh sách theo dõi | Cmanga'
         ];
+
+        Session::put('previous_url', $request->url());
 
         return view('pages.follow')->with(compact('category', 'bookstory', 'check', 'count', 'pageMeta'));
     }

@@ -38,9 +38,7 @@ class categoryController extends Controller
         $bookstory = Bookstory::select('bookstory.*', 'bookstory.slug as slug_book', 'chapter.title_name', 'chapter.slug')
         ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
             $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
-                 ->where(function($query) use ($publisher) {
-                     $query->Where('pivot_table_readhistory.publisher_id', $publisher);
-                 });
+                 ->where('pivot_table_readhistory.publisher_id', $publisher);
         })
         ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
         ->selectSub(function($query) {
@@ -76,9 +74,7 @@ class categoryController extends Controller
         ->join('pivot_table_follow', 'bookstory.id', '=', 'pivot_table_follow.bookstory_id')
         ->leftJoin('pivot_table_readhistory', function($join) use ($publisher) {
             $join->on('bookstory.id', '=', 'pivot_table_readhistory.bookstory_id')
-                 ->where(function($query) use ($publisher) {
-                     $query->Where('pivot_table_readhistory.publisher_id', $publisher);
-                 });
+                 ->where('pivot_table_readhistory.publisher_id', $publisher);
         })
         ->leftJoin('chapter', 'chapter.id', '=', 'pivot_table_readhistory.chapter_id')
         ->selectSub(function($query) {

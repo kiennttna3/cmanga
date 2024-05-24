@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th3 22, 2024 lúc 02:55 PM
--- Phiên bản máy phục vụ: 8.0.30
--- Phiên bản PHP: 8.3.0
+-- Thời gian đã tạo: Th5 12, 2024 lúc 09:24 AM
+-- Phiên bản máy phục vụ: 10.5.24-MariaDB-cll-lve-log
+-- Phiên bản PHP: 8.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `cmanga`
+-- Cơ sở dữ liệu: `lhfaijcshosting_cmanga`
 --
 
 -- --------------------------------------------------------
@@ -28,23 +28,23 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `bookstory` (
-  `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seo_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('ACTIVE','INACTIVE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
-  `featured` tinyint DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `seo_title` varchar(255) DEFAULT NULL,
+  `excerpt` text DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) NOT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'INACTIVE',
+  `featured` tinyint(4) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `category_id` int DEFAULT NULL,
-  `statusproblem` enum('Đang Cập Nhật','Đã Hoàn Thành') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Đang Cập Nhật',
-  `follow` int NOT NULL DEFAULT '0',
-  `view` int NOT NULL DEFAULT '0'
+  `category_id` int(11) DEFAULT NULL,
+  `statusproblem` enum('Đang Cập Nhật','Đã Hoàn Thành') DEFAULT 'Đang Cập Nhật',
+  `follow` int(11) NOT NULL DEFAULT 0,
+  `view` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `bookstory` (
 --
 
 INSERT INTO `bookstory` (`id`, `title`, `seo_title`, `excerpt`, `body`, `image`, `slug`, `meta_description`, `meta_keywords`, `status`, `featured`, `created_at`, `updated_at`, `category_id`, `statusproblem`, `follow`, `view`) VALUES
-(11, 'Thảm Họa Tử Linh Sư', NULL, NULL, '<p>Truyện tranh Thảm Họa Tử Linh Sư được cập nhật nhanh v&agrave; đầy đủ nhất tại NetTruyen. Bạn đọc đừng qu&ecirc;n để lại b&igrave;nh luận v&agrave; chia sẻ, ủng hộ NetTruyen ra c&aacute;c chương mới nhất của truyện Thảm Họa Tử Linh Sư.</p>', 'bookstory/tham_hoa_tu_linh_su.png', 'tham-hoa-tu-linh-su', NULL, NULL, 'ACTIVE', 1, '2024-01-15 04:22:04', '2024-03-22 08:53:27', NULL, 'Đang Cập Nhật', 0, 3),
+(11, 'Thảm Họa Tử Linh Sư', NULL, NULL, '<p>Truyện tranh Thảm Họa Tử Linh Sư được cập nhật nhanh v&agrave; đầy đủ nhất tại NetTruyen. Bạn đọc đừng qu&ecirc;n để lại b&igrave;nh luận v&agrave; chia sẻ, ủng hộ NetTruyen ra c&aacute;c chương mới nhất của truyện Thảm Họa Tử Linh Sư.</p>', 'bookstory/tham_hoa_tu_linh_su.png', 'tham-hoa-tu-linh-su', NULL, NULL, 'ACTIVE', 1, '2024-01-15 04:22:04', '2024-05-09 16:57:26', NULL, 'Đang Cập Nhật', 0, 99),
 (29, 'Hoàng Tử Chuyển Sinh Trở Thành Người Mạnh Nhất Thế Giới Nhờ Vào Sự Hiểu Biết Về Bug', NULL, NULL, '<p>Destiny Slayer, một tựa game kh&aacute; nổi ở Nhật Bản đ&atilde; được ch&agrave;ng game thủ Tamotsu ph&aacute; đảo. Một h&ocirc;m l&uacute;c đang ngủ, do th&oacute;i ngủ xấu của anh ch&agrave;ng, cậu đ&atilde; ng&atilde; dập đầu v&agrave; chuyển sinh v&agrave;o vai phản diện yếu nhất trong game. Với deathflag si&ecirc;u to khổng lồ, h&agrave;nh tr&igrave;nh của ch&agrave;ng trai trong thế giới mới bắt đầu.</p>', 'bookstory/hoang_tu_chuyen_sinh_tro_thanh_nguoi_manh_nhat_the_gioi_nho_vao_su_hieu_biet_ve_bug.png', 'hoang-tu-chuyen-sinh-tro-thanh-nguoi-manh-nhat-the-gioi-nho-vao-su-hieu-biet-ve-bug', NULL, NULL, 'ACTIVE', 1, '2024-01-17 03:52:42', '2024-03-22 08:48:40', NULL, 'Đang Cập Nhật', 1, 0),
 (30, 'Ngày Nào Đó Trở Thành Công Chúa Tế Phẩm', NULL, NULL, '<p>c&ocirc;ng ch&uacute;a bebejana vừa ra đời th&igrave; bị vứt bỏ đi, đ&aacute;nh mất th&acirc;n phận c&ocirc;ng ch&uacute;a trở th&agrave;nh trẻ mồ c&ocirc;i lang thang, đột nhi&ecirc;n c&oacute; một ng&agrave;y phụ ho&agrave;ng t&igrave;m kiếm c&ocirc; ấy trở về, kh&ocirc;i phục th&acirc;n phận c&ocirc;ng ch&uacute;a của c&ocirc; ấy, nhưng điều c&ocirc; ấy mong đợi kh&ocirc;ng phải l&agrave; sự đo&agrave;n tụ của người th&acirc;n v&agrave; ăn ngon mặc đẹp, m&agrave; l&agrave; trở th&agrave;nh vật tế phẩm của c&aacute;c vị thần. xuy&ecirc;n kh&ocirc;ng v&agrave;o bebejana để muốn thay đổi số phận, nhưng lại ph&aacute;t hiện c&aacute;ch tốt nhất ch&iacute;nh l&agrave; trở th&agrave;nh tế phẩm, bởi v&igrave; trở th&agrave;nh tế phẩm mới c&oacute; thể khiến cho c&ocirc; ấy sống tiếp, &acirc;m mưu v&agrave; nh&acirc;n quả tiềm ẩn trong đ&oacute;, dần dần hiện ra trước mắt c&ocirc;&hellip;</p>', 'bookstory/ngay_nao_do_tro_thanh_cong_chua_te_pham.png', 'ngay-nao-do-tro-thanh-cong-chua-te-pham', NULL, NULL, 'ACTIVE', 0, '2024-01-17 04:04:48', '2024-03-22 08:49:49', NULL, 'Đang Cập Nhật', 0, 0),
 (31, 'Độc Thoại Của Người Dược Sĩ', NULL, NULL, '<p>Ở trong triều đ&igrave;nh, một c&ocirc; g&aacute;i trẻ bị trở th&agrave;nh n&ocirc; t&igrave;, Maomao. C&acirc;u chuyện mở đầu khi Maomao (b&aacute;c sĩ từ phố đ&egrave;n đỏ) nghe về chuyện con của ho&agrave;ng đế bị chết non. Bản t&iacute;nh hiếu k&igrave; v&agrave; kh&aacute;t vọng tri thức đ&atilde; l&agrave;m c&ocirc; phải ra tay. Vậy th&igrave; c&ocirc; đ&atilde; t&igrave;m ra được g&igrave;? Chuyện g&igrave; đang xảy ra trong triều đ&igrave;nh?</p>', 'bookstory/doc_thoai_cua_nguoi_duoc_si.png', 'doc-thoai-cua-nguoi-duoc-s', NULL, NULL, 'ACTIVE', 1, '2024-01-17 04:07:28', '2024-03-22 08:47:52', NULL, 'Đang Cập Nhật', 1, 0),
@@ -62,7 +62,7 @@ INSERT INTO `bookstory` (`id`, `title`, `seo_title`, `excerpt`, `body`, `image`,
 (35, 'Hậu Duệ Phái Mao Sơn', NULL, NULL, '<p>V&igrave; ngẫu nhi&ecirc;n đạt được cuốn m&agrave; Trương Quốc Trung mở được c&aacute;nh cửa bước v&agrave;o ph&eacute;p thuật của ph&aacute;i Mao Sơn. Từ trừ quỷ trấn t&agrave; cho đến t&igrave;m kiếm v&agrave; kh&aacute;m ph&aacute; những điều k&igrave; b&iacute;, bước l&ecirc;n nhiều khu vực, lợi dụng thuật ph&aacute;p của Mao Sơn ph&aacute; giải b&iacute; ẩn đ&atilde; ngủ s&acirc;u ng&agrave;n năm.</p>', 'bookstory/hau_due_phai_mao_son.png', 'hau-due-phai-mao-son', NULL, NULL, 'ACTIVE', 0, '2024-01-19 10:01:30', '2024-03-22 08:48:06', NULL, 'Đang Cập Nhật', 1, 0),
 (36, 'Quân Cờ Thứ 31 Lật Ngược Ván Cờ', NULL, NULL, '<p>Truyện tranh Qu&acirc;n Cờ Thứ 31 Lật Ngược V&aacute;n Cờ được cập nhật nhanh v&agrave; đầy đủ nhất tại NetTruyen. Bạn đọc đừng qu&ecirc;n để lại b&igrave;nh luận v&agrave; chia sẻ, ủng hộ NetTruyen ra c&aacute;c chương mới nhất của truyện Qu&acirc;n Cờ Thứ 31 Lật Ngược V&aacute;n Cờ.</p>', 'bookstory/quan_co_thu_31_lat_nguoc_van_co.png', 'quan-co-thu-31-lat-nguoc-van-co', NULL, NULL, 'ACTIVE', 1, '2024-01-19 10:02:29', '2024-03-22 08:50:38', NULL, 'Đang Cập Nhật', 2, 0),
 (37, 'Trở Thành Vợ Thái Tử Quái Vật', NULL, NULL, '<p>C&ocirc; tr&ugrave;ng sinh v&agrave;o th&acirc;n thể của &ldquo;Ancia&rdquo;, th&ecirc; tử của một th&aacute;i tử qu&aacute;i dị, &ldquo;Blake&rdquo; trong một bộ tiểu thuyết l&atilde;ng mạn 19+ Trong truyện gốc, Ancia đ&atilde; tử tự v&agrave;o ng&agrave;y đầu t&acirc;n h&ocirc;n, để lại cho Blake một &aacute;m ảnh lớn. Nhưng lần n&agrave;y, Ancia kh&ocirc;ng hề c&oacute; &yacute; định l&agrave;m vậy nữa. Blake l&agrave; nam thứ trong truyện gốc, người được khắc họa như một con qu&aacute;i vật tr&uacute; ngụ dưới chiếc vỏ bọc ho&agrave;n hảo. Vậy nhưng, giờ đ&acirc;y ng&agrave;y ấy lại cư xử như một con thỏ ngay thơ vậy. Người duy nhất c&oacute; thể h&oacute;a giải được lời nguyền của th&aacute;i tử l&agrave; nữ ch&iacute;nh Diana. C&ocirc; chỉ c&oacute; một nhiệm vụ duy nhất đ&oacute; ch&iacute;nh l&agrave; bảo vệ th&aacute;i tử b&eacute; nhỏ đ&aacute;ng y&ecirc;u n&agrave;y khỏi mọi hiểm nguy v&agrave; l&ugrave;i bước khi thời khắc định mệnh tới. Nhưng&hellip; &ldquo;Ancia, đừng bỏ ta!&rdquo; Con thỏ con n&agrave;y cứ m&atilde;i lẽo đẽo theo c&ocirc; th&ocirc;i.</p>', 'bookstory/tro_thanh_vo_thai_tu_quai_vat.png', 'tro-thanh-vo-thai-tu-quai-vat', NULL, NULL, 'ACTIVE', 0, '2024-01-19 10:03:39', '2024-03-22 08:56:31', NULL, 'Đang Cập Nhật', 0, 0),
-(38, 'Võ Luyện Đỉnh Phong', NULL, NULL, NULL, 'bookstory/vo_luyen_dinh_phong.png', 'vo-luyen-dinh-phong', NULL, NULL, 'ACTIVE', 1, '2024-01-19 10:04:33', '2024-03-22 08:57:47', NULL, 'Đang Cập Nhật', 5, 116),
+(38, 'Võ Luyện Đỉnh Phong', NULL, NULL, NULL, 'bookstory/vo_luyen_dinh_phong.png', 'vo-luyen-dinh-phong', NULL, NULL, 'ACTIVE', 1, '2024-01-19 10:04:33', '2024-05-09 16:57:28', NULL, 'Đang Cập Nhật', 5, 1027),
 (39, 'Anh Hùng  Ta Không Làm Lâu Rồi', NULL, NULL, '<p>Zero l&agrave; l&agrave; vị Si&ecirc;u Anh h&ugrave;ng đầu ti&ecirc;n của to&agrave;n nh&acirc;n loại. Sau hắn, lần lượt xuất hiện nhiều si&ecirc;u anh h&ugrave;ng kh&aacute;c, nhưng hắn chỉ l&agrave;m si&ecirc;u anh h&ugrave;ng 5 năm rồi đột nhi&ecirc;n biến mất, kh&ocirc;ng ai biết hắn đi đ&acirc;u</p>', 'bookstory/anh_hung_ta_khong_lam_lau_roi.png', 'anh-hung-ta-khong-lam-lau-roi', NULL, NULL, 'ACTIVE', 0, '2024-01-24 04:54:47', '2024-03-22 08:44:07', NULL, 'Đang Cập Nhật', 3, 0),
 (40, 'Chiến Lược Tình Yêu Trong Sáng', NULL, NULL, '<p>Truyện tranh Chiến Lược: T&igrave;nh Y&ecirc;u Trong S&aacute;ng được cập nhật nhanh v&agrave; đầy đủ nhất tại NetTruyen. Bạn đọc đừng qu&ecirc;n để lại b&igrave;nh luận v&agrave; chia sẻ, ủng hộ NetTruyen ra c&aacute;c chương mới nhất của truyện Chiến Lược: T&igrave;nh Y&ecirc;u Trong S&aacute;ng.</p>', 'bookstory/chien_luoc_tinh_yeu_trong_sang.png', 'chien-luoc-tinh-yeu-trong-sang', NULL, NULL, 'ACTIVE', 0, '2024-01-25 08:50:58', '2024-03-22 08:45:20', NULL, 'Đang Cập Nhật', 1, 0),
 (41, 'Cô Dâu Pháp Sư', NULL, NULL, '<p>Tồn tại c&ugrave;ng với ch&uacute;ng ta l&agrave; thế giới của ma thuật, nơi m&agrave; ph&ugrave; thuỷ, thuật sĩ, người s&oacute;i, ma quỷ... sinh sống. Nhưng c&oacute; những con người c&oacute; khả năng nh&igrave;n thấy những sinh vật huyền b&iacute; đ&oacute;. Chitose l&agrave; một c&ocirc; b&eacute; như vậy. 15 tuổi, Chitose kh&ocirc;ng c&ograve;n nơi để nương tựa. V&agrave; rồi ở bước đường c&ugrave;ng, khi m&agrave; c&ocirc; b&eacute; phải b&aacute;n m&igrave;nh l&agrave;m n&ocirc; lệ, một ph&ugrave; thuỷ với bộ dạng ch&iacute;n phần quỷ, một phần người xuất hiện đ&oacute;n c&ocirc; b&eacute; về, chăm s&oacute;c Chitose, dạy dỗ Chitose, cho c&ocirc; b&eacute; một gia đ&igrave;nh. Với th&acirc;n phận \\\"học tr&ograve; của Ph&ugrave; Thuỷ\\\", chờ đợi Chitose ph&iacute;a trước l&agrave; cả những điều kỳ th&uacute;, k&egrave;m theo đ&oacute; l&agrave; v&ocirc; v&agrave;n trắc trở, c&aacute;m dỗ...</p>', 'bookstory/co_dau_phap_su.png', 'co-dau-phap-su', NULL, NULL, 'ACTIVE', 0, '2024-01-25 08:51:55', '2024-03-22 08:45:35', NULL, 'Đang Cập Nhật', 1, 0),
@@ -72,15 +72,15 @@ INSERT INTO `bookstory` (`id`, `title`, `seo_title`, `excerpt`, `body`, `image`,
 (45, 'Tôi Chỉ Là Một Người Dọn Dẹp', NULL, NULL, '<p>T&ocirc;i l&agrave; Banjo Taiga, v&agrave; h&ocirc;m nay, t&ocirc;i v&agrave;o ng&ocirc;i trường n&agrave;y dưới danh nghĩa người dọn dẹp. Banjo Taiga l&agrave; một đứa trẻ sống trong thời kỳ Yakuza. Theo những g&igrave; cậu nhớ được, họ l&agrave; s&aacute;t thủ chuy&ecirc;n nghiệp được huấn luyện tại thế giới ngầm. Tuy nhi&ecirc;n, sự hiện diện của yakuza bao tr&ugrave;m cả thế giới ngầm chỉ l&agrave; chuyện trong qu&aacute; khứ. Những g&igrave; c&ograve;n s&oacute;t lại ở thực tại chỉ l&agrave; Gokudo, v&agrave; Yamada-gumi, nơi Taiga thuộc về, nhưng nơi đ&oacute; cũng đ&atilde; bị giải t&aacute;n v&agrave; được th&agrave;nh lập lại, hoạt động dưới tư c&aacute;ch một c&ocirc;ng ty hợp ph&aacute;p. C&ocirc;ng việc mới của cậu l&agrave; người dọn dẹp. Một s&aacute;t thủ thi&ecirc;n t&agrave;i m&agrave; giờ lại trở th&agrave;nh lao c&ocirc;ng. Nơi l&agrave;m việc th&igrave; chuyển từ thế giới ngầm sang trường học. Giờ đ&acirc;y, l&agrave; một người l&agrave;m c&ocirc;ng b&igrave;nh thường trong x&atilde; hội, kh&ocirc;ng c&ograve;n l&agrave; kẻ s&aacute;t nh&acirc;n nữa, mọi h&agrave;nh vi bạo lực v&agrave; đ&aacute;nh nhau đều bị cấm. Tuy thế, những g&igrave; chờ đợi Taiga trong trường cấp 3 lại l&agrave; b&egrave; lũ c&ocirc;n đồ với những vụ bắt nạt tr&agrave;n lan, bạo lực, h&uacute;t thuốc, uống rượu, v&agrave; nhiều vấn đề kh&aacute;c nữa. Một h&igrave;nh huống m&agrave; ngay cả gi&aacute;o vi&ecirc;n lẫn người lớn kh</p>', 'bookstory/toi_chi_la_mot_nguoi_don_dep.png', 'toi-chi-la-mot-nguoi-don-dep', NULL, NULL, 'ACTIVE', 0, '2024-02-01 11:14:15', '2024-03-22 08:55:33', NULL, 'Đang Cập Nhật', 0, 0),
 (46, 'Đại Phụng Đả Canh Nhân', NULL, NULL, '<p>Truyện tranh Đại Phụng Đả Canh Nh&acirc;n được cập nhật nhanh v&agrave; đầy đủ nhất tại NetTruyen. Bạn đọc đừng qu&ecirc;n để lại b&igrave;nh luận v&agrave; chia sẻ, ủng hộ NetTruyen ra c&aacute;c chương mới nhất của truyện Đại Phụng Đả Canh Nh&acirc;n.</p>', 'bookstory/dai_phung_da_canh_nhan.png', 'dai-phung-da-canh-nhan', NULL, NULL, 'ACTIVE', 0, '2024-02-01 11:15:03', '2024-03-22 08:46:19', NULL, 'Đang Cập Nhật', 0, 0),
 (47, 'Tôi Trở Thành Vợ Nam Chính', NULL, NULL, '<p>C&ocirc; xuy&ecirc;n v&agrave;o cơ thể của Fiona, nh&acirc;n vật phản diện cuối c&ugrave;ng phải chịu c&aacute;i chết bi thảm bởi nam ch&iacute;nh đ&atilde; giải cứu thế giới. C&ocirc; chết theo đ&uacute;ng nghĩa đen v&agrave; đau khổ cả thể x&aacute;c lẫn linh hồn. Từ năm mười ba tuổi, c&ocirc; đ&atilde; bị gia đ&igrave;nh đối xử tệ bạc v&igrave; l&agrave; con ngo&agrave;i gi&aacute; th&uacute;. S&aacute;u năm trước khi c&acirc;u chuyện bắt đầu, c&ocirc; bị đuổi ra chiến trường! May mắn thay, c&ocirc; xuy&ecirc;n v&agrave;o cơ thể của nh&acirc;n vật phản diện mạnh nhất trong truyện, cũng l&agrave; ma ph&aacute;p sư thi&ecirc;n t&agrave;i với sức mạnh khổng lồ. Nhưng, c&ocirc; cũng phải sống s&oacute;t tr&ecirc;n chiến trường đầy rẫy ma quỷ. B&ecirc;n cạnh đ&oacute;... Đ&uacute;ng l&uacute;c đ&oacute;, c&ocirc; lại gặp được nam ch&iacute;nh &ndash; người anh h&ugrave;ng thời thơ ấu của c&ocirc; &ndash; đang vật lộn giữa ranh giới sinh tử. ...Tại sao anh ấy ở đ&acirc;y? D&ugrave; sao th&igrave;, nếu nh&acirc;n vật ch&iacute;nh đ&atilde; chết, thế giới sẽ bị hủy diệt. V&igrave; vậy cho n&ecirc;n, c&ocirc; phải cứu anh trước đ&atilde;....</p>', 'bookstory/toi_tro_thanh_vo_nam_chinh.png', 'toi-tro-thanh-vo-nam-chinh', NULL, NULL, 'ACTIVE', 0, '2024-02-01 11:16:05', '2024-03-22 08:56:21', NULL, 'Đang Cập Nhật', 0, 0),
-(48, 'Bách Luyện Thành Thần', NULL, NULL, NULL, 'bookstory/bach_luyen_thanh_than.png', 'bach-luyen-thanh-than', NULL, NULL, 'ACTIVE', 1, '2024-02-01 11:20:33', '2024-03-22 08:44:18', NULL, 'Đang Cập Nhật', 1, 14),
+(48, 'Bách Luyện Thành Thần', NULL, NULL, NULL, 'bookstory/bach_luyen_thanh_than.png', 'bach-luyen-thanh-than', NULL, NULL, 'ACTIVE', 1, '2024-02-01 11:20:33', '2024-05-09 16:57:25', NULL, 'Đang Cập Nhật', 1, 122),
 (49, 'Tôi Sẽ Ly Hôn Với Người Chồng Bạo Chúa Của Mình', NULL, NULL, NULL, 'bookstory/toi_se_ly_hon_voi_nguoi_chong_bao_chua_cua_minh.png', 'toi-se-ly-hon-voi-nguoi-chong-bao-chua-cua-minh', NULL, NULL, 'ACTIVE', 0, '2024-02-02 15:16:08', '2024-03-22 08:56:07', NULL, 'Đang Cập Nhật', 0, 0),
 (50, 'Trường Học Thôi Miên', NULL, NULL, '<p>&ldquo;Bạn đang rất buồn ngủ&hellip;&rdquo; Chankyu Kim học c&aacute;ch th&ocirc;i mi&ecirc;n từ việc xem c&aacute;c video tr&ecirc;n YouTube để trở n&ecirc;n nổi tiếng trong số c&aacute;c nữ sinh ở trường của m&igrave;nh. Tuy nhi&ecirc;n, mọi thứ kh&ocirc;ng diễn ra theo đ&uacute;ng kế hoạch khi anh nhận thấy m&igrave;nh li&ecirc;n tiếp gặp thất bại. Sau đ&oacute;, anh gặp người đọc t&acirc;m tr&iacute; Euijoo Yeo, người c&oacute; khả năng phi thường giống như anh. C&acirc;u chuyện th&uacute; vị nhưng kh&ocirc;ng may của họ bắt đầu từ đ&oacute;&hellip;</p>', 'bookstory/truong_hoc_thoi_mien.png', 'truong-hoc-thoi-mien', NULL, NULL, 'ACTIVE', 1, '2024-02-02 15:17:17', '2024-03-22 08:57:22', NULL, 'Đang Cập Nhật', 0, 0),
 (51, 'Đại Tiểu Thư Có Thể Có Bụng Dạ Gì Xấu Chứ!', NULL, NULL, '<p>Bộ truyện n&agrave;y đang được ph&aacute;t h&agrave;nh tr&ecirc;n ứng dụng Beebook.Online.</p>', 'bookstory/dai_tieu_thu_co_the_co_bung_da_gi_xau_chu.png', 'dai-tieu-thu-co-the-co-bung-da-gi-xau-chu', NULL, NULL, 'ACTIVE', 0, '2024-02-02 15:18:14', '2024-03-22 08:46:29', NULL, 'Đang Cập Nhật', 0, 0),
 (52, 'Trọng Sinh Thành Cậu Vàng Tại Dị Thế', NULL, NULL, NULL, 'bookstory/trong_sinh_sau_tam_van_nam.png', 'trong-sinh-thanh-cau-vang-tai-di-the', NULL, NULL, 'ACTIVE', 1, '2024-02-02 15:20:18', '2024-03-22 08:57:15', NULL, 'Đang Cập Nhật', 0, 0),
-(53, 'Tiên Vương Trùng Sinh', NULL, NULL, '<p>B&aacute;ch L&yacute; V&acirc;n Ti&ecirc;u - một đời linh t&ocirc;ng ở Cửu Ti&ecirc;u đại lục, sau khi chết lại hồi sinh trở về 300 năm trước, quay lại thời thiếu ni&ecirc;n đ&ocirc; thị, thay đổi cuộc đời, leo l&ecirc;n đỉnh thế giới một lần nữa, tr&ecirc;n trời dưới đất, chỉ c&oacute; ta v&ocirc; địch! Xem th&ecirc;m</p>', 'bookstory/tien_vuong_trung_snh.png', 'tien-vuong-trung-sinh', NULL, NULL, 'ACTIVE', 1, '2024-02-02 15:21:38', '2024-03-22 08:54:08', NULL, 'Đang Cập Nhật', 0, 4),
-(54, 'Thả Vu Nữ Đó Ra', NULL, NULL, NULL, 'bookstory/tha_vu_nu_do_ra.png', 'tha-vu-nu-do-ra', NULL, NULL, 'ACTIVE', 1, '2024-02-02 15:27:26', '2024-03-22 08:53:17', NULL, 'Đang Cập Nhật', 0, 8),
+(53, 'Tiên Vương Trùng Sinh', NULL, NULL, '<p>B&aacute;ch L&yacute; V&acirc;n Ti&ecirc;u - một đời linh t&ocirc;ng ở Cửu Ti&ecirc;u đại lục, sau khi chết lại hồi sinh trở về 300 năm trước, quay lại thời thiếu ni&ecirc;n đ&ocirc; thị, thay đổi cuộc đời, leo l&ecirc;n đỉnh thế giới một lần nữa, tr&ecirc;n trời dưới đất, chỉ c&oacute; ta v&ocirc; địch! Xem th&ecirc;m</p>', 'bookstory/tien_vuong_trung_snh.png', 'tien-vuong-trung-sinh', NULL, NULL, 'ACTIVE', 1, '2024-02-02 15:21:38', '2024-05-09 16:57:24', NULL, 'Đang Cập Nhật', 0, 116),
+(54, 'Thả Vu Nữ Đó Ra', NULL, NULL, NULL, 'bookstory/tha_vu_nu_do_ra.png', 'tha-vu-nu-do-ra', NULL, NULL, 'ACTIVE', 1, '2024-02-02 15:27:26', '2024-05-09 16:57:26', NULL, 'Đang Cập Nhật', 0, 119),
 (55, 'Ta Có Phòng Riêng Thời Tận Thế', NULL, NULL, '<p>Truyện Ta C&oacute; Ph&ograve;ng Ri&ecirc;ng Thời Tận Thế Tận thế sau chiến tranh hạt nh&acirc;n, nơi nơi đều l&agrave; đống đổ n&aacute;t hoang t&agrave;n,nếu ngươi may mắn c&ograve;n sống, vậy tiếptheo, ngươi kh&ocirc;ng thể đối mặt với nỗi sợh&atilde;i về đ&oacute;i kh&aacute;t v&agrave; bệnh tật, c&ograve;n c&oacute;người nhiễm ph&oacute;ng xa m&agrave; biến th&agrave;nh dị chủng kỳqu&aacute;i, nhưng đối với Giang Thần m&agrave; n&oacute;i,Nơi n&agrave;y lại l&agrave; thi&ecirc;n được, khắp nơi đều c&oacute; biệt thư cao cấp, si&ecirc;u xe, c&ograve;n c&oacute; mỹ nữ nữa</p>', 'bookstory/ta_co_phong_rieng_thoi_tan_the.png', 'ta-co-phong-rieng-thoi-tan-the', NULL, NULL, 'ACTIVE', 0, '2024-02-02 15:29:08', '2024-03-22 08:51:10', NULL, 'Đang Cập Nhật', 1, 0),
-(56, 'Bạn Gái Zombie Của Tôi', NULL, NULL, NULL, 'bookstory/ban_gai_toi_la_zombie.png', 'ban-gai-zombie-cua-toi', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:35:59', '2024-03-22 08:44:27', NULL, 'Đang Cập Nhật', 0, 2),
+(56, 'Bạn Gái Zombie Của Tôi', NULL, NULL, NULL, 'bookstory/ban_gai_toi_la_zombie.png', 'ban-gai-zombie-cua-toi', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:35:59', '2024-05-09 16:57:25', NULL, 'Đang Cập Nhật', 0, 56),
 (57, 'Bạn Học Của Tôi Là Lính Đánh Thuê', NULL, NULL, '<p>Yu Ijin - người duy nhất sống s&oacute;t sau một vụ tai nạn m&aacute;y bay thảm khốc khi anh c&ograve;n nhỏ. Sau qu&atilde;ng thời gian 10 năm trở th&agrave;nh l&iacute;nh đ&aacute;nh thu&ecirc; để ho&agrave;n th&agrave;nh giao k&egrave;o với người đ&atilde; cứu m&igrave;nh, cậu đ&atilde; trở về với gia đ&igrave;nh ở qu&ecirc; hương. Một cuộc sống mới v&agrave; cả s&oacute;ng gi&oacute; mới bắt đầu....</p>', 'bookstory/ban_hoc_cua_toi_la_linh_danh_thue.png', 'ban-hoc-cua-toi-la-linh-danh-thue', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:36:59', '2024-03-22 08:45:07', NULL, 'Đang Cập Nhật', 0, 0),
 (58, 'Cường Giả Đến Từ Trại Tâm Thần', NULL, NULL, NULL, 'bookstory/cuong_gia_den_tu_trai_tam_than.png', 'cuong-gia-den-tu-trai-tam-than', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:38:05', '2024-03-22 08:45:46', NULL, 'Đang Cập Nhật', 0, 0),
 (59, 'Đại Vương Tha Mạng', NULL, NULL, '<p>Sau khi linh kh&iacute; hồi phục, mọi người chắt chiu từng tơ linh kh&iacute;, chỉ c&oacute; Lữ Thụ, dựa v&agrave;o hệ thống điểm cảm x&uacute;c ti&ecirc;u cực , o&aacute;n hận người kh&aacute;c l&agrave; trở n&ecirc;n mạnh hơn! Cậu ta chỉ muốn bảo vệ em g&aacute;i, nhưng m&agrave; thời k&igrave; lũ lụt kh&oacute; c&oacute; thể tr&aacute;nh khỏi, chỉ đ&agrave;nh..... tiện o&aacute;n hận người kh&aacute;c , trở n&ecirc;n mạnh hơn! Vậy th&igrave; , chuẩn bị xong chưa, Lữ Thụ \\\"Đại Ma Vương \\\" tới đ&acirc;y</p>', 'bookstory/dai_vuong_tha_mang.png', 'dai-vuong-tha-mang', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:40:57', '2024-03-22 08:46:40', NULL, 'Đang Cập Nhật', 0, 0),
@@ -89,9 +89,9 @@ INSERT INTO `bookstory` (`id`, `title`, `seo_title`, `excerpt`, `body`, `image`,
 (62, 'Đệ Nhất Người Ở Rể', NULL, NULL, '<p>Cha mẹ mất t&iacute;ch Tần Lập đạt được l&atilde;o nh&acirc;n thần b&iacute; b&iacute; truyền c&ocirc;ng ph&aacute;p, 10 năm nhẫn nhục tu luyện, khi th&agrave;nh c&ocirc;ng nh&acirc;n sinh đỉnh phong.</p>', 'bookstory/de_nhat_nguoi_o_re.png', 'de-nhat-nguoi-o-re', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:44:08', '2024-03-22 08:47:39', NULL, 'Đang Cập Nhật', 0, 0),
 (63, 'Hộ Hoa Cao Thủ Tại Vườn Trường', NULL, NULL, '<p>Tịnh lệ cường thế ngự tỷ, thanh thuần mỹ nữ l&atilde;o sư, nhao nhao &ocirc;m ấp y&ecirc;u thương... một học sinh phổ phổ th&ocirc;ng th&ocirc;ng, ngẫu nhi&ecirc;n nhặt được một c&aacute;i b&uacute;t m&aacute;y thần kỳ, từ đ&oacute; xảy ra nhiều chuyện li k&igrave;...</p>', 'bookstory/ho_hoa_cao_thu_tai_vuon_truong.png', 'ho-hoa-cao-thu-tai-vuon-truong', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:45:07', '2024-03-22 08:48:33', NULL, 'Đang Cập Nhật', 0, 0),
 (64, 'Kiếm Nghịch Thương Khung', NULL, NULL, NULL, 'bookstory/kiem_nghich_thuong_khung.png', 'kiem-nghich-thuong-khung', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:58:38', '2024-03-22 08:49:01', NULL, 'Đang Cập Nhật', 0, 0),
-(65, 'Mạt Thế Vi Vương', NULL, NULL, NULL, 'bookstory/mat_the_vi_vuong.png', 'mat-the-vi-vuong', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:59:25', '2024-03-22 08:49:08', NULL, 'Đang Cập Nhật', 0, 0),
+(65, 'Mạt Thế Vi Vương', NULL, NULL, NULL, 'bookstory/mat_the_vi_vuong.png', 'mat-the-vi-vuong', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:59:25', '2024-05-09 16:57:26', NULL, 'Đang Cập Nhật', 0, 99),
 (66, 'Ngạo Thị Thiên Địa', NULL, NULL, NULL, 'bookstory/ngao_thi_thien_dia.png', 'ngao-thi-thien-dia', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:00:12', '2024-03-22 08:49:43', NULL, 'Đang Cập Nhật', 0, 0),
-(67, 'Nghịch Thiên Tà Thần', NULL, NULL, '<p>Nhất đại thi&ecirc;n t&agrave;i huyền mạch bị hao tổn trở th&agrave;nh phế vật, gia tộc vứt bỏ, thế nh&acirc;n chế giễu, thậm ch&iacute; đ&ecirc;m t&acirc;n h&ocirc;n bị người độc hại...... Huyền Thi&ecirc;n ch&iacute; bảo, lu&acirc;n hồi k&iacute;nh hiện, nghịch thi&ecirc;n cải mệnh, khởi động lại nh&acirc;n sinh, mang theo cừu hận c&ugrave;ng tiếc nuối, thề phải đăng đỉnh lực lượng đỉnh phong!</p>', 'bookstory/kiem_nghich_thuong_khung.png', 'nghich-thien-ta-than', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:01:18', '2024-03-22 08:49:59', NULL, 'Đang Cập Nhật', 0, 5),
+(67, 'Nghịch Thiên Tà Thần', NULL, NULL, '<p>Nhất đại thi&ecirc;n t&agrave;i huyền mạch bị hao tổn trở th&agrave;nh phế vật, gia tộc vứt bỏ, thế nh&acirc;n chế giễu, thậm ch&iacute; đ&ecirc;m t&acirc;n h&ocirc;n bị người độc hại...... Huyền Thi&ecirc;n ch&iacute; bảo, lu&acirc;n hồi k&iacute;nh hiện, nghịch thi&ecirc;n cải mệnh, khởi động lại nh&acirc;n sinh, mang theo cừu hận c&ugrave;ng tiếc nuối, thề phải đăng đỉnh lực lượng đỉnh phong!</p>', 'bookstory/nghich_thien_ta_than.png', 'nghich-thien-ta-than', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:01:18', '2024-05-09 16:57:26', NULL, 'Đang Cập Nhật', 0, 79),
 (68, 'Người Ở Rể Bị Ép Thành Phản Diện', NULL, NULL, '<p>Một t&aacute;c giả tiểu thuyết mạng trọng sinh v&agrave;o ch&iacute;nh t&aacute;c phẩm của m&igrave;nh, trở th&agrave;nh vai &aacute;c người ở rể L&iacute; Quả Vũ, c&ugrave;ng nam ch&iacute;nh đấu tr&iacute; đấu dũng, kết duy&ecirc;n với nhiều hồng nhan tri kỷ....</p>', 'bookstory/nguoi_o_re_bi_ep_thanh_phan_dien.png', 'nguoi-o-re-bi-ep-thanh-phan-dien', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:02:19', '2024-03-22 08:50:09', NULL, 'Đang Cập Nhật', 0, 0),
 (69, 'Phàm Nhân Tu Tiên', NULL, NULL, '<p>Một bộ truyện được chuyển thể từ tiểu thuyết tu ti&ecirc;n c&ugrave;ng t&ecirc;n rất đỉnh của t&aacute;c giả Vong Ngữ, với t&igrave;nh tiết logic, Vong Ngữ đ&atilde; cho ra đời một thế giới tu ti&ecirc;n giả đầy m&agrave;u sắc v&agrave; huyền ảo.</p>', 'bookstory/pham_nhan_tu_tien.png', 'pham-nhan-tu-tien', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:03:11', '2024-03-22 08:50:27', NULL, 'Đang Cập Nhật', 0, 0),
 (70, 'Spy X Family', NULL, NULL, NULL, 'bookstory/spy_x_family.png', 'spy-x-family', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:04:06', '2024-03-22 08:50:47', NULL, 'Đang Cập Nhật', 0, 0),
@@ -104,13 +104,14 @@ INSERT INTO `bookstory` (`id`, `title`, `seo_title`, `excerpt`, `body`, `image`,
 (77, 'Tôi Chuyển Vàng Tại Mạt Thế', NULL, NULL, NULL, 'bookstory/toi_chuyen_vang_tai_mat_the.png', 'toi-chuyen-vang-tai-mat-the', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:10:36', '2024-03-22 08:55:39', NULL, 'Đang Cập Nhật', 0, 0),
 (78, 'Tối Cường Phản Sáo Lộ Hệ Thống', NULL, NULL, NULL, 'bookstory/toi_cuong_phan_sao_lo_he_thong.png', 'toi-cuong-phan-sao-lo-he-thong', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:11:16', '2024-03-22 08:55:46', NULL, 'Đang Cập Nhật', 0, 0),
 (79, 'Tối Cường Thăng Cấp', NULL, NULL, '<p>Hệ thống trong tay, thi&ecirc;n hạ ta c&oacute;! Ta muốn c&oacute; người đẹp xinh nhất, quyền lực ta lớn nhất, th&acirc;n phận ta t&ocirc;n qu&yacute; nhất! Cửu thi&ecirc;n thập địa, b&aacute;t hoang lục hợp, ta phải l&agrave; ch&iacute; cao v&ocirc; thượng!</p>', 'bookstory/toi_cuong_thang_cap.png', 'toi-cuong-thang-cap', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:11:59', '2024-03-22 08:55:53', NULL, 'Đang Cập Nhật', 0, 0),
-(80, 'Tôi Là Thiên Ma Truyền Nhân', NULL, NULL, '<p>Jin Suho mất mẹ khi c&ograve;n nhỏ v&agrave; quyết định trở th&agrave;nh thợ săn để t&igrave;m c&aacute;ch trả th&ugrave; cho b&agrave;. Anh ấy đ&atilde; d&agrave;nh cả cuộc đời để r&egrave;n luyện bản th&acirc;n v&agrave; cuối c&ugrave;ng trở th&agrave;nh một thợ săn hạng B. Rồi một ng&agrave;y, Suho t&igrave;nh cờ gặp một người đ&agrave;n &ocirc;ng b&iacute; ẩn ở Cổng Đỏ. Người đ&agrave;n &ocirc;ng b&iacute; ẩn ấy tự giới thiệu m&igrave;nh l&agrave; Thi&ecirc;n ma v&agrave; tiết lộ với Jin Suho rằng cậu ch&iacute;nh l&agrave; truyền nh&acirc;n của anh ta v&agrave; anh ta cần cơ thể của Suho để đối ph&oacute; với đối thủ của m&igrave;nh, Huyết Quỷ.</p>', 'bookstory/toi_la_thien_ma_truyen_nhan.png', 'toi-la-thien-ma-truyen-nhan', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:14:56', '2024-03-22 14:08:12', NULL, 'Đang Cập Nhật', 0, 11),
-(81, 'Trọng Sinh Đô Thị Tu Tiên', NULL, NULL, NULL, 'bookstory/trong_sinh_do_thi_tu_tien.png', 'trong-sinh-do-thi-tu-tien', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:16:14', '2024-03-22 08:57:03', NULL, 'Đang Cập Nhật', 0, 2),
+(80, 'Tôi Là Thiên Ma Truyền Nhân', NULL, NULL, '<p>Jin Suho mất mẹ khi c&ograve;n nhỏ v&agrave; quyết định trở th&agrave;nh thợ săn để t&igrave;m c&aacute;ch trả th&ugrave; cho b&agrave;. Anh ấy đ&atilde; d&agrave;nh cả cuộc đời để r&egrave;n luyện bản th&acirc;n v&agrave; cuối c&ugrave;ng trở th&agrave;nh một thợ săn hạng B. Rồi một ng&agrave;y, Suho t&igrave;nh cờ gặp một người đ&agrave;n &ocirc;ng b&iacute; ẩn ở Cổng Đỏ. Người đ&agrave;n &ocirc;ng b&iacute; ẩn ấy tự giới thiệu m&igrave;nh l&agrave; Thi&ecirc;n ma v&agrave; tiết lộ với Jin Suho rằng cậu ch&iacute;nh l&agrave; truyền nh&acirc;n của anh ta v&agrave; anh ta cần cơ thể của Suho để đối ph&oacute; với đối thủ của m&igrave;nh, Huyết Quỷ.</p>', 'bookstory/toi_la_thien_ma_truyen_nhan.png', 'toi-la-thien-ma-truyen-nhan', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:14:56', '2024-05-11 06:14:49', NULL, 'Đang Cập Nhật', 0, 92),
+(81, 'Trọng Sinh Đô Thị Tu Tiên', NULL, NULL, NULL, 'bookstory/trong_sinh_do_thi_tu_tien.png', 'trong-sinh-do-thi-tu-tien', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:16:14', '2024-05-09 16:57:25', NULL, 'Đang Cập Nhật', 0, 97),
 (82, 'Trọng Sinh Sau Tám Vạn Năm', NULL, NULL, '<p>Một kẻ cực mạnh tr&ocirc;i dạt trong hư kh&ocirc;ng v&agrave; trở lại 8 vạn năm trước để trả th&ugrave;</p>', 'bookstory/trong_sinh_sau_tam_van_nam.png', 'trong-sinh-sau-tam-van-nam', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:17:59', '2024-03-22 08:57:09', NULL, 'Đang Cập Nhật', 0, 0),
-(83, 'Tu Tiên Trở Về Tại Vườn Trường', NULL, NULL, '<p>Bị &aacute;m to&aacute;n chết v&agrave; trọng sinh về hiện đại đ&uacute;ng l&uacute;c...</p>', 'bookstory/tu_tien_tro_lai_ve_vuon_truong.png', 'tu-tien-tro-ve-tai-vuon-truong', NULL, NULL, 'ACTIVE', 1, '2024-03-02 04:19:03', '2024-03-22 08:57:28', NULL, 'Đang Cập Nhật', 0, 6),
+(83, 'Tu Tiên Trở Về Tại Vườn Trường', NULL, NULL, '<p>Bị &aacute;m to&aacute;n chết v&agrave; trọng sinh về hiện đại đ&uacute;ng l&uacute;c...</p>', 'bookstory/tu_tien_tro_lai_ve_vuon_truong.png', 'tu-tien-tro-ve-tai-vuon-truong', NULL, NULL, 'ACTIVE', 1, '2024-03-02 04:19:03', '2024-05-09 16:57:24', NULL, 'Đang Cập Nhật', 0, 118),
 (84, 'Tuyệt Thế Võ Thần', NULL, NULL, '<p>Cửu Ti&ecirc;u đại lục, t&ocirc;ng m&ocirc;n san s&aacute;t, v&otilde; đạo l&agrave;m đầu, người yếu tầm thường, bị người bắt nạt, cường giả giận dữ, m&aacute;u chảy th&agrave;nh s&ocirc;ng.V&otilde; đạo ho&agrave;ng giả, c&agrave;ng c&oacute; thể quan s&aacute;t thi&ecirc;n địa, ngạo cười non s&ocirc;ng, động th&igrave; lại ng&agrave;y kinh thạch ph&aacute;, phơi th&acirc;y trăm vạn.Một đời cường nh&acirc;n L&acirc;m Phong, nghịch thi&ecirc;n xuất thế, đến kinh thế truyền thừa, tu v&otilde; đạo, đạp Cửu Ti&ecirc;u, ph&aacute; thi&ecirc;n địa, ngạo thương khung!</p>', 'bookstory/tuyet_the_vo_than.png', 'tuyet-the-vo-than', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:19:51', '2024-03-22 08:57:34', NULL, 'Đang Cập Nhật', 0, 0),
 (85, 'Võ Đạo Độc Tôn', NULL, NULL, NULL, 'bookstory/vo_dao_doc_ton.png', 'vo-dao-doc-ton', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:20:53', '2024-03-22 08:57:40', NULL, 'Đang Cập Nhật', 0, 0),
-(86, 'Võ Nghịch', NULL, NULL, NULL, 'bookstory/vo_nghich.png', 'vo-nghich', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:21:59', '2024-03-22 08:57:53', NULL, 'Đang Cập Nhật', 0, 2);
+(86, 'Võ Nghịch', NULL, NULL, NULL, 'bookstory/vo_nghich.png', 'vo-nghich', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:21:59', '2024-05-09 16:57:27', NULL, 'Đang Cập Nhật', 0, 80),
+(87, 'Tu Tiên Giả Đại Chiến Siêu Năng Lực', NULL, NULL, NULL, 'bookstory/tu_tien_gia_dai_chien_sieu_nang_luc.png', 'tu-tien-gia-dai-chien-sieu-nang-luc', NULL, NULL, 'ACTIVE', 1, '2024-03-25 04:19:18', '2024-03-25 04:19:18', NULL, 'Đang Cập Nhật', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -119,11 +120,11 @@ INSERT INTO `bookstory` (`id`, `title`, `seo_title`, `excerpt`, `body`, `image`,
 --
 
 CREATE TABLE `categories` (
-  `id` int UNSIGNED NOT NULL,
-  `parent_id` int UNSIGNED DEFAULT NULL,
-  `order` int NOT NULL DEFAULT '1',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `order` int(11) NOT NULL DEFAULT 1,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -143,16 +144,16 @@ INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `slug`, `created_a
 --
 
 CREATE TABLE `category` (
-  `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seo_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('ACTIVE','INACTIVE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
-  `featured` tinyint NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `seo_title` varchar(255) DEFAULT NULL,
+  `excerpt` text DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `slug` varchar(255) NOT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'INACTIVE',
+  `featured` tinyint(4) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -227,22 +228,22 @@ INSERT INTO `category` (`id`, `title`, `seo_title`, `excerpt`, `body`, `slug`, `
 --
 
 CREATE TABLE `chapter` (
-  `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seo_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci,
-  `media` text COLLATE utf8mb4_unicode_ci,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
-  `featured` tinyint DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `title_name` varchar(255) NOT NULL,
+  `seo_title` varchar(255) DEFAULT NULL,
+  `excerpt` text DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `media` text DEFAULT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'INACTIVE',
+  `featured` tinyint(4) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `bookstory_id` int DEFAULT NULL,
-  `view` int NOT NULL DEFAULT '0'
+  `bookstory_id` int(11) UNSIGNED DEFAULT NULL,
+  `view` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -250,46 +251,48 @@ CREATE TABLE `chapter` (
 --
 
 INSERT INTO `chapter` (`id`, `title`, `slug`, `title_name`, `seo_title`, `excerpt`, `body`, `media`, `meta_description`, `meta_keywords`, `status`, `featured`, `created_at`, `updated_at`, `bookstory_id`, `view`) VALUES
-(1, 'chapter 1 - Võ Luyện Đỉnh Phong', 'chapter-1-vo-luyen-dinh-phong', 'chapter 1', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 1/trang_0.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_1.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_2.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_3.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_4.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_5.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_6.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_7.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_8.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_9.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_10.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_11.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_12.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_13.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_14.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_15.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_16.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_17.jpeg\"]', NULL, NULL, 'ACTIVE', 0, '2024-01-11 06:35:00', '2024-03-22 14:38:45', 38, 15),
-(13, 'chapter 2 - Võ Luyện Đỉnh Phong', 'chapter-2-vo-luyen-dinh-phong', 'chapter 2', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 2/trang_0.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_1.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_2.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_3.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_4.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_5.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_6.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_7.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_8.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_9.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_10.jpeg\"]', NULL, NULL, 'ACTIVE', 0, '2024-01-22 06:42:30', '2024-03-22 14:47:30', 38, 15),
-(14, 'chapter 3 - Võ Luyện Đỉnh Phong', 'chapter-3-vo-luyen-dinh-phong', 'chapter 3', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 3/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_9.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-01-24 13:53:34', '2024-03-22 14:52:52', 38, 15),
-(15, 'chapter 1 - Bách Luyện Thành Thần', 'chapter-1-bach-luyen-thanh-than', 'chapter 1', NULL, NULL, NULL, '[\"chapter/bach_luyen_thanh_than/chapter 1/trang_0.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_1.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_2.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_3.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_4.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_5.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_6.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_7.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_8.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_9.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_10.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_11.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_12.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_13.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_14.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_15.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_16.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_17.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_18.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_19.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_20.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_21.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_22.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-02-01 11:22:17', '2024-03-22 14:30:44', 48, 6),
-(16, 'chapter 2 - Bách Luyện Thành Thần', 'chapter-2-bach-luyen-thanh-than', 'chapter 2', NULL, NULL, NULL, '[\"chapter/bach_luyen_thanh_than/chapter 2/trang_0.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_1.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_2.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_3.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_4.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_5.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_6.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_7.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_8.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_9.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_10.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_11.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_12.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_13.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_14.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_15.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_16.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_17.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-02-01 11:24:17', '2024-03-22 14:41:12', 48, 8),
-(17, 'chapter 4 - Võ Luyện Đỉnh Phong', 'chapter-4-vo-luyen-dinh-phong', 'chapter 4', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 4/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_9.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:06:25', '2024-03-22 14:53:08', 38, 4),
-(18, 'chapter 5 - Võ Luyện Đỉnh Phong', 'chapter-5-vo-luyen-dinh-phong', 'chapter 5', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 5/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_9.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_10.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_11.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:10:13', '2024-03-22 14:53:32', 38, 5),
-(19, 'chapter 6 - Võ Luyện Đỉnh Phong', 'chapter-6-vo-luyen-dinh-phong', 'chapter 6', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 6/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_7.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:11:11', '2024-03-22 14:53:52', 38, 5),
-(20, 'chapter 7 - Võ Luyện Đỉnh Phong', 'chapter-7-vo-luyen-dinh-phong', 'chapter 7', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 7/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_8.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:13:23', '2024-03-22 14:54:11', 38, 2),
-(22, 'chapter 1 - Tu Tiên Trở Về Tại Vườn Trường', 'chapter-1-tu-tien-tro-ve-tai-vuon-truong', 'chapter 1', NULL, NULL, NULL, '[\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_0.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_1.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_2.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_3.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_4.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_5.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_6.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_7.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_8.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_9.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_10.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_11.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_12.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_13.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_14.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_15.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_16.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_17.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:24:38', '2024-03-22 14:38:16', 83, 2),
-(23, 'chapter 2 - Tu Tiên Trở Về Tại Vườn Trường', 'chapter-2-tu-tien-tro-ve-tai-vuon-truong', 'chapter 2', NULL, NULL, NULL, '[\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_0.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_1.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_2.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_3.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_4.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_5.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_6.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_7.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_8.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_9.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_10.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_11.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_12.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_13.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_14.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_15.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:25:58', '2024-03-22 14:47:04', 83, 2),
-(24, 'chapter 3 - Tu Tiên Trở Về Tại Vườn Trường', 'chapter-3-tu-tien-tro-ve-tai-vuon-truong', 'chapter 3', NULL, NULL, NULL, '[\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_0.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_1.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_2.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_3.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_4.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_5.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_6.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_7.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_8.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_9.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_10.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_11.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_12.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_13.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_14.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_15.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_16.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_17.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:26:52', '2024-03-22 14:52:34', 83, 2),
-(25, 'chapter 1 - Trọng Sinh Đô Thị Tu Tiên', 'chapter-1-trong-sinh-do-thi-tu-tien', 'chapter 1', NULL, NULL, NULL, '[\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_0.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_1.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_2.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_3.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_4.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_5.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_6.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_7.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_8.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_9.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_10.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_11.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_12.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_13.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_14.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_15.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_16.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_17.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_18.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_19.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_20.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_21.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_22.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_23.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_24.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_25.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_26.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_27.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:29:06', '2024-03-22 14:37:00', 81, 2),
-(26, 'chapter 2 - Trọng Sinh Đô Thị Tu Tiên', 'chapter-2-trong-sinh-do-thi-tu-tien', 'chapter 2', NULL, NULL, NULL, '[\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_0.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_1.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_2.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_3.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_4.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_5.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_6.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_7.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_8.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_9.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_10.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_11.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_12.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:30:04', '2024-03-22 14:46:30', 81, 0),
-(27, 'chapter 3 - Trọng Sinh Đô Thị Tu Tiên', 'chapter-3-trong-sinh-do-thi-tu-tien', 'chapter 3', NULL, NULL, NULL, '[\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_0.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_1.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_2.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_3.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_4.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_5.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_6.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_7.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_8.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_9.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_10.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_11.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_12.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_13.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_14.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:31:06', '2024-03-22 14:52:08', 81, 0),
-(28, 'chapter 1 - Tiên Vương Trùng Sinh', 'chapter-1-tien-vuong-trung-sinh', 'chapter 1', NULL, NULL, NULL, '[\"chapter/tien_vuong_trung_sinh/chapter 1/trang_0.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_1.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_2.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_3.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_4.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_5.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_6.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_7.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_8.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_9.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_10.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_11.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_12.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_13.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_14.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_15.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_16.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_17.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_18.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_19.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_20.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_21.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_22.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_23.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_24.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_25.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_26.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_27.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_28.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_29.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_30.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_31.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_32.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_33.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_34.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_35.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_36.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_37.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:33:36', '2024-03-22 14:35:50', 53, 2),
-(29, 'chapter 2 - Tiên Vương Trùng Sinh', 'chapter-2-tien-vuong-trung-sinh', 'chapter 2', NULL, NULL, NULL, '[\"chapter/tien_vuong_trung_sinh/chapter 2/trang_0.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_1.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_2.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_3.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_4.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_5.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_6.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_7.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_8.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_9.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_10.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_11.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_12.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_13.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_14.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_15.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_16.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_17.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_18.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_19.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_20.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_21.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_22.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_23.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_24.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_25.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_26.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_27.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_28.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_29.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_30.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_31.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_32.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_33.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:34:51', '2024-03-22 14:44:08', 53, 1),
-(30, 'chapter 3 - Tiên Vương Trùng Sinh', 'chapter-3-tien-vuong-trung-sinh', 'chapter 3', NULL, NULL, NULL, '[\"chapter/tien_vuong_trung_sinh/chapter 3/trang_0.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_1.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_2.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_3.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_4.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_5.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_6.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_7.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_8.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_9.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_10.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_11.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_12.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_13.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_14.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_15.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_16.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_17.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_18.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_19.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_20.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_21.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_22.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_23.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_24.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_25.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_26.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_27.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:35:55', '2024-03-22 14:50:57', 53, 1),
-(31, 'chapter 1 - Bạn Gái Zombie Của Tôi', 'chapter-1-ban-gai-zombie-cua-toi', 'chapter 1', NULL, NULL, NULL, '[\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_0.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_1.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_2.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_3.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_4.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_5.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_6.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_7.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_8.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_9.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_10.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_11.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_12.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_13.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_14.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_15.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_16.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_17.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_18.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_19.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_20.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_21.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_22.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_23.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_24.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_25.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_26.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_27.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_28.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_29.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_30.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_31.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_32.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_33.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_34.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_35.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_36.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_37.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_38.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_39.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_40.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_41.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_42.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_43.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_44.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_45.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_46.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_47.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_48.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_49.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_50.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_51.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_52.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_53.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_54.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_55.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_56.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-10 04:08:39', '2024-03-22 14:32:54', 56, 2),
-(32, 'chapter 3 - Bách Luyện Thành Thần', 'chapter-3-bach-luyen-thanh-than', 'chapter 3', NULL, NULL, NULL, '[\"chapter/bach_luyen_thanh_than/chapter 3/trang_0.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_1.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_2.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_3.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_4.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_5.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_6.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_7.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_8.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_9.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_10.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_11.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_12.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_13.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_14.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_15.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_16.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_17.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_18.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_19.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_20.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_21.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_22.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:49:47', '2024-03-22 14:48:53', 48, 0),
-(33, 'chapter 8 - Võ Luyện Đỉnh Phong', 'chapter-8-vo-luyen-dinh-phong', 'chapter 8', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 8/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_7.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:51:19', '2024-03-22 14:54:28', 38, 2),
-(34, 'chapter 1 - Mạt Thế Vi Vương', 'chapter-1-mat-the-vi-vuong', 'chapter 1', NULL, NULL, NULL, '[\"chapter/mat_the_vi_vuong/chapter 1/trang_0.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_1.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_2.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_3.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_4.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_5.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_6.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_7.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_8.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_9.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_10.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_11.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_12.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_13.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_14.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_15.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_16.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_17.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_18.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_19.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_20.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_21.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:53:17', '2024-03-22 14:33:28', 65, 0),
-(35, 'chapter 2 - Mạt Thế Vi Vương', 'chapter-2-mat-the-vi-vuong', 'chapter 2', NULL, NULL, NULL, '[\"chapter/mat_the_vi_vuong/chapter 2/trang_0.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_1.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_2.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_3.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_4.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_5.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_6.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_7.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_8.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_9.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_10.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_11.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_12.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_13.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_14.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_15.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_16.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_17.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_18.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_19.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_20.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_21.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_22.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_23.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_24.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_25.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_26.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_27.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_28.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_29.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_30.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_31.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:54:49', '2024-03-22 14:41:57', 65, 0),
-(36, 'chapter 3 - Mạt Thế Vi Vương', 'chapter-3-mat-the-vi-vuong', 'chapter 3', NULL, NULL, NULL, '[\"chapter/mat_the_vi_vuong/chapter 3/trang_0.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_1.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_2.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_3.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_4.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_5.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_6.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_7.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_8.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_9.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_10.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_11.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_12.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_13.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_14.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_15.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_16.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_17.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_18.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_19.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_20.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_21.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_22.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_23.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_24.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:55:31', '2024-03-22 14:49:26', 65, 0),
-(37, 'chapter 1 - Thả Vu Nữ Đó Ra', 'chapter-1-tha-vu-nu-do-ra', 'chapter 1', NULL, NULL, NULL, '[\"chapter/tha_vu_nu_do_ra/chapter 1/trang_0.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_1.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_2.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_3.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_4.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_5.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_6.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_7.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_8.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_9.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_10.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_11.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_12.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_13.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_14.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_15.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:56:27', '2024-03-22 14:34:46', 54, 7),
-(38, 'chapter 2 - Thả Vu Nữ Đó Ra', 'chapter-2-tha-vu-nu-do-ra', 'chapter 2', NULL, NULL, NULL, '[\"chapter/tha_vu_nu_do_ra/chapter 2/trang_0.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_1.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_2.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_3.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_4.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_5.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_6.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_7.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_8.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_9.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_10.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_11.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_12.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_13.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_14.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_15.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_16.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_17.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_18.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_19.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:57:08', '2024-03-22 14:43:04', 54, 0),
-(39, 'chapter 3 - Thả Vu Nữ Đó Ra', 'chapter-3-tha-vu-nu-do-ra', 'chapter 3', NULL, NULL, NULL, '[\"chapter/tha_vu_nu_do_ra/chapter 3/trang_0.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_1.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_2.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_3.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_4.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_5.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_6.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_7.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_8.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_9.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_10.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_11.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_12.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_13.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_14.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_15.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_16.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:57:40', '2024-03-22 14:49:59', 54, 1),
-(40, 'chapter 0 - Nghịch Thiên Tà Thần', 'chapter-0-nghich-thien-ta-than', 'chapter 0', NULL, NULL, NULL, '[\"chapter/nghich_thien_ta_than/chapter 0/trang_0.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_1.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_2.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_3.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_4.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_5.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_6.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_7.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_8.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_9.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_10.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_11.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_12.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_13.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_14.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:58:53', '2024-03-22 14:28:33', 67, 5),
-(41, 'chapter 1 - Nghịch Thiên Tà Thần', 'chapter-1-nghich-thien-ta-than', 'chapter 1', NULL, NULL, NULL, '[\"chapter/nghich_thien_ta_than/chapter 1/trang_0.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_1.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_2.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_3.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_4.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_5.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_6.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_7.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_8.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_9.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_10.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_11.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_12.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_13.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_14.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_15.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_16.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_17.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_18.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_19.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_20.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_21.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_22.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_23.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_24.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_25.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_26.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_27.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_28.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_29.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_30.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_31.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_32.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:59:45', '2024-03-22 14:34:12', 67, 0),
-(42, 'chapter 1 - Thảm Họa Tử Linh Sư', 'chapter-1-tham-hoa-tu-linh-su', 'chapter 1', NULL, NULL, NULL, '[\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_0.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_1.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_2.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_3.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_4.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_5.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_6.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_7.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_8.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_9.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_10.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_11.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_12.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_13.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 15:13:13', '2024-03-22 14:35:09', 11, 1),
-(43, 'chapter 2 - Thảm Họa Tử Linh Sư', 'chapter-2-tham-hoa-tu-linh-su', 'chapter 2', NULL, NULL, NULL, '[\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_0.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_1.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_2.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_3.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_4.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_5.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_6.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_7.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_8.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_9.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_10.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_11.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 15:13:40', '2024-03-22 14:43:28', 11, 1),
-(44, 'chapter 3 - Thảm Họa Tử Linh Sư', 'chapter-3-tham-hoa-tu-linh-su', 'chapter 3', NULL, NULL, NULL, '[\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_0.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_1.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_2.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_3.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_4.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_5.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_6.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_7.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_8.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 15:16:18', '2024-03-22 14:50:20', 11, 1),
-(45, 'chapter 1 - Võ Nghịch', 'chapter-1-vo-nghich', 'chapter 1', NULL, NULL, NULL, '[\"chapter/vo_nghich/chapter 1/trang_0.jpg\",\"chapter/vo_nghich/chapter 1/trang_1.jpg\",\"chapter/vo_nghich/chapter 1/trang_2.jpg\",\"chapter/vo_nghich/chapter 1/trang_3.jpg\",\"chapter/vo_nghich/chapter 1/trang_4.jpg\",\"chapter/vo_nghich/chapter 1/trang_5.jpg\",\"chapter/vo_nghich/chapter 1/trang_6.jpg\",\"chapter/vo_nghich/chapter 1/trang_7.jpg\",\"chapter/vo_nghich/chapter 1/trang_8.jpg\",\"chapter/vo_nghich/chapter 1/trang_9.jpg\",\"chapter/vo_nghich/chapter 1/trang_10.jpg\",\"chapter/vo_nghich/chapter 1/trang_11.jpg\",\"chapter/vo_nghich/chapter 1/trang_12.jpg\",\"chapter/vo_nghich/chapter 1/trang_13.jpg\",\"chapter/vo_nghich/chapter 1/trang_14.jpg\",\"chapter/vo_nghich/chapter 1/trang_15.jpg\",\"chapter/vo_nghich/chapter 1/trang_16.jpg\",\"chapter/vo_nghich/chapter 1/trang_17.jpg\",\"chapter/vo_nghich/chapter 1/trang_18.jpg\",\"chapter/vo_nghich/chapter 1/trang_19.jpg\",\"chapter/vo_nghich/chapter 1/trang_20.jpg\",\"chapter/vo_nghich/chapter 1/trang_21.jpg\",\"chapter/vo_nghich/chapter 1/trang_22.jpg\",\"chapter/vo_nghich/chapter 1/trang_23.jpg\",\"chapter/vo_nghich/chapter 1/trang_24.jpg\",\"chapter/vo_nghich/chapter 1/trang_25.jpg\",\"chapter/vo_nghich/chapter 1/trang_26.jpg\",\"chapter/vo_nghich/chapter 1/trang_27.jpg\",\"chapter/vo_nghich/chapter 1/trang_28.jpg\",\"chapter/vo_nghich/chapter 1/trang_29.jpg\",\"chapter/vo_nghich/chapter 1/trang_30.jpg\",\"chapter/vo_nghich/chapter 1/trang_31.jpg\",\"chapter/vo_nghich/chapter 1/trang_32.jpg\",\"chapter/vo_nghich/chapter 1/trang_33.jpg\",\"chapter/vo_nghich/chapter 1/trang_34.jpg\",\"chapter/vo_nghich/chapter 1/trang_35.jpg\",\"chapter/vo_nghich/chapter 1/trang_36.jpg\",\"chapter/vo_nghich/chapter 1/trang_37.jpg\",\"chapter/vo_nghich/chapter 1/trang_38.jpg\",\"chapter/vo_nghich/chapter 1/trang_39.jpg\",\"chapter/vo_nghich/chapter 1/trang_40.jpg\",\"chapter/vo_nghich/chapter 1/trang_41.jpg\",\"chapter/vo_nghich/chapter 1/trang_42.jpg\",\"chapter/vo_nghich/chapter 1/trang_43.jpg\",\"chapter/vo_nghich/chapter 1/trang_44.jpg\",\"chapter/vo_nghich/chapter 1/trang_45.jpg\",\"chapter/vo_nghich/chapter 1/trang_46.jpg\",\"chapter/vo_nghich/chapter 1/trang_47.jpg\",\"chapter/vo_nghich/chapter 1/trang_48.jpg\",\"chapter/vo_nghich/chapter 1/trang_49.jpg\",\"chapter/vo_nghich/chapter 1/trang_50.jpg\",\"chapter/vo_nghich/chapter 1/trang_51.jpg\",\"chapter/vo_nghich/chapter 1/trang_52.jpg\",\"chapter/vo_nghich/chapter 1/trang_53.jpg\",\"chapter/vo_nghich/chapter 1/trang_54.jpg\",\"chapter/vo_nghich/chapter 1/trang_55.jpg\",\"chapter/vo_nghich/chapter 1/trang_56.jpg\",\"chapter/vo_nghich/chapter 1/trang_57.jpg\",\"chapter/vo_nghich/chapter 1/trang_58.jpg\",\"chapter/vo_nghich/chapter 1/trang_59.jpg\",\"chapter/vo_nghich/chapter 1/trang_60.jpg\",\"chapter/vo_nghich/chapter 1/trang_61.jpg\",\"chapter/vo_nghich/chapter 1/trang_62.jpg\",\"chapter/vo_nghich/chapter 1/trang_63.jpg\",\"chapter/vo_nghich/chapter 1/trang_64.jpg\",\"chapter/vo_nghich/chapter 1/trang_65.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:13:36', '2024-03-22 14:40:00', 86, 1),
-(46, 'chapter 2 - Võ Nghịch', 'chapter-2-vo-nghich', 'chapter 2', NULL, NULL, NULL, '[\"chapter/vo_nghich/chapter 2/trang_0.jpg\",\"chapter/vo_nghich/chapter 2/trang_1.jpg\",\"chapter/vo_nghich/chapter 2/trang_2.jpg\",\"chapter/vo_nghich/chapter 2/trang_3.jpg\",\"chapter/vo_nghich/chapter 2/trang_4.jpg\",\"chapter/vo_nghich/chapter 2/trang_5.jpg\",\"chapter/vo_nghich/chapter 2/trang_6.jpg\",\"chapter/vo_nghich/chapter 2/trang_7.jpg\",\"chapter/vo_nghich/chapter 2/trang_8.jpg\",\"chapter/vo_nghich/chapter 2/trang_9.jpg\",\"chapter/vo_nghich/chapter 2/trang_10.jpg\",\"chapter/vo_nghich/chapter 2/trang_11.jpg\",\"chapter/vo_nghich/chapter 2/trang_12.jpg\",\"chapter/vo_nghich/chapter 2/trang_13.jpg\",\"chapter/vo_nghich/chapter 2/trang_14.jpg\",\"chapter/vo_nghich/chapter 2/trang_15.jpg\",\"chapter/vo_nghich/chapter 2/trang_16.jpg\",\"chapter/vo_nghich/chapter 2/trang_17.jpg\",\"chapter/vo_nghich/chapter 2/trang_18.jpg\",\"chapter/vo_nghich/chapter 2/trang_19.jpg\",\"chapter/vo_nghich/chapter 2/trang_20.jpg\",\"chapter/vo_nghich/chapter 2/trang_21.jpg\",\"chapter/vo_nghich/chapter 2/trang_22.jpg\",\"chapter/vo_nghich/chapter 2/trang_23.jpg\",\"chapter/vo_nghich/chapter 2/trang_24.jpg\",\"chapter/vo_nghich/chapter 2/trang_25.jpg\",\"chapter/vo_nghich/chapter 2/trang_26.jpg\",\"chapter/vo_nghich/chapter 2/trang_27.jpg\",\"chapter/vo_nghich/chapter 2/trang_28.jpg\",\"chapter/vo_nghich/chapter 2/trang_29.jpg\",\"chapter/vo_nghich/chapter 2/trang_30.jpg\",\"chapter/vo_nghich/chapter 2/trang_31.jpg\",\"chapter/vo_nghich/chapter 2/trang_32.jpg\",\"chapter/vo_nghich/chapter 2/trang_33.jpg\",\"chapter/vo_nghich/chapter 2/trang_34.jpg\",\"chapter/vo_nghich/chapter 2/trang_35.jpg\",\"chapter/vo_nghich/chapter 2/trang_36.jpg\",\"chapter/vo_nghich/chapter 2/trang_37.jpg\",\"chapter/vo_nghich/chapter 2/trang_38.jpg\",\"chapter/vo_nghich/chapter 2/trang_39.jpg\",\"chapter/vo_nghich/chapter 2/trang_40.jpg\",\"chapter/vo_nghich/chapter 2/trang_41.jpg\",\"chapter/vo_nghich/chapter 2/trang_42.jpg\",\"chapter/vo_nghich/chapter 2/trang_43.jpg\",\"chapter/vo_nghich/chapter 2/trang_44.jpg\",\"chapter/vo_nghich/chapter 2/trang_45.jpg\",\"chapter/vo_nghich/chapter 2/trang_46.jpg\",\"chapter/vo_nghich/chapter 2/trang_47.jpg\",\"chapter/vo_nghich/chapter 2/trang_48.jpg\",\"chapter/vo_nghich/chapter 2/trang_49.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:14:57', '2024-03-22 14:48:18', 86, 1),
-(47, 'chapter 9 - Võ Luyện Đỉnh Phong', 'chapter-9-vo-luyen-dinh-phong', 'chapter 9', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 9/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_9.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_10.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_11.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:26:59', '2024-03-22 14:54:53', 38, 5),
-(48, 'chapter 10 - Võ Luyện Đỉnh Phong', 'chapter-10-vo-luyen-dinh-phong', 'chapter 10', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 10/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_8.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:27:27', '2024-03-22 14:40:21', 38, 42),
-(49, 'chapter 11 - Võ Luyện Đỉnh Phong', 'chapter-11-vo-luyen-dinh-phong', 'chapter 11', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 11/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_9.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_10.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_11.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:27:56', '2024-03-22 14:40:43', 38, 6);
+(1, 'chapter 1 - Võ Luyện Đỉnh Phong', 'chapter-1-vo-luyen-dinh-phong', 'chapter 1', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 1/trang_0.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_1.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_2.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_3.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_4.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_5.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_6.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_7.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_8.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_9.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_10.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_11.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_12.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_13.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_14.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_15.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_16.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 1/trang_17.jpeg\"]', NULL, NULL, 'ACTIVE', 0, '2024-01-11 06:35:00', '2024-05-09 16:57:20', 38, 243),
+(13, 'chapter 2 - Võ Luyện Đỉnh Phong', 'chapter-2-vo-luyen-dinh-phong', 'chapter 2', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 2/trang_0.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_1.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_2.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_3.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_4.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_5.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_6.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_7.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_8.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_9.jpeg\",\"chapter/vo_luyen_dinh_phong/chapter 2/trang_10.jpeg\"]', NULL, NULL, 'ACTIVE', 0, '2024-01-22 06:42:30', '2024-05-09 16:57:21', 38, 137),
+(14, 'chapter 3 - Võ Luyện Đỉnh Phong', 'chapter-3-vo-luyen-dinh-phong', 'chapter 3', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 3/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 3/trang_9.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-01-24 13:53:34', '2024-05-09 16:57:20', 38, 129),
+(15, 'chapter 1 - Bách Luyện Thành Thần', 'chapter-1-bach-luyen-thanh-than', 'chapter 1', NULL, NULL, NULL, '[\"chapter/bach_luyen_thanh_than/chapter 1/trang_0.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_1.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_2.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_3.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_4.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_5.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_6.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_7.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_8.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_9.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_10.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_11.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_12.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_13.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_14.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_15.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_16.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_17.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_18.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_19.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_20.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_21.jpg\",\"chapter/bach_luyen_thanh_than/chapter 1/trang_22.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-02-01 11:22:17', '2024-03-27 07:06:03', 48, 34),
+(16, 'chapter 2 - Bách Luyện Thành Thần', 'chapter-2-bach-luyen-thanh-than', 'chapter 2', NULL, NULL, NULL, '[\"chapter/bach_luyen_thanh_than/chapter 2/trang_0.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_1.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_2.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_3.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_4.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_5.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_6.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_7.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_8.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_9.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_10.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_11.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_12.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_13.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_14.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_15.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_16.jpg\",\"chapter/bach_luyen_thanh_than/chapter 2/trang_17.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-02-01 11:24:17', '2024-03-27 07:06:01', 48, 38),
+(17, 'chapter 4 - Võ Luyện Đỉnh Phong', 'chapter-4-vo-luyen-dinh-phong', 'chapter 4', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 4/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 4/trang_9.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:06:25', '2024-05-03 03:59:34', 38, 109),
+(18, 'chapter 5 - Võ Luyện Đỉnh Phong', 'chapter-5-vo-luyen-dinh-phong', 'chapter 5', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 5/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_9.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_10.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 5/trang_11.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:10:13', '2024-05-03 03:59:18', 38, 43),
+(19, 'chapter 6 - Võ Luyện Đỉnh Phong', 'chapter-6-vo-luyen-dinh-phong', 'chapter 6', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 6/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 6/trang_7.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:11:11', '2024-05-03 03:59:15', 38, 53),
+(20, 'chapter 7 - Võ Luyện Đỉnh Phong', 'chapter-7-vo-luyen-dinh-phong', 'chapter 7', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 7/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 7/trang_8.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 03:13:23', '2024-05-03 03:59:13', 38, 40),
+(22, 'chapter 1 - Tu Tiên Trở Về Tại Vườn Trường', 'chapter-1-tu-tien-tro-ve-tai-vuon-truong', 'chapter 1', NULL, NULL, NULL, '[\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_0.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_1.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_2.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_3.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_4.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_5.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_6.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_7.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_8.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_9.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_10.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_11.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_12.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_13.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_14.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_15.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_16.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 1/trang_17.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:24:38', '2024-03-27 07:32:43', 83, 32),
+(23, 'chapter 2 - Tu Tiên Trở Về Tại Vườn Trường', 'chapter-2-tu-tien-tro-ve-tai-vuon-truong', 'chapter 2', NULL, NULL, NULL, '[\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_0.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_1.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_2.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_3.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_4.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_5.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_6.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_7.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_8.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_9.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_10.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_11.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_12.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_13.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_14.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 2/trang_15.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:25:58', '2024-03-27 07:31:27', 83, 30),
+(24, 'chapter 3 - Tu Tiên Trở Về Tại Vườn Trường', 'chapter-3-tu-tien-tro-ve-tai-vuon-truong', 'chapter 3', NULL, NULL, NULL, '[\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_0.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_1.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_2.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_3.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_4.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_5.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_6.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_7.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_8.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_9.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_10.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_11.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_12.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_13.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_14.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_15.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_16.jpg\",\"chapter/tu_tien_tro_ve_tai_vuon_truong/chapter 3/trang_17.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:26:52', '2024-05-09 16:57:24', 83, 56),
+(25, 'chapter 1 - Trọng Sinh Đô Thị Tu Tiên', 'chapter-1-trong-sinh-do-thi-tu-tien', 'chapter 1', NULL, NULL, NULL, '[\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_0.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_1.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_2.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_3.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_4.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_5.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_6.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_7.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_8.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_9.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_10.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_11.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_12.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_13.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_14.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_15.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_16.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_17.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_18.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_19.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_20.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_21.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_22.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_23.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_24.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_25.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_26.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 1/trang_27.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:29:06', '2024-03-27 07:23:51', 81, 26),
+(26, 'chapter 2 - Trọng Sinh Đô Thị Tu Tiên', 'chapter-2-trong-sinh-do-thi-tu-tien', 'chapter 2', NULL, NULL, NULL, '[\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_0.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_1.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_2.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_3.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_4.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_5.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_6.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_7.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_8.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_9.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_10.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_11.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 2/trang_12.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:30:04', '2024-03-27 07:22:47', 81, 24),
+(27, 'chapter 3 - Trọng Sinh Đô Thị Tu Tiên', 'chapter-3-trong-sinh-do-thi-tu-tien', 'chapter 3', NULL, NULL, NULL, '[\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_0.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_1.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_2.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_3.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_4.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_5.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_6.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_7.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_8.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_9.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_10.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_11.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_12.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_13.jpg\",\"chapter/trong_sinh_do_thi_tu_tien/chapter 3/trang_14.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:31:06', '2024-05-09 16:57:25', 81, 47),
+(28, 'chapter 1 - Tiên Vương Trùng Sinh', 'chapter-1-tien-vuong-trung-sinh', 'chapter 1', NULL, NULL, NULL, '[\"chapter/tien_vuong_trung_sinh/chapter 1/trang_0.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_1.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_2.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_3.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_4.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_5.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_6.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_7.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_8.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_9.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_10.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_11.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_12.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_13.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_14.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_15.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_16.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_17.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_18.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_19.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_20.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_21.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_22.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_23.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_24.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_25.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_26.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_27.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_28.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_29.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_30.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_31.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_32.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_33.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_34.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_35.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_36.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 1/trang_37.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:33:36', '2024-03-27 07:11:35', 53, 32),
+(29, 'chapter 2 - Tiên Vương Trùng Sinh', 'chapter-2-tien-vuong-trung-sinh', 'chapter 2', NULL, NULL, NULL, '[\"chapter/tien_vuong_trung_sinh/chapter 2/trang_0.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_1.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_2.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_3.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_4.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_5.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_6.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_7.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_8.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_9.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_10.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_11.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_12.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_13.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_14.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_15.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_16.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_17.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_18.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_19.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_20.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_21.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_22.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_23.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_24.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_25.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_26.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_27.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_28.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_29.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_30.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_31.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_32.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 2/trang_33.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:34:51', '2024-03-27 07:09:08', 53, 31),
+(30, 'chapter 3 - Tiên Vương Trùng Sinh', 'chapter-3-tien-vuong-trung-sinh', 'chapter 3', NULL, NULL, NULL, '[\"chapter/tien_vuong_trung_sinh/chapter 3/trang_0.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_1.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_2.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_3.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_4.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_5.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_6.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_7.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_8.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_9.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_10.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_11.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_12.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_13.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_14.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_15.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_16.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_17.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_18.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_19.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_20.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_21.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_22.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_23.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_24.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_25.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_26.jpg\",\"chapter/tien_vuong_trung_sinh/chapter 3/trang_27.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-02 04:35:55', '2024-05-09 16:57:24', 53, 53),
+(31, 'chapter 1 - Bạn Gái Zombie Của Tôi', 'chapter-1-ban-gai-zombie-cua-toi', 'chapter 1', NULL, NULL, NULL, '[\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_0.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_1.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_2.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_3.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_4.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_5.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_6.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_7.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_8.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_9.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_10.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_11.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_12.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_13.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_14.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_15.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_16.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_17.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_18.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_19.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_20.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_21.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_22.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_23.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_24.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_25.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_26.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_27.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_28.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_29.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_30.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_31.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_32.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_33.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_34.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_35.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_36.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_37.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_38.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_39.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_40.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_41.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_42.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_43.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_44.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_45.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_46.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_47.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_48.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_49.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_50.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_51.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_52.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_53.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_54.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_55.jpg\",\"chapter/ban_gai_zombie_cua_toi/chapter 1/trang_56.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-10 04:08:39', '2024-05-09 16:57:25', 56, 56),
+(32, 'chapter 3 - Bách Luyện Thành Thần', 'chapter-3-bach-luyen-thanh-than', 'chapter 3', NULL, NULL, NULL, '[\"chapter/bach_luyen_thanh_than/chapter 3/trang_0.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_1.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_2.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_3.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_4.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_5.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_6.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_7.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_8.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_9.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_10.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_11.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_12.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_13.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_14.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_15.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_16.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_17.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_18.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_19.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_20.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_21.jpg\",\"chapter/bach_luyen_thanh_than/chapter 3/trang_22.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:49:47', '2024-05-09 16:57:25', 48, 50),
+(33, 'chapter 8 - Võ Luyện Đỉnh Phong', 'chapter-8-vo-luyen-dinh-phong', 'chapter 8', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 8/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 8/trang_7.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:51:19', '2024-05-03 03:59:12', 38, 49),
+(34, 'chapter 1 - Mạt Thế Vi Vương', 'chapter-1-mat-the-vi-vuong', 'chapter 1', NULL, NULL, NULL, '[\"chapter/mat_the_vi_vuong/chapter 1/trang_0.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_1.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_2.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_3.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_4.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_5.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_6.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_7.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_8.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_9.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_10.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_11.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_12.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_13.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_14.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_15.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_16.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_17.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_18.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_19.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_20.jpg\",\"chapter/mat_the_vi_vuong/chapter 1/trang_21.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:53:17', '2024-03-27 06:45:11', 65, 24),
+(35, 'chapter 2 - Mạt Thế Vi Vương', 'chapter-2-mat-the-vi-vuong', 'chapter 2', NULL, NULL, NULL, '[\"chapter/mat_the_vi_vuong/chapter 2/trang_0.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_1.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_2.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_3.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_4.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_5.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_6.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_7.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_8.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_9.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_10.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_11.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_12.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_13.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_14.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_15.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_16.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_17.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_18.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_19.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_20.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_21.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_22.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_23.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_24.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_25.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_26.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_27.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_28.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_29.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_30.jpg\",\"chapter/mat_the_vi_vuong/chapter 2/trang_31.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:54:49', '2024-03-27 06:42:51', 65, 24),
+(36, 'chapter 3 - Mạt Thế Vi Vương', 'chapter-3-mat-the-vi-vuong', 'chapter 3', NULL, NULL, NULL, '[\"chapter/mat_the_vi_vuong/chapter 3/trang_0.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_1.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_2.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_3.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_4.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_5.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_6.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_7.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_8.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_9.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_10.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_11.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_12.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_13.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_14.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_15.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_16.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_17.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_18.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_19.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_20.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_21.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_22.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_23.jpg\",\"chapter/mat_the_vi_vuong/chapter 3/trang_24.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:55:31', '2024-05-09 16:57:26', 65, 51),
+(37, 'chapter 1 - Thả Vu Nữ Đó Ra', 'chapter-1-tha-vu-nu-do-ra', 'chapter 1', NULL, NULL, NULL, '[\"chapter/tha_vu_nu_do_ra/chapter 1/trang_0.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_1.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_2.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_3.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_4.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_5.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_6.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_7.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_8.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_9.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_10.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_11.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_12.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_13.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_14.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 1/trang_15.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:56:27', '2024-03-27 06:39:40', 54, 37),
+(38, 'chapter 2 - Thả Vu Nữ Đó Ra', 'chapter-2-tha-vu-nu-do-ra', 'chapter 2', NULL, NULL, NULL, '[\"chapter/tha_vu_nu_do_ra/chapter 2/trang_0.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_1.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_2.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_3.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_4.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_5.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_6.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_7.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_8.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_9.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_10.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_11.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_12.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_13.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_14.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_15.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_16.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_17.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_18.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 2/trang_19.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:57:08', '2024-03-27 06:38:07', 54, 30),
+(39, 'chapter 3 - Thả Vu Nữ Đó Ra', 'chapter-3-tha-vu-nu-do-ra', 'chapter 3', NULL, NULL, NULL, '[\"chapter/tha_vu_nu_do_ra/chapter 3/trang_0.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_1.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_2.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_3.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_4.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_5.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_6.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_7.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_8.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_9.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_10.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_11.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_12.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_13.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_14.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_15.jpg\",\"chapter/tha_vu_nu_do_ra/chapter 3/trang_16.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:57:40', '2024-05-09 16:57:26', 54, 52),
+(40, 'chapter 0 - Nghịch Thiên Tà Thần', 'chapter-0-nghich-thien-ta-than', 'chapter 0', NULL, NULL, NULL, '[\"chapter/nghich_thien_ta_than/chapter 0/trang_0.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_1.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_2.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_3.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_4.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_5.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_6.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_7.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_8.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_9.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_10.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_11.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_12.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_13.jpg\",\"chapter/nghich_thien_ta_than/chapter 0/trang_14.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:58:53', '2024-03-27 07:01:11', 67, 29),
+(41, 'chapter 1 - Nghịch Thiên Tà Thần', 'chapter-1-nghich-thien-ta-than', 'chapter 1', NULL, NULL, NULL, '[\"chapter/nghich_thien_ta_than/chapter 1/trang_0.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_1.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_2.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_3.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_4.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_5.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_6.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_7.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_8.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_9.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_10.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_11.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_12.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_13.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_14.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_15.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_16.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_17.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_18.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_19.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_20.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_21.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_22.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_23.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_24.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_25.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_26.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_27.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_28.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_29.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_30.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_31.jpg\",\"chapter/nghich_thien_ta_than/chapter 1/trang_32.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 13:59:45', '2024-05-09 16:57:26', 67, 50),
+(42, 'chapter 1 - Thảm Họa Tử Linh Sư', 'chapter-1-tham-hoa-tu-linh-su', 'chapter 1', NULL, NULL, NULL, '[\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_0.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_1.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_2.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_3.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_4.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_5.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_6.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_7.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_8.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_9.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_10.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_11.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_12.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 1/trang_13.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 15:13:13', '2024-03-27 06:55:51', 11, 25),
+(43, 'chapter 2 - Thảm Họa Tử Linh Sư', 'chapter-2-tham-hoa-tu-linh-su', 'chapter 2', NULL, NULL, NULL, '[\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_0.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_1.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_2.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_3.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_4.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_5.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_6.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_7.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_8.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_9.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_10.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 2/trang_11.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 15:13:40', '2024-03-27 06:54:51', 11, 25),
+(44, 'chapter 3 - Thảm Họa Tử Linh Sư', 'chapter-3-tham-hoa-tu-linh-su', 'chapter 3', NULL, NULL, NULL, '[\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_0.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_1.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_2.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_3.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_4.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_5.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_6.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_7.jpg\",\"chapter/tham_hoa_tu_linh_su/chapter 3/trang_8.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-11 15:16:18', '2024-05-09 16:57:26', 11, 49),
+(45, 'chapter 1 - Võ Nghịch', 'chapter-1-vo-nghich', 'chapter 1', NULL, NULL, NULL, '[\"chapter/vo_nghich/chapter 1/trang_0.jpg\",\"chapter/vo_nghich/chapter 1/trang_1.jpg\",\"chapter/vo_nghich/chapter 1/trang_2.jpg\",\"chapter/vo_nghich/chapter 1/trang_3.jpg\",\"chapter/vo_nghich/chapter 1/trang_4.jpg\",\"chapter/vo_nghich/chapter 1/trang_5.jpg\",\"chapter/vo_nghich/chapter 1/trang_6.jpg\",\"chapter/vo_nghich/chapter 1/trang_7.jpg\",\"chapter/vo_nghich/chapter 1/trang_8.jpg\",\"chapter/vo_nghich/chapter 1/trang_9.jpg\",\"chapter/vo_nghich/chapter 1/trang_10.jpg\",\"chapter/vo_nghich/chapter 1/trang_11.jpg\",\"chapter/vo_nghich/chapter 1/trang_12.jpg\",\"chapter/vo_nghich/chapter 1/trang_13.jpg\",\"chapter/vo_nghich/chapter 1/trang_14.jpg\",\"chapter/vo_nghich/chapter 1/trang_15.jpg\",\"chapter/vo_nghich/chapter 1/trang_16.jpg\",\"chapter/vo_nghich/chapter 1/trang_17.jpg\",\"chapter/vo_nghich/chapter 1/trang_18.jpg\",\"chapter/vo_nghich/chapter 1/trang_19.jpg\",\"chapter/vo_nghich/chapter 1/trang_20.jpg\",\"chapter/vo_nghich/chapter 1/trang_21.jpg\",\"chapter/vo_nghich/chapter 1/trang_22.jpg\",\"chapter/vo_nghich/chapter 1/trang_23.jpg\",\"chapter/vo_nghich/chapter 1/trang_24.jpg\",\"chapter/vo_nghich/chapter 1/trang_25.jpg\",\"chapter/vo_nghich/chapter 1/trang_26.jpg\",\"chapter/vo_nghich/chapter 1/trang_27.jpg\",\"chapter/vo_nghich/chapter 1/trang_28.jpg\",\"chapter/vo_nghich/chapter 1/trang_29.jpg\",\"chapter/vo_nghich/chapter 1/trang_30.jpg\",\"chapter/vo_nghich/chapter 1/trang_31.jpg\",\"chapter/vo_nghich/chapter 1/trang_32.jpg\",\"chapter/vo_nghich/chapter 1/trang_33.jpg\",\"chapter/vo_nghich/chapter 1/trang_34.jpg\",\"chapter/vo_nghich/chapter 1/trang_35.jpg\",\"chapter/vo_nghich/chapter 1/trang_36.jpg\",\"chapter/vo_nghich/chapter 1/trang_37.jpg\",\"chapter/vo_nghich/chapter 1/trang_38.jpg\",\"chapter/vo_nghich/chapter 1/trang_39.jpg\",\"chapter/vo_nghich/chapter 1/trang_40.jpg\",\"chapter/vo_nghich/chapter 1/trang_41.jpg\",\"chapter/vo_nghich/chapter 1/trang_42.jpg\",\"chapter/vo_nghich/chapter 1/trang_43.jpg\",\"chapter/vo_nghich/chapter 1/trang_44.jpg\",\"chapter/vo_nghich/chapter 1/trang_45.jpg\",\"chapter/vo_nghich/chapter 1/trang_46.jpg\",\"chapter/vo_nghich/chapter 1/trang_47.jpg\",\"chapter/vo_nghich/chapter 1/trang_48.jpg\",\"chapter/vo_nghich/chapter 1/trang_49.jpg\",\"chapter/vo_nghich/chapter 1/trang_50.jpg\",\"chapter/vo_nghich/chapter 1/trang_51.jpg\",\"chapter/vo_nghich/chapter 1/trang_52.jpg\",\"chapter/vo_nghich/chapter 1/trang_53.jpg\",\"chapter/vo_nghich/chapter 1/trang_54.jpg\",\"chapter/vo_nghich/chapter 1/trang_55.jpg\",\"chapter/vo_nghich/chapter 1/trang_56.jpg\",\"chapter/vo_nghich/chapter 1/trang_57.jpg\",\"chapter/vo_nghich/chapter 1/trang_58.jpg\",\"chapter/vo_nghich/chapter 1/trang_59.jpg\",\"chapter/vo_nghich/chapter 1/trang_60.jpg\",\"chapter/vo_nghich/chapter 1/trang_61.jpg\",\"chapter/vo_nghich/chapter 1/trang_62.jpg\",\"chapter/vo_nghich/chapter 1/trang_63.jpg\",\"chapter/vo_nghich/chapter 1/trang_64.jpg\",\"chapter/vo_nghich/chapter 1/trang_65.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:13:36', '2024-03-27 06:21:20', 86, 27),
+(46, 'chapter 2 - Võ Nghịch', 'chapter-2-vo-nghich', 'chapter 2', NULL, NULL, NULL, '[\"chapter/vo_nghich/chapter 2/trang_0.jpg\",\"chapter/vo_nghich/chapter 2/trang_1.jpg\",\"chapter/vo_nghich/chapter 2/trang_2.jpg\",\"chapter/vo_nghich/chapter 2/trang_3.jpg\",\"chapter/vo_nghich/chapter 2/trang_4.jpg\",\"chapter/vo_nghich/chapter 2/trang_5.jpg\",\"chapter/vo_nghich/chapter 2/trang_6.jpg\",\"chapter/vo_nghich/chapter 2/trang_7.jpg\",\"chapter/vo_nghich/chapter 2/trang_8.jpg\",\"chapter/vo_nghich/chapter 2/trang_9.jpg\",\"chapter/vo_nghich/chapter 2/trang_10.jpg\",\"chapter/vo_nghich/chapter 2/trang_11.jpg\",\"chapter/vo_nghich/chapter 2/trang_12.jpg\",\"chapter/vo_nghich/chapter 2/trang_13.jpg\",\"chapter/vo_nghich/chapter 2/trang_14.jpg\",\"chapter/vo_nghich/chapter 2/trang_15.jpg\",\"chapter/vo_nghich/chapter 2/trang_16.jpg\",\"chapter/vo_nghich/chapter 2/trang_17.jpg\",\"chapter/vo_nghich/chapter 2/trang_18.jpg\",\"chapter/vo_nghich/chapter 2/trang_19.jpg\",\"chapter/vo_nghich/chapter 2/trang_20.jpg\",\"chapter/vo_nghich/chapter 2/trang_21.jpg\",\"chapter/vo_nghich/chapter 2/trang_22.jpg\",\"chapter/vo_nghich/chapter 2/trang_23.jpg\",\"chapter/vo_nghich/chapter 2/trang_24.jpg\",\"chapter/vo_nghich/chapter 2/trang_25.jpg\",\"chapter/vo_nghich/chapter 2/trang_26.jpg\",\"chapter/vo_nghich/chapter 2/trang_27.jpg\",\"chapter/vo_nghich/chapter 2/trang_28.jpg\",\"chapter/vo_nghich/chapter 2/trang_29.jpg\",\"chapter/vo_nghich/chapter 2/trang_30.jpg\",\"chapter/vo_nghich/chapter 2/trang_31.jpg\",\"chapter/vo_nghich/chapter 2/trang_32.jpg\",\"chapter/vo_nghich/chapter 2/trang_33.jpg\",\"chapter/vo_nghich/chapter 2/trang_34.jpg\",\"chapter/vo_nghich/chapter 2/trang_35.jpg\",\"chapter/vo_nghich/chapter 2/trang_36.jpg\",\"chapter/vo_nghich/chapter 2/trang_37.jpg\",\"chapter/vo_nghich/chapter 2/trang_38.jpg\",\"chapter/vo_nghich/chapter 2/trang_39.jpg\",\"chapter/vo_nghich/chapter 2/trang_40.jpg\",\"chapter/vo_nghich/chapter 2/trang_41.jpg\",\"chapter/vo_nghich/chapter 2/trang_42.jpg\",\"chapter/vo_nghich/chapter 2/trang_43.jpg\",\"chapter/vo_nghich/chapter 2/trang_44.jpg\",\"chapter/vo_nghich/chapter 2/trang_45.jpg\",\"chapter/vo_nghich/chapter 2/trang_46.jpg\",\"chapter/vo_nghich/chapter 2/trang_47.jpg\",\"chapter/vo_nghich/chapter 2/trang_48.jpg\",\"chapter/vo_nghich/chapter 2/trang_49.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:14:57', '2024-05-09 16:57:27', 86, 53),
+(47, 'chapter 9 - Võ Luyện Đỉnh Phong', 'chapter-9-vo-luyen-dinh-phong', 'chapter 9', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 9/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_9.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_10.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 9/trang_11.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:26:59', '2024-05-03 03:59:11', 38, 50),
+(48, 'chapter 10 - Võ Luyện Đỉnh Phong', 'chapter-10-vo-luyen-dinh-phong', 'chapter 10', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 10/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 10/trang_8.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:27:27', '2024-05-03 03:53:53', 38, 82),
+(49, 'chapter 11 - Võ Luyện Đỉnh Phong', 'chapter-11-vo-luyen-dinh-phong', 'chapter 11', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 11/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_9.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_10.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 11/trang_11.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-12 08:27:56', '2024-04-18 03:26:19', 38, 58);
 INSERT INTO `chapter` (`id`, `title`, `slug`, `title_name`, `seo_title`, `excerpt`, `body`, `media`, `meta_description`, `meta_keywords`, `status`, `featured`, `created_at`, `updated_at`, `bookstory_id`, `view`) VALUES
-(50, 'chapter 1 - Tôi Là Thiên Ma Truyền Nhân', 'chapter-1-toi-la-thien-ma-truyen-nhan', 'chapter 1', NULL, NULL, NULL, '[\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_0.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_1.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_2.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_3.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_4.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_5.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_6.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_7.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_8.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_9.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_10.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_11.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_12.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-13 03:01:52', '2024-03-22 14:36:21', 80, 3),
-(51, 'chapter 2 - Tôi Là Thiên Ma Truyền Nhân', 'chapter-2-toi-la-thien-ma-truyen-nhan', 'chapter 2', NULL, NULL, NULL, '[\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_0.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_1.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_2.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_3.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_4.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_5.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_6.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_7.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_8.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_9.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_10.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_11.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_12.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_13.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_14.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_15.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_16.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_17.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_18.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_19.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_20.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_21.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_22.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_23.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_24.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_25.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_26.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_27.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_28.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_29.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_30.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_31.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_32.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_33.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_34.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_35.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_36.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_37.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_38.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_39.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_40.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_41.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_42.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_43.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_44.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_45.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-13 03:19:33', '2024-03-22 14:46:04', 80, 8);
+(50, 'chapter 1 - Tôi Là Thiên Ma Truyền Nhân', 'chapter-1-toi-la-thien-ma-truyen-nhan', 'chapter 1', NULL, NULL, NULL, '[\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_0.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_1.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_2.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_3.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_4.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_5.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_6.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_7.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_8.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_9.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_10.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_11.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 1/trang_12.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-13 03:01:52', '2024-03-27 07:26:00', 80, 32),
+(51, 'chapter 2 - Tôi Là Thiên Ma Truyền Nhân', 'chapter-2-toi-la-thien-ma-truyen-nhan', 'chapter 2', NULL, NULL, NULL, '[\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_0.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_1.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_2.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_3.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_4.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_5.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_6.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_7.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_8.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_9.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_10.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_11.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_12.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_13.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_14.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_15.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_16.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_17.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_18.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_19.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_20.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_21.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_22.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_23.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_24.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_25.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_26.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_27.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_28.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_29.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_30.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_31.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_32.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_33.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_34.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_35.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_36.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_37.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_38.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_39.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_40.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_41.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_42.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_43.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_44.jpg\",\"chapter/toi_la_thien_ma_truyen_nhan/chapter 2/trang_45.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-03-13 03:19:33', '2024-05-11 06:14:49', 80, 60),
+(52, 'chapter 12 - Võ Luyện Đỉnh Phong', 'chapter-12-vo-luyen-dinh-phong', 'chapter 12', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 12/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 12/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 12/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 12/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 12/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 12/trang_5.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-04-22 03:16:43', '2024-05-03 03:57:55', 38, 17),
+(53, 'chapter 13 - Võ Luyện Đỉnh Phong', 'chapter-13-vo-luyen-dinh-phong', 'chapter 13', NULL, NULL, NULL, '[\"chapter/vo_luyen_dinh_phong/chapter 13/trang_0.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 13/trang_1.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 13/trang_2.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 13/trang_3.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 13/trang_4.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 13/trang_5.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 13/trang_6.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 13/trang_7.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 13/trang_8.jpg\",\"chapter/vo_luyen_dinh_phong/chapter 13/trang_9.jpg\"]', NULL, NULL, 'ACTIVE', 0, '2024-04-22 03:17:15', '2024-05-09 16:57:28', 38, 17);
 
 -- --------------------------------------------------------
 
@@ -298,19 +301,19 @@ INSERT INTO `chapter` (`id`, `title`, `slug`, `title_name`, `seo_title`, `excerp
 --
 
 CREATE TABLE `data_rows` (
-  `id` int UNSIGNED NOT NULL,
-  `data_type_id` int UNSIGNED NOT NULL,
-  `field` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `required` tinyint(1) NOT NULL DEFAULT '0',
-  `browse` tinyint(1) NOT NULL DEFAULT '1',
-  `read` tinyint(1) NOT NULL DEFAULT '1',
-  `edit` tinyint(1) NOT NULL DEFAULT '1',
-  `add` tinyint(1) NOT NULL DEFAULT '1',
-  `delete` tinyint(1) NOT NULL DEFAULT '1',
-  `details` text COLLATE utf8mb4_unicode_ci,
-  `order` int NOT NULL DEFAULT '1'
+  `id` int(10) UNSIGNED NOT NULL,
+  `data_type_id` int(10) UNSIGNED NOT NULL,
+  `field` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
+  `required` tinyint(1) NOT NULL DEFAULT 0,
+  `browse` tinyint(1) NOT NULL DEFAULT 1,
+  `read` tinyint(1) NOT NULL DEFAULT 1,
+  `edit` tinyint(1) NOT NULL DEFAULT 1,
+  `add` tinyint(1) NOT NULL DEFAULT 1,
+  `delete` tinyint(1) NOT NULL DEFAULT 1,
+  `details` text DEFAULT NULL,
+  `order` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -429,8 +432,8 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (166, 23, 'created_at', 'timestamp', 'Ngày tạo', 0, 0, 1, 0, 0, 0, '{}', 7),
 (167, 23, 'updated_at', 'timestamp', 'Ngày cập nhật', 0, 0, 1, 0, 0, 0, '{}', 8),
 (169, 22, 'media', 'media_picker', 'Hình ảnh', 0, 0, 1, 1, 1, 1, '{\"max\":1000,\"min\":0,\"expanded\":true,\"show_folders\":true,\"show_toolbar\":true,\"allow_upload\":true,\"allow_move\":true,\"allow_delete\":true,\"allow_create_folder\":true,\"allow_rename\":true,\"allow_crop\":true,\"allowed\":[],\"hide_thumbnails\":false,\"quality\":90,\"description\":\"D\\u00f9ng \\u0111\\u1ec3 nh\\u1eadp h\\u00ecnh \\u1ea3nh.\"}', 14),
-(170, 17, 'statusproblem', 'select_dropdown', 'Statusproblem', 0, 1, 1, 1, 1, 1, '{\"default\":\"\\u0110ang C\\u1eadp Nh\\u1eadt\",\"options\":{\"\\u0110ang C\\u1eadp Nh\\u1eadt\":\"\\u0110ang C\\u1eadp Nh\\u1eadt\",\"\\u0110\\u00e3 Ho\\u00e0n Th\\u00e0nh\":\"\\u0110\\u00e3 Ho\\u00e0n Th\\u00e0nh\"},\"description\":\"D\\u00f9ng \\u0111\\u1ec3 xem tr\\u1ea1ng th\\u00e1i truy\\u1ec7n \\u0110ang c\\u1eadp nh\\u1eadt v\\u00e0 \\u0110\\u00e3 ho\\u00e0n th\\u00e0nh.\",\"display\":{\"width\":\"3\"}}', 7),
-(171, 17, 'follow', 'text', 'Follow', 0, 0, 0, 0, 0, 0, '{}', 16),
+(170, 17, 'statusproblem', 'select_dropdown', 'Tình trạng', 0, 1, 1, 1, 1, 1, '{\"default\":\"\\u0110ang C\\u1eadp Nh\\u1eadt\",\"options\":{\"\\u0110ang C\\u1eadp Nh\\u1eadt\":\"\\u0110ang C\\u1eadp Nh\\u1eadt\",\"\\u0110\\u00e3 Ho\\u00e0n Th\\u00e0nh\":\"\\u0110\\u00e3 Ho\\u00e0n Th\\u00e0nh\"},\"description\":\"D\\u00f9ng \\u0111\\u1ec3 xem tr\\u1ea1ng th\\u00e1i truy\\u1ec7n \\u0110ang c\\u1eadp nh\\u1eadt v\\u00e0 \\u0110\\u00e3 ho\\u00e0n th\\u00e0nh.\",\"display\":{\"width\":\"3\"}}', 7),
+(171, 17, 'follow', 'text', 'Follow', 1, 0, 0, 0, 0, 0, '{}', 16),
 (172, 23, 'body', 'rich_text_box', 'Giới thiệu', 0, 0, 1, 1, 1, 1, '{\"description\":\"D\\u00f9ng \\u0111\\u1ec3 nh\\u1eadp gi\\u1edbi thi\\u1ec7u.\"}', 6),
 (173, 25, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
 (174, 25, 'bookstory_id', 'text', 'Bookstory Id', 0, 1, 1, 1, 1, 1, '{}', 2),
@@ -473,7 +476,8 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (212, 26, 'pivot_table_readhistory_belongsto_chapter_relationship', 'relationship', 'Tên chapter', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Chapter\",\"table\":\"chapter\",\"type\":\"belongsTo\",\"column\":\"chapter_id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"bookstory\",\"pivot\":\"0\",\"taggable\":\"0\"}', 7),
 (213, 25, 'pivot_table_error_belongsto_bookstory_relationship', 'relationship', 'Tên truyện', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Bookstory\",\"table\":\"bookstory\",\"type\":\"belongsTo\",\"column\":\"bookstory_id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"bookstory\",\"pivot\":\"0\",\"taggable\":\"0\"}', 3),
 (214, 25, 'pivot_table_error_belongsto_chapter_relationship', 'relationship', 'Tên chapter', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Chapter\",\"table\":\"chapter\",\"type\":\"belongsTo\",\"column\":\"chapter_id\",\"key\":\"id\",\"label\":\"title\",\"pivot_table\":\"bookstory\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
-(215, 22, 'view', 'text', 'View', 1, 1, 1, 0, 0, 0, '{}', 16);
+(215, 22, 'view', 'text', 'View', 1, 1, 1, 0, 0, 0, '{}', 16),
+(216, 17, 'view', 'text', 'View', 1, 1, 1, 1, 1, 1, '{}', 17);
 
 -- --------------------------------------------------------
 
@@ -482,19 +486,19 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 --
 
 CREATE TABLE `data_types` (
-  `id` int UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name_singular` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name_plural` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `model_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `policy_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `controller` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `generate_permissions` tinyint(1) NOT NULL DEFAULT '0',
-  `server_side` tinyint NOT NULL DEFAULT '0',
-  `details` text COLLATE utf8mb4_unicode_ci,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `display_name_singular` varchar(255) NOT NULL,
+  `display_name_plural` varchar(255) NOT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `model_name` varchar(255) DEFAULT NULL,
+  `policy_name` varchar(255) DEFAULT NULL,
+  `controller` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `generate_permissions` tinyint(1) NOT NULL DEFAULT 0,
+  `server_side` tinyint(4) NOT NULL DEFAULT 0,
+  `details` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -511,7 +515,7 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (5, 'posts', 'posts', 'Post', 'Posts', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2023-11-16 00:53:20', '2024-02-26 09:43:47'),
 (6, 'pages', 'pages', 'Page', 'Pages', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"desc\",\"default_search_key\":null,\"scope\":null}', '2023-11-16 00:53:20', '2024-02-29 09:38:53'),
 (16, 'category', 'category', 'thể loại', 'thể loại', 'voyager-categories', 'App\\Models\\Category', NULL, '\\App\\Http\\Controllers\\admin\\categoryController', NULL, 1, 0, '{\"order_column\":\"slug\",\"order_display_column\":\"slug\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-01-08 19:19:02', '2024-01-24 13:54:34'),
-(17, 'bookstory', 'bookstory', 'Truyện', 'Truyện', 'voyager-book', 'App\\Models\\Bookstory', NULL, '\\App\\Http\\Controllers\\admin\\bookstoryController', NULL, 1, 0, '{\"order_column\":\"slug\",\"order_display_column\":\"slug\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-01-09 02:56:42', '2024-01-25 09:19:21'),
+(17, 'bookstory', 'bookstory', 'Truyện', 'Truyện', 'voyager-book', 'App\\Models\\Bookstory', NULL, '\\App\\Http\\Controllers\\admin\\bookstoryController', NULL, 1, 0, '{\"order_column\":\"slug\",\"order_display_column\":\"slug\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-01-09 02:56:42', '2024-04-21 08:23:18'),
 (20, 'pivote_bookstory_category', 'pivote-bookstory-category', 'Liên kết giữa truyện và thể loại', 'Liên kết giữa truyện và thể loại', 'voyager-heart', 'App\\Models\\Pivote_Bookstory_Category', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-01-10 07:56:49', '2024-01-10 08:00:26'),
 (22, 'chapter', 'chapter', 'Chapter', 'Chapter', 'voyager-file-text', 'App\\Models\\Chapter', NULL, '\\App\\Http\\Controllers\\admin\\chapterController', NULL, 1, 0, '{\"order_column\":\"slug\",\"order_display_column\":\"slug\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-01-11 07:27:08', '2024-03-02 03:54:57'),
 (23, 'publisher', 'publisher', 'Tài khoản người dùng', 'Tài khoản người dùng', 'voyager-people', 'App\\Models\\Publisher', NULL, '\\App\\Http\\Controllers\\admin\\publisherController', NULL, 1, 0, '{\"order_column\":\"email\",\"order_display_column\":\"email\",\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2024-01-13 09:31:02', '2024-03-13 03:16:37'),
@@ -528,13 +532,13 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -544,8 +548,8 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `menus` (
-  `id` int UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -564,19 +568,19 @@ INSERT INTO `menus` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `menu_items` (
-  `id` int UNSIGNED NOT NULL,
-  `menu_id` int UNSIGNED DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `target` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self',
-  `icon_class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parent_id` int DEFAULT NULL,
-  `order` int NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `menu_id` int(10) UNSIGNED DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `target` varchar(255) NOT NULL DEFAULT '_self',
+  `icon_class` varchar(255) DEFAULT NULL,
+  `color` varchar(255) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `order` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `route` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parameters` text COLLATE utf8mb4_unicode_ci
+  `route` varchar(255) DEFAULT NULL,
+  `parameters` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -598,7 +602,7 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (13, 1, 'Pages', '', '_self', 'voyager-file-text', NULL, 19, 2, '2023-11-16 00:53:20', '2024-01-10 07:57:41', 'voyager.pages.index', NULL),
 (16, 1, 'Thể loại', '', '_self', 'voyager-categories', '#000000', 18, 2, '2024-01-08 19:19:02', '2024-01-13 09:31:15', 'voyager.category.index', 'null'),
 (17, 1, 'Truyện', '', '_self', 'voyager-book', NULL, 18, 3, '2024-01-09 02:56:42', '2024-01-13 09:31:15', 'voyager.bookstory.index', NULL),
-(18, 1, 'Tiện ích', '', '_self', 'voyager-window-list', '#000000', NULL, 5, '2024-01-09 07:23:45', '2024-01-09 07:24:41', NULL, ''),
+(18, 1, 'Quản lý', '', '_self', 'voyager-window-list', '#000000', NULL, 5, '2024-01-09 07:23:45', '2024-04-16 06:10:34', NULL, ''),
 (19, 1, 'Khác', '', '_self', 'voyager-archive', '#000000', NULL, 6, '2024-01-09 07:31:06', '2024-02-27 09:58:58', NULL, ''),
 (22, 1, 'Liên kết giữa truyện và thể loại', '', '_self', 'voyager-heart', NULL, 18, 10, '2024-01-10 07:56:49', '2024-02-27 13:27:40', 'voyager.pivote-bookstory-category.index', NULL),
 (24, 1, 'Chapter', '', '_self', 'voyager-file-text', NULL, 18, 4, '2024-01-11 07:27:08', '2024-01-13 09:31:15', 'voyager.chapter.index', NULL),
@@ -616,9 +620,9 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 --
 
 CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -662,16 +666,16 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `pages` (
-  `id` int UNSIGNED NOT NULL,
-  `author_id` int NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci,
-  `image` text COLLATE utf8mb4_unicode_ci,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
+  `id` int(10) UNSIGNED NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `excerpt` text DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `image` text DEFAULT NULL,
+  `slug` varchar(255) NOT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'INACTIVE',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -690,8 +694,8 @@ INSERT INTO `pages` (`id`, `author_id`, `title`, `excerpt`, `body`, `image`, `sl
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -702,9 +706,9 @@ CREATE TABLE `password_reset_tokens` (
 --
 
 CREATE TABLE `permissions` (
-  `id` bigint UNSIGNED NOT NULL,
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `key` varchar(255) NOT NULL,
+  `table_name` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -812,8 +816,8 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 --
 
 CREATE TABLE `permission_role` (
-  `permission_id` bigint UNSIGNED NOT NULL,
-  `role_id` bigint UNSIGNED NOT NULL
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -919,12 +923,12 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 --
 
 CREATE TABLE `personal_access_tokens` (
-  `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -938,9 +942,9 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `pivote_bookstory_category` (
-  `id` int UNSIGNED NOT NULL,
-  `bookstory_id` int DEFAULT NULL,
-  `category_id` int DEFAULT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `bookstory_id` int(11) UNSIGNED DEFAULT NULL,
+  `category_id` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -948,21 +952,21 @@ CREATE TABLE `pivote_bookstory_category` (
 --
 
 INSERT INTO `pivote_bookstory_category` (`id`, `bookstory_id`, `category_id`) VALUES
-(12, 11, 36),
-(13, 11, 38),
-(14, 11, 43),
 (15, 11, 20),
 (16, 11, 24),
 (17, 11, 29),
 (18, 11, 33),
+(12, 11, 36),
+(13, 11, 38),
+(14, 11, 43),
+(23, 29, 19),
 (19, 29, 38),
 (20, 29, 40),
 (21, 29, 43),
 (22, 29, 52),
-(23, 29, 19),
-(24, 30, 41),
 (25, 30, 22),
 (26, 30, 35),
+(24, 30, 41),
 (27, 31, 15),
 (28, 31, 40),
 (29, 31, 41),
@@ -1001,8 +1005,8 @@ INSERT INTO `pivote_bookstory_category` (`id`, `bookstory_id`, `category_id`) VA
 (62, 38, 20),
 (63, 38, 24),
 (64, 38, 31),
-(65, 38, 43),
 (66, 38, 36),
+(65, 38, 43),
 (67, 38, 58),
 (68, 39, 20),
 (69, 39, 29),
@@ -1076,9 +1080,9 @@ INSERT INTO `pivote_bookstory_category` (`id`, `bookstory_id`, `category_id`) VA
 (137, 53, 24),
 (138, 53, 29),
 (139, 53, 35),
+(142, 53, 36),
 (140, 53, 38),
 (141, 53, 39),
-(142, 53, 36),
 (143, 54, 20),
 (144, 54, 24),
 (145, 54, 29),
@@ -1096,22 +1100,22 @@ INSERT INTO `pivote_bookstory_category` (`id`, `bookstory_id`, `category_id`) VA
 (157, 55, 38),
 (158, 55, 43),
 (159, 55, 48),
-(160, 56, 20),
-(161, 56, 31),
 (162, 56, 7),
 (163, 56, 14),
+(160, 56, 20),
 (164, 56, 29),
-(165, 56, 52),
+(161, 56, 31),
 (166, 56, 36),
 (167, 56, 42),
-(168, 57, 21),
-(169, 57, 33),
+(165, 56, 52),
 (170, 57, 7),
+(168, 57, 21),
 (171, 57, 25),
+(169, 57, 33),
 (172, 57, 36),
 (173, 57, 38),
-(174, 57, 53),
 (175, 57, 41),
+(174, 57, 53),
 (176, 58, 20),
 (177, 58, 29),
 (178, 58, 31),
@@ -1208,8 +1212,8 @@ INSERT INTO `pivote_bookstory_category` (`id`, `bookstory_id`, `category_id`) VA
 (269, 76, 20),
 (270, 76, 24),
 (271, 76, 31),
-(272, 76, 43),
 (273, 76, 36),
+(272, 76, 43),
 (274, 76, 48),
 (275, 76, 58),
 (276, 77, 14),
@@ -1260,7 +1264,12 @@ INSERT INTO `pivote_bookstory_category` (`id`, `bookstory_id`, `category_id`) VA
 (321, 86, 20),
 (322, 86, 29),
 (323, 86, 36),
-(324, 86, 38);
+(324, 86, 38),
+(326, 87, 20),
+(328, 87, 24),
+(329, 87, 29),
+(327, 87, 31),
+(325, 87, 36);
 
 -- --------------------------------------------------------
 
@@ -1269,11 +1278,11 @@ INSERT INTO `pivote_bookstory_category` (`id`, `bookstory_id`, `category_id`) VA
 --
 
 CREATE TABLE `pivot_table_comment` (
-  `id` int UNSIGNED NOT NULL,
-  `publisher_id` int DEFAULT NULL,
-  `bookstory_id` int DEFAULT NULL,
-  `chapter_id` int DEFAULT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci,
+  `id` int(10) UNSIGNED NOT NULL,
+  `publisher_id` int(11) UNSIGNED DEFAULT NULL,
+  `bookstory_id` int(11) UNSIGNED DEFAULT NULL,
+  `chapter_id` int(11) UNSIGNED DEFAULT NULL,
+  `body` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1304,11 +1313,11 @@ INSERT INTO `pivot_table_comment` (`id`, `publisher_id`, `bookstory_id`, `chapte
 --
 
 CREATE TABLE `pivot_table_error` (
-  `id` int UNSIGNED NOT NULL,
-  `bookstory_id` int DEFAULT NULL,
-  `chapter_id` int DEFAULT NULL,
-  `error_type` int NOT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `bookstory_id` int(11) UNSIGNED DEFAULT NULL,
+  `chapter_id` int(11) UNSIGNED DEFAULT NULL,
+  `error_type` int(11) NOT NULL,
+  `body` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1330,9 +1339,9 @@ INSERT INTO `pivot_table_error` (`id`, `bookstory_id`, `chapter_id`, `error_type
 --
 
 CREATE TABLE `pivot_table_follow` (
-  `id` int UNSIGNED NOT NULL,
-  `publisher_id` int DEFAULT NULL,
-  `bookstory_id` int DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `publisher_id` int(11) UNSIGNED DEFAULT NULL,
+  `bookstory_id` int(11) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1371,10 +1380,10 @@ INSERT INTO `pivot_table_follow` (`id`, `publisher_id`, `bookstory_id`, `created
 --
 
 CREATE TABLE `pivot_table_readhistory` (
-  `id` int UNSIGNED NOT NULL,
-  `publisher_id` int DEFAULT NULL,
-  `bookstory_id` int DEFAULT NULL,
-  `chapter_id` int DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `publisher_id` int(11) UNSIGNED DEFAULT NULL,
+  `bookstory_id` int(11) UNSIGNED DEFAULT NULL,
+  `chapter_id` int(11) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1384,7 +1393,7 @@ CREATE TABLE `pivot_table_readhistory` (
 --
 
 INSERT INTO `pivot_table_readhistory` (`id`, `publisher_id`, `bookstory_id`, `chapter_id`, `created_at`, `updated_at`) VALUES
-(1, 4, 38, 13, '2024-02-01 08:46:17', '2024-02-01 09:46:19'),
+(1, 4, 38, 14, '2024-02-01 08:46:17', '2024-05-05 06:22:06'),
 (2, 4, 48, 16, '2024-02-01 11:24:26', '2024-02-01 11:25:37'),
 (3, 7, 38, 14, '2024-02-02 11:08:38', '2024-02-02 11:08:41'),
 (4, 7, 48, 15, '2024-02-02 11:10:19', '2024-02-02 11:10:19'),
@@ -1400,9 +1409,9 @@ INSERT INTO `pivot_table_readhistory` (`id`, `publisher_id`, `bookstory_id`, `ch
 --
 
 CREATE TABLE `pivot_table_view` (
-  `id` int UNSIGNED NOT NULL,
-  `bookstory_id` int DEFAULT NULL,
-  `view` int DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `bookstory_id` int(11) UNSIGNED DEFAULT NULL,
+  `view` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1436,8 +1445,184 @@ INSERT INTO `pivot_table_view` (`id`, `bookstory_id`, `view`, `created_at`, `upd
 (22, 38, 4, '2024-03-13 03:41:37', '2024-03-13 10:17:08'),
 (23, 38, 2, '2024-03-14 03:20:25', '2024-03-14 03:23:30'),
 (24, 56, 1, '2024-03-14 04:00:55', '2024-03-14 04:00:55'),
-(25, 38, 43, '2024-03-22 00:46:53', '2024-03-22 01:59:16'),
-(26, 80, 7, '2024-03-22 02:37:54', '2024-03-22 14:08:12');
+(25, 38, 45, '2024-03-22 00:46:53', '2024-03-22 14:58:09'),
+(26, 80, 8, '2024-03-22 02:37:54', '2024-03-22 14:57:56'),
+(27, 80, 9, '2024-03-22 22:20:24', '2024-03-23 12:08:01'),
+(28, 38, 58, '2024-03-22 22:20:25', '2024-03-23 12:08:02'),
+(29, 86, 10, '2024-03-22 22:20:27', '2024-03-23 06:49:20'),
+(30, 11, 11, '2024-03-22 22:20:28', '2024-03-23 06:53:58'),
+(31, 67, 6, '2024-03-22 22:20:30', '2024-03-23 06:54:41'),
+(32, 54, 15, '2024-03-22 22:20:31', '2024-03-23 06:54:06'),
+(33, 65, 11, '2024-03-22 22:20:33', '2024-03-23 06:55:11'),
+(34, 48, 15, '2024-03-22 22:20:34', '2024-03-23 06:59:07'),
+(35, 56, 5, '2024-03-22 22:20:36', '2024-03-23 06:23:49'),
+(36, 53, 15, '2024-03-22 22:20:36', '2024-03-23 06:53:25'),
+(37, 81, 11, '2024-03-22 22:20:38', '2024-03-23 06:51:20'),
+(38, 83, 15, '2024-03-22 22:20:39', '2024-03-23 06:50:34'),
+(39, 80, 43, '2024-03-24 23:51:25', '2024-03-25 15:05:24'),
+(40, 38, 243, '2024-03-24 23:51:26', '2024-03-25 15:06:03'),
+(41, 86, 42, '2024-03-24 23:51:29', '2024-03-25 14:35:25'),
+(42, 11, 56, '2024-03-24 23:51:31', '2024-03-25 14:35:40'),
+(43, 67, 42, '2024-03-24 23:51:33', '2024-03-25 14:35:44'),
+(44, 54, 60, '2024-03-24 23:51:34', '2024-03-25 14:35:00'),
+(45, 65, 58, '2024-03-24 23:51:37', '2024-03-25 14:36:01'),
+(46, 48, 62, '2024-03-24 23:51:37', '2024-03-25 14:34:54'),
+(47, 56, 26, '2024-03-24 23:51:40', '2024-03-25 14:34:09'),
+(48, 53, 62, '2024-03-24 23:51:41', '2024-03-25 14:35:04'),
+(49, 81, 54, '2024-03-24 23:51:43', '2024-03-25 14:36:40'),
+(50, 83, 62, '2024-03-24 23:51:44', '2024-03-25 14:35:02'),
+(51, 80, 12, '2024-03-25 21:23:34', '2024-03-26 00:20:25'),
+(52, 38, 71, '2024-03-25 21:23:35', '2024-03-26 08:52:37'),
+(53, 86, 12, '2024-03-25 21:23:36', '2024-03-25 23:14:43'),
+(54, 11, 14, '2024-03-25 21:23:38', '2024-03-25 23:16:02'),
+(55, 67, 12, '2024-03-25 21:23:40', '2024-03-25 23:16:45'),
+(56, 54, 20, '2024-03-25 21:23:41', '2024-03-26 00:11:37'),
+(57, 65, 14, '2024-03-25 21:23:43', '2024-03-25 23:18:16'),
+(58, 48, 16, '2024-03-25 21:23:43', '2024-03-26 00:02:18'),
+(59, 56, 8, '2024-03-25 21:23:45', '2024-03-25 23:20:22'),
+(60, 53, 20, '2024-03-25 21:23:46', '2024-03-26 00:16:39'),
+(61, 81, 14, '2024-03-25 21:23:48', '2024-03-25 23:22:12'),
+(62, 83, 18, '2024-03-25 21:23:49', '2024-03-26 00:12:46'),
+(63, 86, 3, '2024-03-27 06:21:20', '2024-03-27 16:53:31'),
+(64, 54, 4, '2024-03-27 06:38:07', '2024-03-27 16:53:30'),
+(65, 65, 4, '2024-03-27 06:42:51', '2024-03-27 16:53:29'),
+(66, 38, 15, '2024-03-27 06:48:55', '2024-03-27 16:53:32'),
+(67, 11, 4, '2024-03-27 06:54:51', '2024-03-27 16:53:31'),
+(68, 67, 3, '2024-03-27 07:01:11', '2024-03-27 16:53:30'),
+(69, 48, 4, '2024-03-27 07:06:01', '2024-03-27 16:53:29'),
+(70, 53, 4, '2024-03-27 07:09:08', '2024-03-27 16:53:29'),
+(71, 56, 2, '2024-03-27 07:18:44', '2024-03-27 16:53:29'),
+(72, 81, 4, '2024-03-27 07:22:47', '2024-03-27 16:53:28'),
+(73, 80, 3, '2024-03-27 07:26:00', '2024-03-27 16:53:31'),
+(74, 83, 4, '2024-03-27 07:31:27', '2024-03-27 16:53:28'),
+(75, 38, 2, '2024-03-30 08:01:54', '2024-03-30 08:02:40'),
+(76, 80, 1, '2024-04-02 04:07:03', '2024-04-02 04:07:03'),
+(77, 38, 4, '2024-04-02 04:07:05', '2024-04-02 04:07:25'),
+(78, 86, 1, '2024-04-02 04:07:11', '2024-04-02 04:07:11'),
+(79, 11, 1, '2024-04-02 04:07:18', '2024-04-02 04:07:18'),
+(80, 67, 1, '2024-04-02 04:07:24', '2024-04-02 04:07:24'),
+(81, 54, 1, '2024-04-02 04:07:26', '2024-04-02 04:07:26'),
+(82, 65, 1, '2024-04-02 04:07:32', '2024-04-02 04:07:32'),
+(83, 48, 1, '2024-04-02 04:07:34', '2024-04-02 04:07:34'),
+(84, 56, 1, '2024-04-02 04:07:40', '2024-04-02 04:07:40'),
+(85, 53, 1, '2024-04-02 04:07:43', '2024-04-02 04:07:43'),
+(86, 81, 1, '2024-04-02 04:07:49', '2024-04-02 04:07:49'),
+(87, 83, 1, '2024-04-02 04:07:51', '2024-04-02 04:07:51'),
+(88, 38, 4, '2024-04-03 20:42:14', '2024-04-03 20:42:23'),
+(89, 81, 1, '2024-04-03 20:42:20', '2024-04-03 20:42:20'),
+(90, 83, 1, '2024-04-03 20:42:20', '2024-04-03 20:42:20'),
+(91, 53, 1, '2024-04-03 20:42:21', '2024-04-03 20:42:21'),
+(92, 56, 1, '2024-04-03 20:42:21', '2024-04-03 20:42:21'),
+(93, 65, 1, '2024-04-03 20:42:21', '2024-04-03 20:42:21'),
+(94, 48, 1, '2024-04-03 20:42:21', '2024-04-03 20:42:21'),
+(95, 54, 1, '2024-04-03 20:42:22', '2024-04-03 20:42:22'),
+(96, 67, 1, '2024-04-03 20:42:22', '2024-04-03 20:42:22'),
+(97, 86, 1, '2024-04-03 20:42:22', '2024-04-03 20:42:22'),
+(98, 11, 1, '2024-04-03 20:42:23', '2024-04-03 20:42:23'),
+(99, 80, 1, '2024-04-03 20:42:23', '2024-04-03 20:42:23'),
+(100, 80, 1, '2024-04-09 04:34:46', '2024-04-09 04:34:46'),
+(101, 38, 4, '2024-04-09 04:34:49', '2024-04-09 04:35:11'),
+(102, 86, 1, '2024-04-09 04:34:54', '2024-04-09 04:34:54'),
+(103, 11, 1, '2024-04-09 04:35:01', '2024-04-09 04:35:01'),
+(104, 67, 1, '2024-04-09 04:35:06', '2024-04-09 04:35:06'),
+(105, 54, 1, '2024-04-09 04:35:09', '2024-04-09 04:35:09'),
+(106, 65, 1, '2024-04-09 04:35:15', '2024-04-09 04:35:15'),
+(107, 48, 1, '2024-04-09 04:35:18', '2024-04-09 04:35:18'),
+(108, 56, 1, '2024-04-09 04:35:20', '2024-04-09 04:35:20'),
+(109, 53, 1, '2024-04-09 04:35:23', '2024-04-09 04:35:23'),
+(110, 81, 1, '2024-04-09 04:35:26', '2024-04-09 04:35:26'),
+(111, 83, 1, '2024-04-09 04:35:29', '2024-04-09 04:35:29'),
+(112, 38, 4, '2024-04-11 01:26:15', '2024-04-11 01:26:23'),
+(113, 81, 1, '2024-04-11 01:26:20', '2024-04-11 01:26:20'),
+(114, 83, 1, '2024-04-11 01:26:20', '2024-04-11 01:26:20'),
+(115, 53, 1, '2024-04-11 01:26:21', '2024-04-11 01:26:21'),
+(116, 56, 1, '2024-04-11 01:26:21', '2024-04-11 01:26:21'),
+(117, 65, 1, '2024-04-11 01:26:21', '2024-04-11 01:26:21'),
+(118, 48, 1, '2024-04-11 01:26:22', '2024-04-11 01:26:22'),
+(119, 67, 1, '2024-04-11 01:26:22', '2024-04-11 01:26:22'),
+(120, 54, 1, '2024-04-11 01:26:22', '2024-04-11 01:26:22'),
+(121, 86, 1, '2024-04-11 01:26:23', '2024-04-11 01:26:23'),
+(122, 11, 1, '2024-04-11 01:26:23', '2024-04-11 01:26:23'),
+(123, 80, 1, '2024-04-11 01:26:23', '2024-04-11 01:26:23'),
+(124, 80, 2, '2024-04-13 23:38:25', '2024-04-14 15:34:19'),
+(125, 38, 8, '2024-04-13 23:38:27', '2024-04-14 15:34:43'),
+(126, 86, 2, '2024-04-13 23:38:32', '2024-04-14 15:34:27'),
+(127, 11, 2, '2024-04-13 23:38:39', '2024-04-14 15:34:33'),
+(128, 67, 2, '2024-04-13 23:38:44', '2024-04-14 15:34:39'),
+(129, 54, 2, '2024-04-13 23:38:47', '2024-04-14 15:34:42'),
+(130, 65, 2, '2024-04-13 23:38:49', '2024-04-14 15:34:49'),
+(131, 48, 2, '2024-04-13 23:38:52', '2024-04-14 15:34:51'),
+(132, 56, 2, '2024-04-13 23:38:55', '2024-04-14 15:34:53'),
+(133, 53, 2, '2024-04-13 23:38:58', '2024-04-14 15:34:56'),
+(134, 81, 2, '2024-04-13 23:39:03', '2024-04-14 15:35:03'),
+(135, 83, 2, '2024-04-13 23:39:07', '2024-04-14 15:35:06'),
+(136, 80, 2, '2024-04-15 10:24:43', '2024-04-15 12:06:27'),
+(137, 38, 4, '2024-04-15 10:24:48', '2024-04-15 10:25:20'),
+(138, 86, 1, '2024-04-15 10:24:57', '2024-04-15 10:24:57'),
+(139, 11, 1, '2024-04-15 10:25:05', '2024-04-15 10:25:05'),
+(140, 67, 1, '2024-04-15 10:25:14', '2024-04-15 10:25:14'),
+(141, 54, 2, '2024-04-15 10:25:18', '2024-04-15 12:06:19'),
+(142, 65, 2, '2024-04-15 10:25:23', '2024-04-15 12:06:22'),
+(143, 48, 1, '2024-04-15 10:25:29', '2024-04-15 10:25:29'),
+(144, 56, 2, '2024-04-15 10:25:35', '2024-04-15 12:06:11'),
+(145, 53, 1, '2024-04-15 10:25:39', '2024-04-15 10:25:39'),
+(146, 81, 2, '2024-04-15 10:25:49', '2024-04-15 12:06:18'),
+(147, 83, 2, '2024-04-15 10:25:53', '2024-04-15 12:06:15'),
+(148, 38, 4, '2024-04-18 03:26:10', '2024-04-18 03:26:19'),
+(149, 81, 1, '2024-04-18 03:26:16', '2024-04-18 03:26:16'),
+(150, 83, 1, '2024-04-18 03:26:16', '2024-04-18 03:26:16'),
+(151, 53, 1, '2024-04-18 03:26:16', '2024-04-18 03:26:16'),
+(152, 56, 1, '2024-04-18 03:26:16', '2024-04-18 03:26:16'),
+(153, 65, 1, '2024-04-18 03:26:17', '2024-04-18 03:26:17'),
+(154, 48, 1, '2024-04-18 03:26:17', '2024-04-18 03:26:17'),
+(155, 67, 1, '2024-04-18 03:26:17', '2024-04-18 03:26:17'),
+(156, 54, 1, '2024-04-18 03:26:17', '2024-04-18 03:26:17'),
+(157, 11, 1, '2024-04-18 03:26:18', '2024-04-18 03:26:18'),
+(158, 86, 1, '2024-04-18 03:26:19', '2024-04-18 03:26:19'),
+(159, 80, 1, '2024-04-18 03:26:19', '2024-04-18 03:26:19'),
+(160, 38, 7, '2024-04-22 03:14:11', '2024-04-22 03:19:02'),
+(161, 38, 1, '2024-04-24 11:50:36', '2024-04-24 11:50:36'),
+(162, 38, 4, '2024-04-25 09:37:44', '2024-04-25 09:37:54'),
+(163, 83, 1, '2024-04-25 09:37:50', '2024-04-25 09:37:50'),
+(164, 81, 1, '2024-04-25 09:37:50', '2024-04-25 09:37:50'),
+(165, 53, 1, '2024-04-25 09:37:51', '2024-04-25 09:37:51'),
+(166, 56, 1, '2024-04-25 09:37:51', '2024-04-25 09:37:51'),
+(167, 65, 1, '2024-04-25 09:37:52', '2024-04-25 09:37:52'),
+(168, 48, 1, '2024-04-25 09:37:52', '2024-04-25 09:37:52'),
+(169, 67, 1, '2024-04-25 09:37:52', '2024-04-25 09:37:52'),
+(170, 54, 1, '2024-04-25 09:37:52', '2024-04-25 09:37:52'),
+(171, 11, 1, '2024-04-25 09:37:53', '2024-04-25 09:37:53'),
+(172, 86, 1, '2024-04-25 09:37:53', '2024-04-25 09:37:53'),
+(173, 80, 1, '2024-04-25 09:37:53', '2024-04-25 09:37:53'),
+(174, 56, 1, '2024-04-29 07:55:34', '2024-04-29 07:55:34'),
+(175, 83, 1, '2024-04-29 07:55:34', '2024-04-29 07:55:34'),
+(176, 38, 4, '2024-05-02 13:45:12', '2024-05-02 13:45:20'),
+(177, 83, 1, '2024-05-02 13:45:15', '2024-05-02 13:45:15'),
+(178, 81, 1, '2024-05-02 13:45:16', '2024-05-02 13:45:16'),
+(179, 53, 1, '2024-05-02 13:45:16', '2024-05-02 13:45:16'),
+(180, 48, 1, '2024-05-02 13:45:17', '2024-05-02 13:45:17'),
+(181, 56, 1, '2024-05-02 13:45:17', '2024-05-02 13:45:17'),
+(182, 65, 1, '2024-05-02 13:45:17', '2024-05-02 13:45:17'),
+(183, 54, 1, '2024-05-02 13:45:17', '2024-05-02 13:45:17'),
+(184, 67, 1, '2024-05-02 13:45:18', '2024-05-02 13:45:18'),
+(185, 11, 1, '2024-05-02 13:45:18', '2024-05-02 13:45:18'),
+(186, 86, 1, '2024-05-02 13:45:19', '2024-05-02 13:45:19'),
+(187, 80, 1, '2024-05-02 13:45:19', '2024-05-02 13:45:19'),
+(188, 38, 465, '2024-05-03 03:52:38', '2024-05-03 03:59:34'),
+(189, 38, 1, '2024-05-05 06:22:06', '2024-05-05 06:22:06'),
+(190, 38, 6, '2024-05-09 09:05:51', '2024-05-09 16:57:28'),
+(191, 83, 1, '2024-05-09 16:57:24', '2024-05-09 16:57:24'),
+(192, 53, 1, '2024-05-09 16:57:24', '2024-05-09 16:57:24'),
+(193, 81, 1, '2024-05-09 16:57:25', '2024-05-09 16:57:25'),
+(194, 48, 1, '2024-05-09 16:57:25', '2024-05-09 16:57:25'),
+(195, 56, 1, '2024-05-09 16:57:25', '2024-05-09 16:57:25'),
+(196, 54, 1, '2024-05-09 16:57:26', '2024-05-09 16:57:26'),
+(197, 65, 1, '2024-05-09 16:57:26', '2024-05-09 16:57:26'),
+(198, 11, 1, '2024-05-09 16:57:26', '2024-05-09 16:57:26'),
+(199, 67, 1, '2024-05-09 16:57:26', '2024-05-09 16:57:26'),
+(200, 86, 1, '2024-05-09 16:57:27', '2024-05-09 16:57:27'),
+(201, 80, 1, '2024-05-09 16:57:27', '2024-05-09 16:57:27'),
+(202, 80, 1, '2024-05-11 06:14:49', '2024-05-11 06:14:49');
 
 -- --------------------------------------------------------
 
@@ -1446,19 +1631,19 @@ INSERT INTO `pivot_table_view` (`id`, `bookstory_id`, `view`, `created_at`, `upd
 --
 
 CREATE TABLE `posts` (
-  `id` int UNSIGNED NOT NULL,
-  `author_id` int DEFAULT NULL,
-  `category_id` int DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seo_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
-  `featured` tinyint(1) NOT NULL DEFAULT '0',
+  `id` int(10) UNSIGNED NOT NULL,
+  `author_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `seo_title` varchar(255) DEFAULT NULL,
+  `excerpt` text DEFAULT NULL,
+  `body` text NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) NOT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
+  `status` enum('PUBLISHED','DRAFT','PENDING') NOT NULL DEFAULT 'DRAFT',
+  `featured` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1480,12 +1665,12 @@ INSERT INTO `posts` (`id`, `author_id`, `category_id`, `title`, `seo_title`, `ex
 --
 
 CREATE TABLE `publisher` (
-  `id` int UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `body` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1510,9 +1695,9 @@ INSERT INTO `publisher` (`id`, `name`, `email`, `avatar`, `password`, `body`, `c
 --
 
 CREATE TABLE `roles` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1532,14 +1717,14 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`, `updated_at`) V
 --
 
 CREATE TABLE `settings` (
-  `id` int UNSIGNED NOT NULL,
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci,
-  `details` text COLLATE utf8mb4_unicode_ci,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `order` int NOT NULL DEFAULT '1',
-  `group` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `key` varchar(255) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
+  `value` text DEFAULT NULL,
+  `details` text DEFAULT NULL,
+  `type` varchar(255) NOT NULL,
+  `order` int(11) NOT NULL DEFAULT 1,
+  `group` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1565,12 +1750,12 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 --
 
 CREATE TABLE `translations` (
-  `id` int UNSIGNED NOT NULL,
-  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `column_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foreign_key` int UNSIGNED NOT NULL,
-  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `table_name` varchar(255) NOT NULL,
+  `column_name` varchar(255) NOT NULL,
+  `foreign_key` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(255) NOT NULL,
+  `value` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1618,15 +1803,15 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 --
 
 CREATE TABLE `users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `role_id` bigint UNSIGNED DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'users/default.png',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT 'users/default.png',
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `settings` text COLLATE utf8mb4_unicode_ci,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `settings` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1646,8 +1831,8 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 --
 
 CREATE TABLE `user_roles` (
-  `user_id` bigint UNSIGNED NOT NULL,
-  `role_id` bigint UNSIGNED NOT NULL
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1685,7 +1870,8 @@ ALTER TABLE `category`
 -- Chỉ mục cho bảng `chapter`
 --
 ALTER TABLE `chapter`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bookstory_id` (`bookstory_id`);
 
 --
 -- Chỉ mục cho bảng `data_rows`
@@ -1769,37 +1955,50 @@ ALTER TABLE `personal_access_tokens`
 -- Chỉ mục cho bảng `pivote_bookstory_category`
 --
 ALTER TABLE `pivote_bookstory_category`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bookstory_id` (`bookstory_id`,`category_id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Chỉ mục cho bảng `pivot_table_comment`
 --
 ALTER TABLE `pivot_table_comment`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `publisher_id` (`publisher_id`,`bookstory_id`,`chapter_id`),
+  ADD KEY `bookstory_id` (`bookstory_id`),
+  ADD KEY `chapter_id` (`chapter_id`);
 
 --
 -- Chỉ mục cho bảng `pivot_table_error`
 --
 ALTER TABLE `pivot_table_error`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bookstory_id` (`bookstory_id`,`chapter_id`),
+  ADD KEY `chapter_id` (`chapter_id`);
 
 --
 -- Chỉ mục cho bảng `pivot_table_follow`
 --
 ALTER TABLE `pivot_table_follow`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `publisher_id` (`publisher_id`,`bookstory_id`),
+  ADD KEY `bookstory_id` (`bookstory_id`);
 
 --
 -- Chỉ mục cho bảng `pivot_table_readhistory`
 --
 ALTER TABLE `pivot_table_readhistory`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `publisher_id` (`publisher_id`,`bookstory_id`,`chapter_id`),
+  ADD KEY `bookstory_id` (`bookstory_id`),
+  ADD KEY `chapter_id` (`chapter_id`);
 
 --
 -- Chỉ mục cho bảng `pivot_table_view`
 --
 ALTER TABLE `pivot_table_view`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bookstory_id` (`bookstory_id`);
 
 --
 -- Chỉ mục cho bảng `posts`
@@ -1859,151 +2058,151 @@ ALTER TABLE `user_roles`
 -- AUTO_INCREMENT cho bảng `bookstory`
 --
 ALTER TABLE `bookstory`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT cho bảng `chapter`
 --
 ALTER TABLE `chapter`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT cho bảng `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT cho bảng `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `pivote_bookstory_category`
 --
 ALTER TABLE `pivote_bookstory_category`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=330;
 
 --
 -- AUTO_INCREMENT cho bảng `pivot_table_comment`
 --
 ALTER TABLE `pivot_table_comment`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT cho bảng `pivot_table_error`
 --
 ALTER TABLE `pivot_table_error`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `pivot_table_follow`
 --
 ALTER TABLE `pivot_table_follow`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT cho bảng `pivot_table_readhistory`
 --
 ALTER TABLE `pivot_table_readhistory`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `pivot_table_view`
 --
 ALTER TABLE `pivot_table_view`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
 
 --
 -- AUTO_INCREMENT cho bảng `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `publisher`
 --
 ALTER TABLE `publisher`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -2014,6 +2213,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categories`
   ADD CONSTRAINT `categories_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `chapter`
+--
+ALTER TABLE `chapter`
+  ADD CONSTRAINT `chapter_ibfk_1` FOREIGN KEY (`bookstory_id`) REFERENCES `bookstory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `data_rows`
@@ -2033,6 +2238,49 @@ ALTER TABLE `menu_items`
 ALTER TABLE `permission_role`
   ADD CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `pivote_bookstory_category`
+--
+ALTER TABLE `pivote_bookstory_category`
+  ADD CONSTRAINT `pivote_bookstory_category_ibfk_1` FOREIGN KEY (`bookstory_id`) REFERENCES `bookstory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pivote_bookstory_category_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `pivot_table_comment`
+--
+ALTER TABLE `pivot_table_comment`
+  ADD CONSTRAINT `pivot_table_comment_ibfk_1` FOREIGN KEY (`publisher_id`) REFERENCES `publisher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pivot_table_comment_ibfk_2` FOREIGN KEY (`bookstory_id`) REFERENCES `bookstory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pivot_table_comment_ibfk_3` FOREIGN KEY (`chapter_id`) REFERENCES `chapter` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `pivot_table_error`
+--
+ALTER TABLE `pivot_table_error`
+  ADD CONSTRAINT `pivot_table_error_ibfk_1` FOREIGN KEY (`bookstory_id`) REFERENCES `bookstory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pivot_table_error_ibfk_2` FOREIGN KEY (`chapter_id`) REFERENCES `chapter` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `pivot_table_follow`
+--
+ALTER TABLE `pivot_table_follow`
+  ADD CONSTRAINT `pivot_table_follow_ibfk_1` FOREIGN KEY (`publisher_id`) REFERENCES `publisher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pivot_table_follow_ibfk_2` FOREIGN KEY (`bookstory_id`) REFERENCES `bookstory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `pivot_table_readhistory`
+--
+ALTER TABLE `pivot_table_readhistory`
+  ADD CONSTRAINT `pivot_table_readhistory_ibfk_1` FOREIGN KEY (`publisher_id`) REFERENCES `publisher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pivot_table_readhistory_ibfk_2` FOREIGN KEY (`bookstory_id`) REFERENCES `bookstory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pivot_table_readhistory_ibfk_3` FOREIGN KEY (`chapter_id`) REFERENCES `chapter` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `pivot_table_view`
+--
+ALTER TABLE `pivot_table_view`
+  ADD CONSTRAINT `pivot_table_view_ibfk_1` FOREIGN KEY (`bookstory_id`) REFERENCES `bookstory` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `users`

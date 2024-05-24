@@ -309,7 +309,7 @@
                     <div class="justify-content-between align-items-center mt-3 product__item__lastchapter">
                         <div class="btn-group">
                             <small class="text-muted">
-                                <a title="{{ $value->title_name }} {{ $value->chapter_title }}" href="{{ route('chapter', [$value->slug_book, $value->chapter_slug]) }}">
+                                <a title="{{ $value->title }} {{ $value->chapter_title }}" href="{{ route('chapter', [$value->slug_book, $value->chapter_slug]) }}">
                                     {{ $value->chapter_title }}
                                 </a>
                             </small>
